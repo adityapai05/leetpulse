@@ -19,6 +19,7 @@ export default function RootLayout({ children }) {
         className={`${workSans.variable} antialiased`}
       >
         {children}
+
         <Toaster
           position="top-right"
           reverseOrder={false}

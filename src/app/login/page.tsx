@@ -3,22 +3,27 @@
 import Link from "next/link";
 import Input from "@/components/ui/Input";
 import toast from "react-hot-toast";
-import { useState } from "react";
+import { useState, ChangeEvent, FormEvent } from "react";
+
+interface FormData {
+  usernameORemail: string;
+  password: string;
+}
 
 export default function Login() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     usernameORemail: "",
     password: "",
   });
 
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData, // keep all existing fields unchanged
       [e.target.name]: e.target.value, // update only the field that changed
     });
   };
 
-  async function handleSubmit(e) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (formData.usernameORemail.trim().length == 0) {
       toast.error("Please enter username.");

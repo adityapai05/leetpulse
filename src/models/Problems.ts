@@ -2,14 +2,17 @@ import mongoose from "mongoose";
 
 const ProblemSchema = new mongoose.Schema({
     userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-    problemNumber: { type: Number, required: true },
+    problemNo: { type: String, required: true },
+    problemName: { type: String, required: true },
+    slug: { type: String, required: true },
     iteration: { type: Number, default: 0 },
-    phase: { type: String, enum: ["learning", "stable", "struggling"], required: true, default: "learning" },
+    phase: { type: String, enum: ["learning", "stable", "struggling"], default: "learning" },
     retention: { type: Number, default: 0 },
-    language: { type: String },
     tags: { type: [String], default: "" },
     notes: { type: String, default: "" },
-    dueDate: { type: Date },
+    language: { type: String },
+    solution: { type: String },
+    dueDate: { type: Date }
 });
 
 // Pre-save hook to set dueDate to tomorrow.

@@ -3,7 +3,7 @@
 import Input from "@/components/ui/Input";
 import Link from "next/link";
 import toast from "react-hot-toast";
-import { useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 
 export default function SignUp() {
   const [formData, setFormData] = useState({
@@ -14,14 +14,14 @@ export default function SignUp() {
     confirmPassword: "",
   });
 
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData, // keep all existing fields unchanged
       [e.target.name]: e.target.value, // update only the field that changed
     });
   };
 
-  async function handleSubmit(e) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     console.log("Form submitted");
     if (formData.firstName.trim().length == 0) {
