@@ -10,8 +10,6 @@ export default function AddQuestion() {
     problemNo: "",
     tags: "",
     notes: "",
-    language: "",
-    solution: "",
   });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -27,14 +25,6 @@ export default function AddQuestion() {
       toast.error("Please enter a valid question number.");
       return;
     }
-    if (formData.language.trim().length == 0) {
-      toast.error("Please enter language");
-      return;
-    }
-    if (formData.solution.trim().length == 0) {
-      toast.error("Please add a solution");
-      return;
-    }
 
     try {
       const res = await fetch("/api/problem/add", {
@@ -46,8 +36,6 @@ export default function AddQuestion() {
           problemNo: formData.problemNo,
           tags: formData.tags.split(","),
           notes: formData.notes,
-          language: formData.language,
-          solution: formData.solution,
         }),
       });
       const data = await res.json();
@@ -69,16 +57,17 @@ export default function AddQuestion() {
       problemNo: "",
       tags: "",
       notes: "",
-      language: "",
-      solution: "",
     });
   }
 
   return (
-    <div className="bg-bg1 flex flex-col gap-8 py-4 px-4 my-8 mx-16 rounded-md ring-inset ring-1 ring-bg2 shadow-md">
+    <div className="bg-bg1 flex flex-col gap-8 py-8 px-4 my-16 mx-16 rounded-md ring-inset ring-1 ring-bg2 shadow-md items-center justify-center">
       <div className="flex flex-col gap-4 text-2xl font-bold">Add Problems</div>
-      <form onSubmit={handleSubmit} className="flex gap-4 flex-col md:flex-row">
-        <div className="flex flex-1 flex-col gap-4">
+      <form
+        onSubmit={handleSubmit}
+        className="flex gap-4 flex-col md:flex-row w-full items-center justify-center"
+      >
+        <div className="flex flex-col gap-4">
           <Input
             label="Problem No:"
             name="problemNo"
@@ -103,42 +92,22 @@ export default function AddQuestion() {
             onChange={handleChange}
             placeholder="your notes"
           />
-          <Input
-            label="Solution language:"
-            name="language"
-            type="text"
-            value={formData.language}
-            onChange={handleChange}
-            placeholder="ex: c++ (required)"
-          />
-        </div>
-        <div className="flex flex-1 flex-col flex-grow gap-4">
-          <Input
-            label="Solution"
-            name="solution"
-            type="text"
-            multiline
-            value={formData.solution}
-            onChange={handleChange}
-            placeholder="Paste your code leetcode solution here. (required)"
-            className="h-[400px] font-mono"
-          />
+          <div className="flex flex-col-reverse gap-8 md:flex-row pt-4">
+            <Button
+              variant="secondary"
+              text="Cancel"
+              onClickFunction={handleCancel}
+              type="reset"
+            />
+            <Button
+              variant="primary"
+              text="Add to list"
+              onClickFunction={handleSubmit}
+              type="submit"
+            />
+          </div>
         </div>
       </form>
-      <div className="flex flex-row gap-4 pt-4">
-        <Button
-          variant="primary"
-          text="Add to list"
-          onClickFunction={handleSubmit}
-          type="submit"
-        />
-        <Button
-          variant="secondary"
-          text="Cancel"
-          onClickFunction={handleCancel}
-          type="reset"
-        />
-      </div>
     </div>
   );
 }

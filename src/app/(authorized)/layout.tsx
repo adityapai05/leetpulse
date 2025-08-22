@@ -10,7 +10,7 @@ export default async function AuthorizedLayout({ children }) {
   }
 
   return (
-    <main className="bg-[radial-gradient(at_top_left,var(--bg-0),var(--bg-2))">
+    <main className="min-h-screen bg-[radial-gradient(at_top_left,var(--bg-2),var(--bg-0))]">
       <Navbar />
       {children}
     </main>

@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 :root {
-  --bg-0: #E2E8F0;
-  --bg-1: #F1F5F9;
-  --bg-2: #F8FAFC;
+  --bg-0: theme(colors.slate.50);
+  --bg-1: theme(colors.slate.200);
+  --bg-2: theme(colors.slate.300);
   --accent: #E7000B;
   --text-primary: theme(colors.slate.950);
   --text-contrast: #F8FAFC;

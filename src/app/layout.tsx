@@ -15,9 +15,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${workSans.variable} antialiased`}
-      >
+      <body className={`${workSans.variable} antialiased`}>
         {children}
 
         <Toaster
@@ -28,7 +26,8 @@ export default function RootLayout({ children }) {
               background: "var(--bg-0)",
               color: "var(--text-primary)",
             },
-          }} />
+          }}
+        />
       </body>
     </html>
   );

@@ -20,10 +20,7 @@ export async function POST(req: NextRequest) {
     await connectDB();
 
     const user = await User.findOne({
-      $or: [
-        { username: usernameORemail.toLowerCase() },
-        { email: usernameORemail.toLowerCase() },
-      ],
+      $or: [{ username: usernameORemail }, { email: usernameORemail }],
     });
 
     if (!user) {
