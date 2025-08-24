@@ -10,7 +10,7 @@ export default function Button({
 
   const variantStyles = {
     primary:
-      "bg-accent text-text_contrast text-base font-semibold ring-1 ring-inset ring-accent rounded-md hover:bg-transparent hover:text-accent transition-colors duration-200 shadow-[0px_2px_2px_0px_var(--bg-0)] hover:shadow-[0px_2px_2px_0px_var(--bg-0)]",
+      "bg-accent text-text_contrast text-base font-semibold ring-1 ring-inset ring-accent rounded-md hover:bg-transparent hover:text-accent transition-colors duration-200 shadow-md",
     secondary:
       "bg-transperent text-text_muted text-base font-normal ring-1 ring-inset ring-text_muted rounded-md hover:bg-text_muted hover:text-text_contrast transition-colors duration-200 shadow-[0px_2px_2px_0px_var(--bg-0)] hover:shadow-[0px_2px_2px_0px_var(--bg-0)]",
     tertiary:

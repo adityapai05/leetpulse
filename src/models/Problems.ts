@@ -14,15 +14,10 @@ const ProblemSchema = new mongoose.Schema({
   retention: { type: Number, default: 0 },
   tags: { type: [String], default: "" },
   notes: { type: String, default: "" },
-  dueDate: { type: Date },
-});
-
-// Pre-save hook to set dueDate to tomorrow.
-ProblemSchema.pre("save", function (next) {
-  const tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
-  this.dueDate = tomorrow;
-  next();
+  dueDate: {
+    type: Date,
+    default: () => new Date(Date.now() + 24 * 60 * 60 * 1000),
+  },
 });
 
 export default mongoose.model("Problem", ProblemSchema);

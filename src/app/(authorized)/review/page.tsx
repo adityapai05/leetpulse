@@ -4,16 +4,19 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import ProgressBar from "@/components/ui/Progressbar";
 import Phases from "@/components/ui/Phases";
+import toast from "react-hot-toast";
 
 export default function ReviewQueue() {
   const [problems, setProblems] = useState([]);
 
   useEffect(() => {
     async function loadProblems() {
-      const res = await fetch("/api/problem/get");
+      const res = await fetch("/api/problem/get/all");
       const data = await res.json();
+      if (!res.ok) {
+        toast.error("Something went wrong. Please try again later.");
+      }
       setProblems(data.problems || []);
-      console.log(data);
     }
     loadProblems();
   }, []);

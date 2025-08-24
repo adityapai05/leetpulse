@@ -1,7 +1,8 @@
 import clsx from "clsx";
 
 export default function Phases({ variant = "unknown" }) {
-  const baseStyles = "bg-transparent rounded-full border text-xs";
+  const baseStyles =
+    "bg-transparent flex items-center justify-center rounded-full border text-xs px-4 py-1";
   const variantStyles = {
     stable: "text-success border-success",
     learning: "text-warning border-warning",
