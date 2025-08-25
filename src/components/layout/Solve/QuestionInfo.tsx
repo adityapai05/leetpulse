@@ -1,6 +1,12 @@
 import Phases from "@/components/ui/Phases";
 
-export default function QuestionInfo({ problem }: any) {
+export default function QuestionInfo({
+  problem,
+  globalProblems,
+}: {
+  problem: any;
+  globalProblems?: any;
+}) {
   return (
     <div className="bg-bg2 flex flex-1 flex-col gap-6 p-4 border border-accent rounded-md shadow-md">
       {/* Question */}
@@ -12,10 +18,7 @@ export default function QuestionInfo({ problem }: any) {
       <div className="flex flex-col">
         <span className="text-text_muted">Problem Statement</span>
         <span className="text-text_primary">
-          Given an array of integers nums and an integer target, return indices
-          of the two numbers such that they add up to target. You may assume
-          that each input would have exactly one solution, and you may not use
-          the same element twice. You can return the answer in any order.
+          {globalProblems.problemStatement}
         </span>
       </div>
       {/* Notes */}

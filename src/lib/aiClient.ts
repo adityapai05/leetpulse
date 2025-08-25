@@ -1,7 +1,5 @@
 // src/lib/aiClient.ts
 import { GoogleGenAI } from "@google/genai";
-import dotenv from "dotenv";
-dotenv.config({ path: ".env.local" });
 
 const ai = new GoogleGenAI({
   apiKey: process.env.GEMINI_API_KEY,
@@ -17,7 +15,7 @@ export async function runPrompt(prompt: string, responseSchema: object) {
     },
   });
 
-  return response.text;
+  return JSON.parse(response.text);
 }
 
 /*

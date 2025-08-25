@@ -14,26 +14,33 @@ export default function SolvePage({
   const { slug } = use(params); // unwrap the promise
 
   const [problem, setProblem] = useState([]);
-  const [problemStatement, setProblemStatement] = useState([]);
+  const [globalProblems, setglobalProblems] = useState([]);
 
   useEffect(() => {
-    async function getProblem() {
-      const res = await fetch(`/api/problem/get/${slug}`);
-      const data = await res.json();
-      if (!res.ok) {
-        toast.error(
-          data.error || "Something went wrong. Please try again later."
-        );
+    async function getData() {
+      try {
+        const [res1, res2] = await Promise.all([
+          fetch(`/api/problem/get/${slug}`),
+          fetch(`/api/problem/get/statement/${slug}`), // or whatever your second API is
+        ]);
+
+        const [data1, data2] = await Promise.all([res1.json(), res2.json()]);
+
+        if (!res1.ok) toast.error(data1.error || "Error in problem fetch");
+        if (!res2.ok) toast.error(data2.error || "Error in meta fetch");
+
+        setProblem(data1.problem || []);
+        setglobalProblems(data2.problemStatement || []);
+      } catch (err) {
+        toast.error("Something went wrong");
       }
-      setProblem(data.problem || []);
-      console.log(data.problem);
     }
-    getProblem();
+    getData();
   }, [slug]);
 
   return (
     <div className="flex flex-col gap-4 p-4 m-4 md:flex-row">
-      <QuestionInfo problem={problem} />
+      <QuestionInfo problem={problem} globalProblems={globalProblems} />
       <CodeEditor problem={problem} />
     </div>
   );
