@@ -49,7 +49,7 @@ export default function QuestionInfo({
       </div>
       {/* Due Date */}
       <div className="flex flex-row">
-        <span className="text-text_muted">Due date:&nbsp;</span>
+        <span className="text-text_muted ">Due date:&nbsp;</span>
         <span className="text-text_primary">
           {new Date(problem.dueDate).toLocaleDateString("en-GB", {
             day: "2-digit",
