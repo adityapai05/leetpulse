@@ -1,24 +1,44 @@
 // src/lib/aiClient.ts
 import { GoogleGenAI } from "@google/genai";
+import dotenv from "dotenv";
+dotenv.config({ path: ".env.local" });
 
 const ai = new GoogleGenAI({
   apiKey: process.env.GEMINI_API_KEY,
 });
 
-type OutputFormat = "text" | "json";
-
-export async function runPrompt(
-  prompt: string,
-  output: "json" | "text" = "text"
-) {
-  const model = "gemini-2.5-flash";
-
-  const result = await ai.models.generateContent({
-    model,
-    contents: [{ role: "user", parts: [{ text: prompt }] }],
+export async function runPrompt(prompt: string, responseSchema: object) {
+  const response = await ai.models.generateContent({
+    model: "gemini-2.5-flash",
+    contents: prompt,
+    config: {
+      responseMimeType: "application/json",
+      responseSchema: responseSchema,
+    },
   });
 
-  const text = await result.response.text(); // ✅ works
-
-  return output === "json" ? JSON.parse(text) : text;
+  return response.text;
 }
+
+/*
+example response schema
+
+responseSchema: {
+  type: Type.ARRAY,
+  items: {
+    type: Type.OBJECT,
+    properties: {
+      recipeName: {
+        type: Type.STRING,
+      },
+      ingredients: {
+        type: Type.ARRAY,
+        items: {
+          type: Type.STRING,
+        },
+      },
+    },
+    propertyOrdering: ["recipeName", "ingredients"],
+  },
+},
+*/
