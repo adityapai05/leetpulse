@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Editor from "@monaco-editor/react";
 import Button from "@/components/ui/Button";
-import Link from "next/link";
+import toast from "react-hot-toast";
 
 export default function CodeEditor({ problem }: any) {
   const [language, setLanguage] = useState("cpp");
@@ -27,7 +27,30 @@ export default function CodeEditor({ problem }: any) {
     );
   }
 
-  async function handleSubmit() {}
+  async function handleSubmit() {
+    try {
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ code: code }),
+      };
+
+      const res = await fetch(
+        `/api/problem/validate/${problem.slug}`,
+        requestOptions
+      );
+
+      const data = await res.json();
+      if (!res.ok) {
+        toast.error(data.error || "Something went wrong");
+        return;
+      }
+
+      //Code for doing shit if AI responds with answer.
+    } catch (err) {
+      toast.error(err || "Please try again");
+    }
+  }
   return (
     <div className="flex flex-col flex-1 border border-accent rounded-md p-4 bg-bg2 shadow-md">
       <div className="flex flex-row justify-between bg-stone-900 text-sm font-bold text-accent px-4 py-2 rounded-t-md">

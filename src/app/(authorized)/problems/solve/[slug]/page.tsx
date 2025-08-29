@@ -1,27 +1,27 @@
 "use client";
 
-import { use } from "react";
 import QuestionInfo from "@/components/layout/Solve/QuestionInfo";
 import CodeEditor from "@/components/layout/Solve/CodeEditor";
+import Analysis from "@/components/layout/Solve/Analysis";
 import toast from "react-hot-toast";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 
 export default function SolvePage({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
-  const { slug } = use(params); // unwrap the promise
+  const { slug } = use(params);
 
-  const [problem, setProblem] = useState([]);
-  const [globalProblems, setglobalProblems] = useState([]);
+  const [problem, setProblem] = useState({});
+  const [globalProblems, setglobalProblems] = useState({});
 
   useEffect(() => {
     async function getData() {
       try {
         const [res1, res2] = await Promise.all([
           fetch(`/api/problem/get/${slug}`),
-          fetch(`/api/problem/get/statement/${slug}`), // or whatever your second API is
+          fetch(`/api/problem/get/statement/${slug}`),
         ]);
 
         const [data1, data2] = await Promise.all([res1.json(), res2.json()]);
@@ -39,8 +39,8 @@ export default function SolvePage({
   }, [slug]);
 
   return (
-    <div className="flex flex-col gap-4 p-4 m-4 md:flex-row">
-      <QuestionInfo problem={problem} globalProblems={globalProblems} />
+    <div className="flex flex-col gap-4 p-4 m-4 md:flex-row h-[90vh]">
+      <Analysis />
       <CodeEditor problem={problem} />
     </div>
   );

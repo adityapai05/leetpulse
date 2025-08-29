@@ -73,9 +73,9 @@ export async function GET(
       const aiResult = await runPrompt(
         `For LeetCode problem ${problemNumber} titled ${problemName}, generate:
 
-- problemStatement: a clear, easy-to-understand description of what the problem is asking the user to do, in simple language without technical jargon. Avoid words like "implement a function"; just explain the task directly.  
-- arguments: list the inputs with their data types.  
-- returnType: specify the type of the output.`,
+        - problemStatement: a clear, easy-to-understand description of what the problem is asking the user to do, in simple language without technical jargon. Avoid words like "implement a function"; just explain the task directly.  
+        - arguments: list the inputs with their data types.  
+        - returnType: specify the type of the output.`,
         schema
       );
 

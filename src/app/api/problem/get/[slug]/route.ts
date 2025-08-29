@@ -9,7 +9,7 @@ export async function GET(
   context: { params: Promise<{ slug: string }> }
 ) {
   try {
-    const { slug } = await context.params; //unwrap params
+    const { slug } = await context.params;
 
     const cookieStore = await cookies();
     const userToken = cookieStore.get("authToken")?.value;
