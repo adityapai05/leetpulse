@@ -3,7 +3,7 @@ import Editor from "@monaco-editor/react";
 import Button from "@/components/ui/Button";
 import toast from "react-hot-toast";
 
-export default function CodeEditor({ problem }: any) {
+export default function CodeEditor({ problem, onAnalysis }: any) {
   const [language, setLanguage] = useState("cpp");
   const [code, setCode] = useState("// Write your code here");
 
@@ -46,7 +46,7 @@ export default function CodeEditor({ problem }: any) {
         return;
       }
 
-      //Code for doing shit if AI responds with answer.
+      onAnalysis(data.analysis);
     } catch (err) {
       toast.error(err || "Please try again");
     }

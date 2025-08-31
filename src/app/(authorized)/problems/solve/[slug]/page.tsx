@@ -6,15 +6,35 @@ import Analysis from "@/components/layout/Solve/Analysis";
 import toast from "react-hot-toast";
 import { use, useEffect, useState } from "react";
 
-export default function SolvePage({
-  params,
-}: {
+type analysisData = {
+  verdict: string;
+  insights?: string;
+  usersComplexity?: {
+    time: string;
+    space: string;
+  };
+  bestComplexity?: {
+    time: string;
+    space: string;
+  };
+  optimizations?: string;
+  failureReasons?: string;
+  correctionHints?: string;
+  correctCode?: string;
+  dueDate: string;
+  recommendedProblems: string;
+};
+
+type Props = {
   params: Promise<{ slug: string }>;
-}) {
+};
+
+export default function SolvePage({ params }: Props) {
   const { slug } = use(params);
 
   const [problem, setProblem] = useState({});
   const [globalProblems, setglobalProblems] = useState({});
+  const [analysis, setAnalysis] = useState<analysisData | null>(null);
 
   useEffect(() => {
     async function getData() {
@@ -40,8 +60,13 @@ export default function SolvePage({
 
   return (
     <div className="flex flex-col gap-4 p-4 m-4 md:flex-row h-[90vh]">
-      <Analysis />
-      <CodeEditor problem={problem} />
+      {analysis ? (
+        <Analysis analysis={analysis} />
+      ) : (
+        <QuestionInfo problem={problem} globalProblems={globalProblems} />
+      )}
+
+      <CodeEditor problem={problem} onAnalysis={setAnalysis} />
     </div>
   );
 }
