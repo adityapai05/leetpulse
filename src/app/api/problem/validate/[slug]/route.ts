@@ -95,8 +95,8 @@ export async function POST(
 
     if verdict is 'Correct' then
     insights:Give a very short explanation of how the user's approach works.
-    usersComplexity: State the time and space complexity of the user's code.  
-    optimalComplexity: Give the best possible time and space complexity for this problem.  
+    usersComplexity: only state the time and space complexity of the user's code.  
+    optimalComplexity: Give the best possible time and space complexity for this problem(no explanation).  
     optimizations: Suggest improvements to make the solution better(keep the sentence very short).
 
     if verdict is 'Incorrect' then

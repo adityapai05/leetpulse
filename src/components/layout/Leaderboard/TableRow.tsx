@@ -1,5 +1,4 @@
 import clsx from "clsx";
-import { useState } from "react";
 
 type Props = {
   rank: number;
@@ -10,7 +9,6 @@ type Props = {
 
 export default function TableRow(props: Props) {
   const { rank, username, xp, avgIteration } = props;
-  const [data, setData] = useState([]);
   let bgColor: string;
 
   if (rank % 2 == 0) {

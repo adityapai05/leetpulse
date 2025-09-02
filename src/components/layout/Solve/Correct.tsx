@@ -33,7 +33,7 @@ export default function Correct(props: Props) {
       <KeyValueDisplay title="🔍 Insights" value={analysis.insights} />
 
       <div className="bg-bg2 flex flex-col gap-2 p-2 rounded-md ">
-        <div className="text-sm text-text_muted">Complexity comparison</div>
+        <div className="text-sm text-warning">Complexity comparison</div>
         <div className="flex flex-row gap-6">
           <div className="bg-bg2 flex flex-col gap-2 border border-text_muted px-4 py-2 rounded-md shadow-md">
             <div className="text-sm text-warning">Your solution</div>

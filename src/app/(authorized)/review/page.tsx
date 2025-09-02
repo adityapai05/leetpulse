@@ -41,7 +41,7 @@ export default function ReviewQueue() {
           </div>
         </div>
       </div>
-      <div className="bg-bg1 flex flex-col rounded-md gap-8 shadow-md p-4">
+      <div className="bg-bg1 flex flex-col rounded-md border-2 border-bg2 shadow-md p-4">
         <div className="flex flex-col p-4">
           <span className="font-semibold text-text_primary text-2xl">
             Review
@@ -50,7 +50,7 @@ export default function ReviewQueue() {
             You have solved it once. Now let’s make it stick
           </span>
         </div>
-        <div className="flex p-3">
+        <div className="flex p-4">
           <table className="w-full">
             <thead className="">
               <tr>

@@ -3,13 +3,14 @@
 @tailwind utilities;
 
 :root {
-  --bg-0: theme(colors.slate.50);
-  --bg-1: theme(colors.slate.200);
-  --bg-2: theme(colors.slate.300);
+  --bg-0: theme(colors.neutral.100);
+  --bg-1: theme(colors.zinc.200);
+  --bg-2: theme(colors.gray.300);
   --accent: #E7000B;
   --text-primary: theme(colors.slate.950);
   --text-contrast: #F8FAFC;
-  --text-muted: #45556C;
+  --text-muted: theme(colors.stone.500);
+  ;
   --success: #00C950;
   --warning: #FE9A00;
   --error: #C10007;

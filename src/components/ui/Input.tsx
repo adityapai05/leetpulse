@@ -38,7 +38,7 @@ export default function Input({
           onChange={onChange}
           placeholder={placeholder}
           className={clsx(
-            `bg-bg2 font-normal text-base rounded-md border border-text_primary p-2 w-${width} shadow-[0_1px_0px_var(--text-primary)] focus:border-accent focus:outline-none focus:shadow-[0_2px_0px_var(--accent)] cursor-pointer`,
+            `bg-bg1 font-normal text-base rounded-md border border-text_primary p-2 w-${width} shadow-[0_1px_0px_var(--text-primary)] focus:border-accent focus:outline-none focus:shadow-[0_2px_0px_var(--accent)] cursor-pointer placeholder:text-text_muted`,
             className
           )}
         />
