@@ -11,7 +11,7 @@ const UserSchema = new mongoose.Schema({
   maxStreak: { type: Number, default: 0 },
   daysActive: { type: Number, default: 1 },
   submissions: { type: Number, default: 0 },
-  memoryRetention: { type: Number, default: 0 },
+  level: { type: Number, default: 0 },
   problemsAdded: { type: Number, default: 0 },
   averageIteration: { type: Number, default: 0 },
   problemsMastered: { type: Number, default: 0 },
