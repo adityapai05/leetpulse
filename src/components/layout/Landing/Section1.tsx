@@ -11,7 +11,7 @@ export default function Section1() {
             style={{ textShadow: "1px 1px 2px rgba(0,0,0,0.5)" }}
           >
             <span className="text-accent">leetpulse&nbsp;</span>
-            <span>- A Leetcode Tracker</span>
+            <span>- A LeetCode Tracker</span>
           </div>
           <div className="text-text_muted">
             Master coding problems. Never forget them again.

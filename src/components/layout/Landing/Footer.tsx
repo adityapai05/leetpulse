@@ -2,12 +2,12 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="bg-bg0 flex flex-col gap-16 justify-center text-sm text-text_muted px-16 py-8">
+    <footer className="ring-2 ring-bg2 bg-bg0 flex flex-col gap-16 justify-center text-sm text-text_muted px-16 py-8">
       <div className="flex flex-row justify-between">
         <div className="flex flex-col gap-4">
-          <a href="#features" className="text-3xl font-bold text-text_primary">
+          <Link href="/" className="text-3xl font-bold text-text_primary">
             leetpulse
-          </a>
+          </Link>
         </div>
         <div className="flex flex-col gap-4">
           <span className="text-text_primary font-semibold text-lg">

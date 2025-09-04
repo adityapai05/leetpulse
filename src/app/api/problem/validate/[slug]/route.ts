@@ -24,8 +24,6 @@ export async function POST(
   const code = body.code;
   const { slug } = await context.params;
 
-  console.log(user, slug);
-
   await connectDB();
 
   const problemData = await Problems.findOne({
@@ -124,7 +122,9 @@ export async function POST(
   const interval = NextPulse(NextPulseArgs);
 
   problemData.iteration += 1;
-  problemData.retention = (problemData.retention + aiResult.accuracy) / 2;
+  if (aiResult.verdict === "Correct") {
+    problemData.correct += 1;
+  }
   const newDate = new Date(problemData.dueDate);
   newDate.setDate(newDate.getDate() + interval);
   problemData.dueDate = newDate;
@@ -153,8 +153,5 @@ export async function POST(
     }),
     recommendedProblems: aiResult.recommendedProblems,
   };
-
-  console.log(returnData);
-
   return NextResponse.json({ analysis: returnData }, { status: 200 });
 }

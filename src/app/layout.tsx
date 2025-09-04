@@ -23,7 +23,7 @@ export default function RootLayout({ children }) {
           reverseOrder={false}
           toastOptions={{
             style: {
-              background: "var(--bg-0)",
+              background: "var(--bg-2)",
               color: "var(--text-primary)",
             },
           }}

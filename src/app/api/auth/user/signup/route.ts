@@ -49,21 +49,13 @@ export async function POST(req: NextRequest) {
     });
 
     const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, {
-      expiresIn: "30d",
+      expiresIn: "10m",
     });
 
-    const cookieStore = await cookies();
-    cookieStore.set({
-      name: "authToken",
-      value: token,
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
-      path: "/",
-      maxAge: 60 * 60 * 24 * 30,
-    });
+    //Remove this line during production.
+    console.log(token);
 
-    return NextResponse.json({ message: "You have signed up successfully" });
+    return NextResponse.json({ message: "token created!" }, { status: 200 });
   } catch (err) {
     console.error(err);
     return NextResponse.json({ error: "Server Error" }, { status: 500 });

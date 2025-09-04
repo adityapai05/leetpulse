@@ -63,20 +63,20 @@ export async function GET() {
 
   const response = {
     leftContainer: {
-      name: UsersData.firstName, // string
-      username: UsersData.username, // string
-      xp: UsersData.xp, // number
-      rank: UserInLeaderboard.rank, // number (can be computed)
-      level: UsersData?.level || 1, // number
-      dateJoined: formatted, // string (formatted date)
+      name: UsersData.firstName,
+      username: UsersData.username,
+      xp: UsersData.xp,
+      rank: UserInLeaderboard.rank,
+      level: UsersData?.level || 1,
+      dateJoined: formatted,
     },
     stats: {
       card1: [
         { title: "Total problems added", value: UsersData.problemsAdded },
         { title: "Currently in review queue", value: problemsInQueue.length },
-        { title: "Submissions", value: UsersData.submissions },
+        { title: "Submissions", value: 0 },
         { title: "Accuracy", value: "" },
-        { title: "Problems Mastered", value: 0 },
+        { title: "Problems Mastered", value: UsersData.masteryCount },
       ],
       card2: [
         { title: "Problems due today", value: dueTodayCount },

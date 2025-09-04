@@ -7,9 +7,9 @@ html {
 }
 
 :root {
-  --bg-0: theme(colors.neutral.100);
+  --bg-0: theme(colors.gray.300);
   --bg-1: theme(colors.zinc.200);
-  --bg-2: theme(colors.gray.300);
+  --bg-2: theme(colors.neutral.100);
   --accent: #E7000B;
   --text-primary: theme(colors.slate.950);
   --text-contrast: #F8FAFC;

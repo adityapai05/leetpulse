@@ -6,12 +6,12 @@ const ProblemSchema = new mongoose.Schema({
   problemName: { type: String, required: true },
   slug: { type: String, required: true },
   iteration: { type: Number, default: 0 },
+  correct: { type: Number, default: 0 },
   phase: {
     type: String,
     enum: ["learning", "stable", "struggling"],
     default: "learning",
   },
-  retention: { type: Number, default: 0 },
   tags: { type: [String], default: "" },
   notes: { type: String, default: "" },
   dueDate: {
