@@ -23,8 +23,8 @@ export default function Section4() {
               practice in just a few minutes.
             </span>
             <span className="text-text_muted text-sm">
-              - Enjoy the app — just try not to break it! Jokes aside, please
-              report any bugs you find.
+              - Enjoy the app — just try not to break it! Please report any bugs
+              you find.
             </span>
           </div>
         </div>

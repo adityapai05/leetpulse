@@ -1,111 +1,178 @@
 "use client";
 
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import ProgressBar from "@/components/ui/Progressbar";
-import Phases from "@/components/ui/Phases";
+import { use, useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import TableHead from "@/components/layout/Review/TableHeading";
+import TableRow from "@/components/layout/Review/TableRow";
+import { Flame, Zap } from "lucide-react";
+
+const reviewTableHeading = {
+  head1: "No.",
+  head2: "Question",
+  head3: "Iteration",
+  head4: "Accuracy",
+  head5: "Phase",
+  head6: "Due Date",
+};
 
 export default function ReviewQueue() {
+  const [user, setUser] = useState({ firstName: "NA", xp: 0, streak: 0 });
   const [problems, setProblems] = useState([]);
-
   useEffect(() => {
     async function loadProblems() {
       const res = await fetch("/api/problem/get/all");
       const data = await res.json();
-      if (!res.ok) {
-        toast.error("Something went wrong. Please try again later.");
+      if (!res.ok) toast.error("Something went wrong. Please try again later.");
+      const probs = data.problems || [];
+      setProblems(probs);
+
+      const now = new Date();
+      const todayStr = now.toDateString(); // e.g. "Fri Sep 06 2025"
+
+      const lastIncrement = localStorage.getItem("lastStreakIncrement");
+
+      let pastDue = false;
+      let dueToday = false;
+
+      for (const p of probs) {
+        const due = new Date(p.dueDate);
+        if (due < now) pastDue = true;
+        if (
+          due.getDate() === now.getDate() &&
+          due.getMonth() === now.getMonth() &&
+          due.getFullYear() === now.getFullYear()
+        )
+          dueToday = true;
       }
-      setProblems(data.problems || []);
+
+      if (pastDue) {
+        await fetch("/api/user/streak/reset", { method: "POST" });
+      } else if (!dueToday && lastIncrement !== todayStr) {
+        await fetch("/api/user/streak/increment", { method: "POST" });
+        localStorage.setItem("lastStreakIncrement", todayStr);
+      }
     }
+
     loadProblems();
   }, []);
 
+  useEffect(() => {
+    async function getUser() {
+      const res = await fetch("/api/user/summary");
+      const data = await res.json();
+      if (!res.ok) toast.error("Something went wrong. Please try again later.");
+      setUser(data);
+    }
+    getUser();
+  }, []);
+
   return (
-    <div className="flex flex-col mx-16 gap-8 p-4">
-      <div className="flex flex-row justify-between">
-        <div className="flex flex-col py-8">
-          <span className="font-extrabold text-text_primary text-5xl">
-            JOHN WICK
-          </span>
-          <span className="text-text_muted">
-            Welcome back. Your past problems have been missing you.
-          </span>
+    <div className="flex flex-col mx-4 gap-8 p-4 md:mx-16">
+      <Header user={user} />
+      <ReviewTable problems={problems} />
+    </div>
+  );
+}
+
+function Header({
+  user,
+}: {
+  user: { firstName: string; streak: number; xp: number };
+}) {
+  return (
+    <div className="flex justify-between flex-col md:flex-row p-4 gap-4">
+      <div className="flex flex-col">
+        <div className="text-5xl font-black text-text_primary">
+          {user.firstName}
         </div>
-        <div className=" flex flex-row items-center gap-4">
-          <div className="bg-bg2 border-text_muted font-normal flex border rounded-full text-sm px-4 py-0">
-            XP 900
-          </div>
-          <div className="bg-bg2 border-text_muted font-normal flex border rounded-full text-sm px-4 py-0">
-            🔥 10
-          </div>
+        <div className="text-sm text-text_muted">
+          Your past problems have been missing you
         </div>
       </div>
-      <div className="bg-bg1 flex flex-col rounded-md border-2 border-bg2 shadow-md p-4">
-        <div className="flex flex-col p-4">
-          <span className="font-semibold text-text_primary text-2xl">
-            Review
-          </span>
-          <span className="text-text_muted">
-            You have solved it once. Now let’s make it stick
-          </span>
-        </div>
-        <div className="flex p-4">
-          <table className="w-full">
-            <thead className="">
-              <tr>
-                <th className="text-sm font-medium p-2 w-[5%]">No.</th>
-                <th className="text-sm font-medium p-2 text-left">Question</th>
-                <th className="text-sm font-medium p-2 w-[10%]">Iteration</th>
-                <th className="text-sm font-medium p-2 w-[10%]">
-                  Memory Retention
-                </th>
-                <th className="text-sm font-medium p-2 w-[10%]">Phase</th>
-                <th className="text-sm font-medium p-2 w-[10%]">Due Date</th>
-              </tr>
-            </thead>
-            <tbody className="text-center">
-              {problems.map((p: any, i: number) => (
-                <tr
-                  key={p.problemNo}
-                  className={`${
-                    i % 2 === 0 ? "bg-bg2" : "bg-bg1"
-                  } hover:bg-bg1 transition`}
-                >
-                  <td className="p-3 rounded-l-md font-normal">
-                    <Link
-                      href={`/problems/solve/${p.problemNo}`}
-                      className="block w-full h-full"
-                    >
-                      {p.problemNo}
-                    </Link>
-                  </td>
-                  <td className="p-3 text-left font-normal">
-                    <Link
-                      href={`/problems/solve/${p.problemNo}`}
-                      className="block w-full h-full"
-                    >
-                      {p.problemName}
-                    </Link>
-                  </td>
-                  <td className="p-3 font-normal">{p.iteration}</td>
-                  <td className="p-3 font-normal">
-                    <ProgressBar value={p.retention} max={100} />
-                  </td>
-                  <td className="p-3 font-normal">
-                    <Phases variant={p.phase} />
-                  </td>
-                  <td className="p-3 rounded-r-md font-normal text-sm">
-                    {new Date(p.dueDate).toLocaleDateString("en-GB", {
-                      day: "2-digit",
-                      month: "short",
-                      year: "numeric",
-                    })}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+      <div className="flex flex-row items-center gap-4 p-4 ">
+        <BadgeFlame value={user.streak} />
+        <BadgeZap value={user.xp} />
+      </div>
+    </div>
+  );
+}
+
+function BadgeFlame({ value }: { value: number }) {
+  return (
+    <div className="ring-1 ring-inset ring-text_muted bg-bg2 flex flex-row items-center justify-center rounded-full text-sm px-4 py-1">
+      <svg width="20" height="20" viewBox="0 0 24 24">
+        <defs>
+          <linearGradient id="flameStroke" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="var(--error)" />
+            <stop offset="100%" stopColor="var(--warning)" />
+          </linearGradient>
+        </defs>
+        <Flame stroke="url(#flameStroke)" strokeWidth={2} />
+      </svg>
+      &nbsp;&nbsp;
+      <span className="text-base font-medium text-text_primary">{value}</span>
+    </div>
+  );
+}
+
+function BadgeZap({ value }: { value: number }) {
+  return (
+    <div className="ring-1 ring-inset ring-text_muted bg-bg2 flex flex-row items-center justify-center rounded-full text-sm px-4 py-1">
+      <Zap strokeWidth={2} width={20} color="var(--accent)" />
+      &nbsp;&nbsp;
+      <span className="text-base font-medium text-text_primary">{value}</span>
+    </div>
+  );
+}
+
+function ReviewTable({ problems }: { problems: any[] }) {
+  let rows = [];
+
+  if (problems.length === 0) {
+    rows.push(
+      <div key="empty" className="p-4 text-text_muted">
+        No problems found.
+      </div>
+    );
+  } else {
+    for (let i = 0; i < problems.length; i++) {
+      const p = problems[i];
+      const accuracy =
+        p.iteration > 0 ? Math.round((p.correct / p.iteration) * 100) : 0;
+      const formattedDate = new Date(p.dueDate).toLocaleDateString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      });
+
+      rows.push(
+        <TableRow
+          key={p._id || i}
+          idx={i}
+          questionNo={p.problemNo}
+          question={p.problemName}
+          iteration={p.iteration}
+          accuracy={accuracy}
+          phase={p.phase}
+          dueDate={formattedDate}
+        />
+      );
+    }
+  }
+  return (
+    <div className="bg-bg1 flex flex-col rounded-md border-2 border-bg2 shadow-md p-4">
+      <div className="flex flex-col p-4">
+        <span className="font-bold text-text_primary text-3xl">Review</span>
+        <span className="text-sm text-text_muted">
+          You have solved it once. Now let’s make it stick
+        </span>
+      </div>
+      <div className="flex flex-col p-4">
+        <div className="overflow-x-auto">
+          <div className="min-w-[800px]">
+            <TableHead {...reviewTableHeading} />
+            {rows}
+          </div>
         </div>
       </div>
     </div>

@@ -7,15 +7,15 @@ html {
 }
 
 :root {
-  --bg-0: theme(colors.gray.300);
-  --bg-1: theme(colors.zinc.200);
-  --bg-2: theme(colors.neutral.100);
+  --bg-0: theme(colors.slate.300);
+  --bg-1: theme(colors.slate.200);
+  --bg-2: theme(colors.slate.100);
   --accent: #E7000B;
   --text-primary: theme(colors.slate.950);
   --text-contrast: #F8FAFC;
   --text-muted: theme(colors.stone.500);
-  --glass-bg: rgba(28, 25, 23, 0.6);
-  --glass-border: rgba(250, 250, 249, 0.1);
+  --glass-bg: rgba(255, 255, 255, 0.6);
+  --glass-border: rgba(0, 0, 0, 0.05);
   --success: #00C950;
   --warning: #FE9A00;
   --error: #C10007;

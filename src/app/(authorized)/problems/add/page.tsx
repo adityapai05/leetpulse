@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
 import { MouseEvent, ChangeEvent, FormEvent, useState } from "react";
+import { redirect } from "next/navigation";
 
 export default function AddQuestion() {
   const [formData, setFormData] = useState({
@@ -45,6 +46,11 @@ export default function AddQuestion() {
         return;
       }
 
+      if (data.error === "Session expired! Please login again") {
+        window.location.href = "/login";
+        return;
+      }
+
       toast.success(data.success);
     } catch (error) {
       console.error(error);
@@ -61,51 +67,45 @@ export default function AddQuestion() {
   }
 
   return (
-    <div className="bg-bg1 flex flex-col gap-8 py-8 px-4 my-16 mx-16 rounded-md ring-inset ring-1 ring-bg2 shadow-md items-center justify-center">
-      <div className="flex flex-col gap-4 text-2xl font-bold">Add Problems</div>
-      <form
-        onSubmit={handleSubmit}
-        className="flex gap-4 flex-col md:flex-row w-full items-center justify-center"
-      >
-        <div className="flex flex-col gap-4">
-          <Input
-            label="Problem No:"
-            name="problemNo"
-            type="text"
-            value={formData.problemNo}
-            onChange={handleChange}
-            placeholder="ex: 301 (required)"
+    <div className="bg-bg1 mx-16 my-8 ring-2 ring-bg2 rounded-lg py-16 px-4 md:px-32">
+      <form className="flex flex-col gap-4 p-4 md:p-16">
+        <Input
+          label="Problem No:"
+          name="problemNo"
+          type="text"
+          value={formData.problemNo}
+          onChange={handleChange}
+          placeholder="ex: 301 (required)"
+        />
+        <Input
+          label="Tags (comma seperated):"
+          name="tags"
+          type="text"
+          value={formData.tags}
+          onChange={handleChange}
+          placeholder="ex: array, prefix sum"
+        />
+        <Input
+          label="Notes:"
+          name="notes"
+          type="text"
+          value={formData.notes}
+          onChange={handleChange}
+          placeholder="your notes"
+        />
+        <div className="flex justify-center items-center  flex-col-reverse gap-8 md:flex-row pt-4">
+          <Button
+            variant="secondary"
+            text="Cancel"
+            onClickFunction={handleCancel}
+            type="reset"
           />
-          <Input
-            label="Tags (comma seperated):"
-            name="tags"
-            type="text"
-            value={formData.tags}
-            onChange={handleChange}
-            placeholder="ex: array, prefix sum"
+          <Button
+            variant="primary"
+            text="Add to list"
+            onClickFunction={handleSubmit}
+            type="submit"
           />
-          <Input
-            label="Notes:"
-            name="notes"
-            type="text"
-            value={formData.notes}
-            onChange={handleChange}
-            placeholder="your notes"
-          />
-          <div className="flex flex-col-reverse gap-8 md:flex-row pt-4">
-            <Button
-              variant="secondary"
-              text="Cancel"
-              onClickFunction={handleCancel}
-              type="reset"
-            />
-            <Button
-              variant="primary"
-              text="Add to list"
-              onClickFunction={handleSubmit}
-              type="submit"
-            />
-          </div>
         </div>
       </form>
     </div>

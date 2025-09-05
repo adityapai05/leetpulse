@@ -8,7 +8,7 @@ export default function Section1() {
         <div className="flex flex-col">
           <div
             className="text-3xl font-extrabold tracking-wide"
-            style={{ textShadow: "1px 1px 2px rgba(0,0,0,0.5)" }}
+            style={{ textShadow: "1px 1px 2px rgba(0,0,0,0.3)" }}
           >
             <span className="text-accent">leetpulse&nbsp;</span>
             <span>- A LeetCode Tracker</span>
@@ -18,7 +18,7 @@ export default function Section1() {
           </div>
         </div>
         <div className="text-text_primary text-justify">
-          LeetPulse uses spaced repetition and the forgetting curve to help you
+          leetpulse uses spaced repetition and the forgetting curve to help you
           retain LeetCode problems long-term. Track your progress, review
           problems right when you’re about to forget them, and stay consistent
           with a sleek, distraction-free interface.

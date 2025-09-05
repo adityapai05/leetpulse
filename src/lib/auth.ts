@@ -11,7 +11,7 @@ export async function getUserFromCookies() {
     const decoded = jwt.verify(token, process.env.JWT_SECRET!) as {
       id: string;
     };
-    return decoded; // now you have { id: "..." }
+    return decoded;
   } catch {
     return null;
   }

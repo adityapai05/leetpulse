@@ -4,7 +4,7 @@ import Leaderboard from "@/models/Leaderboard";
 import Users from "@/models/Users";
 
 export async function POST(req: NextRequest) {
-  const authHeader = req.headers.get("authorization");
+  const authHeader = req.headers.get("Authorization");
   const token = authHeader?.split("Bearer ")[1];
 
   if (!token || token != process.env.CRON_SECRET) {
@@ -25,7 +25,6 @@ export async function POST(req: NextRequest) {
       rank: idx + 1,
       username: u.username,
       xp: u.xp,
-      avgIteration: u.averageIteration || 0,
     }));
 
     await Leaderboard.insertMany(bulk);

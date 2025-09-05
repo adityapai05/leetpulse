@@ -21,11 +21,12 @@ export async function POST(req: NextRequest) {
 
     const user = await User.findOne({
       $or: [{ username: usernameORemail }, { email: usernameORemail }],
+      isVerified: true,
     });
 
     if (!user) {
       return NextResponse.json(
-        { error: "User does not exist." },
+        { error: "User does not exist or your email is not verified." },
         { status: 404 }
       );
     }

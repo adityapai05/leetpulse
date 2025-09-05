@@ -4,11 +4,10 @@ type Props = {
   rank: number;
   username: string;
   xp: number;
-  avgIteration: number;
 };
 
 export default function TableRow(props: Props) {
-  const { rank, username, xp, avgIteration } = props;
+  const { rank, username, xp } = props;
   let bgColor: string;
 
   if (rank % 2 == 0) {
@@ -25,11 +24,8 @@ export default function TableRow(props: Props) {
       )}
     >
       <div className="flex justify-center items-center w-[10%]">{rank}</div>
-      <div className="flex items-center px-4 w-[70%]">{username}</div>
+      <div className="flex items-center px-4 w-[80%]">{username}</div>
       <div className="flex justify-center items-center w-[10%]">{xp}</div>
-      <div className="flex justify-center items-center w-[10%]">
-        {avgIteration}
-      </div>
     </div>
   );
 }

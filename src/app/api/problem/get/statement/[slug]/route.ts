@@ -4,11 +4,9 @@ import { runPrompt } from "@/lib/aiClient";
 
 import GlobalProblems from "@/models/GlobalProblems";
 
-import { cookies } from "next/headers";
-import jwt from "jsonwebtoken";
 import { NextRequest, NextResponse } from "next/server";
-import fs from "fs";
-import path from "path";
+import { getUserFromCookies } from "@/lib/auth";
+import { getQuestions } from "@/lib/questionsCache";
 
 export async function GET(
   req: NextRequest,
@@ -17,19 +15,8 @@ export async function GET(
   try {
     const { slug } = await context.params;
 
-    const cookieStore = await cookies();
-    const userToken = cookieStore.get("authToken")?.value;
-    if (!userToken) {
-      return NextResponse.json(
-        { error: "Unauthorized Request" },
-        { status: 401 }
-      );
-    }
-
-    let user: any;
-    try {
-      user = jwt.verify(userToken, process.env.JWT_SECRET!);
-    } catch {
+    const user = await getUserFromCookies();
+    if (!user) {
       return NextResponse.json(
         { error: "Unauthorized Request" },
         { status: 401 }
@@ -51,39 +38,32 @@ export async function GET(
         { status: 200 }
       );
     } else {
-      const filePath = path.join(process.cwd(), "public", "questions.json");
-      const questions = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+      const questions = getQuestions();
       const problemName = questions[problemNumber]?.title;
 
       const schema = {
         type: Type.OBJECT,
         properties: {
           problemStatement: { type: Type.STRING },
-          arguments: {
-            type: Type.ARRAY,
-            items: {
-              type: Type.STRING,
-            },
-          },
-          returnType: { type: Type.STRING },
+          input: { type: Type.STRING },
+          output: { type: Type.STRING },
         },
-        propertyOrdering: ["problemStatement", "arguments", "returnType"],
+        propertyOrdering: ["problemStatement", "input", "output"],
       };
 
       const aiResult = await runPrompt(
-        `For LeetCode problem ${problemNumber} titled ${problemName}, generate:
-
-        - problemStatement: a clear, easy-to-understand description of what the problem is asking the user to do, in simple language without technical jargon. Avoid words like "implement a function"; just explain the task directly.  
-        - arguments: list the inputs with their data types.  
-        - returnType: specify the type of the output.`,
+        `for LeetCode problem ${problemNumber} titled ${problemName}, generate:
+        - problemStatement:A simple statement about the LeetCode problem.  
+        - input: an example input of test case.  
+        - output: an example output of test case`,
         schema
       );
 
       const newProblem = await GlobalProblems.create({
         problemNumber,
         problemStatement: aiResult.problemStatement,
-        arguments: aiResult.arguments,
-        returnType: aiResult.returnType,
+        input: aiResult.input,
+        output: aiResult.output,
       });
 
       return NextResponse.json(

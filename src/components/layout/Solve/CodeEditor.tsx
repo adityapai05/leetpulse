@@ -1,11 +1,31 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Editor from "@monaco-editor/react";
 import Button from "@/components/ui/Button";
 import toast from "react-hot-toast";
+import { getBoilerplate } from "@/utils/boilerplateGenerator";
 
-export default function CodeEditor({ problem, onAnalysis }: any) {
+export default function CodeEditor({
+  problem,
+  onAnalysis,
+  globalProblems,
+}: any) {
   const [language, setLanguage] = useState("cpp");
   const [code, setCode] = useState("// Write your code here");
+
+  useEffect(() => {
+    const boilerplate = getBoilerplate(language, problem, globalProblems);
+    setCode(boilerplate);
+  }, [language, problem]);
+
+  useEffect(() => {
+    const saved = localStorage.getItem("preferredLanguage");
+    if (saved) setLanguage(saved);
+  }, []);
+
+  // save preference to localStorage
+  useEffect(() => {
+    localStorage.setItem("preferredLang", language);
+  }, [language]);
 
   function handleEditorMount(editor, monaco) {
     monaco.editor.defineTheme("customTheme", {
@@ -18,6 +38,11 @@ export default function CodeEditor({ problem, onAnalysis }: any) {
     });
 
     monaco.editor.setTheme("customTheme");
+  }
+
+  function handleLanguageChange(lang: string) {
+    setLanguage(lang);
+    localStorage.setItem("preferredLanguage", lang);
   }
 
   function handleRedirect() {
@@ -47,17 +72,24 @@ export default function CodeEditor({ problem, onAnalysis }: any) {
       }
 
       onAnalysis(data.analysis);
+      if (data.mastered) {
+        toast.success(
+          data.message ||
+            `Congratulations! You have mastered the problem ${problem.problemName}`
+        );
+        return;
+      }
     } catch (err) {
       toast.error(err || "Please try again");
     }
   }
   return (
-    <div className="flex flex-col flex-1 border border-accent rounded-md p-4 bg-bg2 shadow-md">
-      <div className="flex flex-row justify-between bg-stone-900 text-sm font-bold text-accent px-4 py-2 rounded-t-md">
-        {"</Code>"}
+    <div className=" bg-bg1 flex flex-col flex-1 border-2 border-bg2 rounded-md p-4 shadow-md">
+      <div className="flex flex-row justify-between bg-stone-900 text-base font-bold text-accent px-4 py-2 rounded-t-md">
+        {"</>"}
         <select
           value={language}
-          onChange={(e) => setLanguage(e.target.value)}
+          onChange={(e) => handleLanguageChange(e.target.value)}
           className="bg-stone-900 rounded px-2 font-medium text-white"
         >
           <option value="javascript">JavaScript</option>

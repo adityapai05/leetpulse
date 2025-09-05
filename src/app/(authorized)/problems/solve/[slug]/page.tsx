@@ -59,14 +59,18 @@ export default function SolvePage({ params }: Props) {
   }, [slug]);
 
   return (
-    <div className="flex flex-col gap-4 p-4 m-4 md:flex-row h-[90vh]">
+    <div className="flex flex-col gap-4 p-4 m-4 md:flex-row">
       {analysis ? (
         <Analysis analysis={analysis} />
       ) : (
         <QuestionInfo problem={problem} globalProblems={globalProblems} />
       )}
 
-      <CodeEditor problem={problem} onAnalysis={setAnalysis} />
+      <CodeEditor
+        problem={problem}
+        onAnalysis={setAnalysis}
+        globalProblems={globalProblems}
+      />
     </div>
   );
 }

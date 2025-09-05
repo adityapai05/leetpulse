@@ -9,7 +9,6 @@ const heading = {
   head1: "Rank",
   head2: "Username",
   head3: "XP",
-  head4: "Avg. Iteration",
 };
 
 export default function Leaderboard() {
@@ -31,9 +30,7 @@ export default function Leaderboard() {
     <div className="bg-bg1 flex flex-col gap-8 mx-16 my-8 p-8 rounded-md shadow-md border-2 border-bg2">
       <div className="flex flex-row gap-2 items-center">
         <span className="text-2xl font-bold">Leaderboard Ranking</span>
-        <span className="text-sm text-text_muted">
-          (based on XP and iteration)
-        </span>
+        <span className="text-sm text-text_muted">(based on XP)</span>
       </div>
       {/* Table below */}
       <div className=" flex flex-col">

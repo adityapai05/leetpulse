@@ -44,7 +44,12 @@ export async function GET() {
   const endOfWeek = new Date(today);
   endOfWeek.setDate(today.getDate() + 7);
 
+  let correct = 0;
+  let iteration = 0;
+
   for (const p of problemsInQueue) {
+    correct += p.correct;
+    iteration += p.iteration;
     if (p.dueDate >= today && p.dueDate < endToday) {
       dueTodayCount++;
     }
@@ -52,6 +57,7 @@ export async function GET() {
       dueThisWeekCount++;
     }
   }
+  const accuracy = (correct / iteration) * 100;
 
   const createdAt = UsersData.createdAt;
   const date = new Date(createdAt);
@@ -66,7 +72,7 @@ export async function GET() {
       name: UsersData.firstName,
       username: UsersData.username,
       xp: UsersData.xp,
-      rank: UserInLeaderboard.rank,
+      rank: UserInLeaderboard.rank || NaN,
       level: UsersData?.level || 1,
       dateJoined: formatted,
     },
@@ -75,7 +81,7 @@ export async function GET() {
         { title: "Total problems added", value: UsersData.problemsAdded },
         { title: "Currently in review queue", value: problemsInQueue.length },
         { title: "Submissions", value: 0 },
-        { title: "Accuracy", value: "" },
+        { title: "Accuracy", value: String(accuracy + "%") },
         { title: "Problems Mastered", value: UsersData.masteryCount },
       ],
       card2: [
@@ -88,8 +94,8 @@ export async function GET() {
       ],
     },
     performancePie: [
-      { name: "Correct", value: 50 },
-      { name: "Incorrect", value: 50 },
+      { name: "Correct", value: accuracy },
+      { name: "Incorrect", value: 100 - accuracy },
     ],
   };
 

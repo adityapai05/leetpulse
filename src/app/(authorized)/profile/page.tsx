@@ -40,7 +40,7 @@ export default function Profile() {
       <div className=" mx-16 my-8 flex flex-row gap-4 p-4">
         <UserProfileCard {...data.leftContainer} />
         <div className="flex flex-col bg-[radial-gradient(at_top_left,var(--bg-0),var(--bg-1))] p-4 w-4/5 rounded-md gap-6">
-          <div className="text-xl text-text_muted font-bold mx-4">
+          <div className="text-xl text-text_primary font-bold mx-4">
             User Stats
           </div>
           <div className="flex flex-row gap-4 flex-1 p-4">

@@ -2,28 +2,11 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="ring-2 ring-bg2 bg-bg0 flex flex-col gap-16 justify-center text-sm text-text_muted px-16 py-8">
+    <footer className="ring-2 ring-bg2 bg-bg0 flex flex-col gap-16 justify-center text-sm text-text_muted px-32 py-8">
       <div className="flex flex-row justify-between">
         <div className="flex flex-col gap-4">
           <Link href="/" className="text-3xl font-bold text-text_primary">
             leetpulse
-          </Link>
-        </div>
-        <div className="flex flex-col gap-4">
-          <span className="text-text_primary font-semibold text-lg">
-            Quick Links
-          </span>
-          <Link className="hover:text-accent" href="#whyleetpulse">
-            Why leetpulse?
-          </Link>
-          <Link className="hover:text-accent" href="#howitworks">
-            How it works
-          </Link>
-          <Link className="hover:text-accent" href="#pricing">
-            Pricing
-          </Link>
-          <Link className="hover:text-accent" href="#about">
-            About
           </Link>
         </div>
         <div className="flex flex-col gap-4">

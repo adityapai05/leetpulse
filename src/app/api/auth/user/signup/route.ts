@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    firstName = firstName.trim();
+    firstName = firstName.toUpperCase().trim();
     username = username.trim();
     email = email.toLowerCase().trim();
 

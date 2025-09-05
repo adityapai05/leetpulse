@@ -1,4 +1,4 @@
-import KeyValueDisplay from "@/components/ui/KeyValueDisplay";
+import KeyValueDisplay from "@/components/layout/Solve/KeyValueDisplay";
 
 type analysisData = {
   verdict: string;
@@ -25,62 +25,38 @@ export default function Correct(props: Props) {
   return (
     <>
       <KeyValueDisplay
-        title="✅ Your solution is"
+        title="Your solution is:"
         value="Correct"
-        valueColor="text-success"
-        className="text-success font-bold text-xl"
+        className="font-bold text-success text-2xl"
       />
-      <KeyValueDisplay title="🔍 Insights" value={analysis.insights} />
-
-      <div className="bg-bg2 flex flex-col gap-2 p-2 rounded-md ">
-        <div className="text-sm text-warning">Complexity comparison</div>
-        <div className="flex flex-row gap-6">
-          <div className="bg-bg2 flex flex-col gap-2 border border-text_muted px-4 py-2 rounded-md shadow-md">
-            <div className="text-sm text-warning">Your solution</div>
-            <div>
-              <span className="text-sm">Time: &nbsp;</span>
-              <span className="text-base font-semibold">
-                {analysis.usersComplexity?.time || "Not Available"}
-              </span>
-            </div>
-            <div>
-              <span className="text-sm">Space: &nbsp;</span>
-              <span className="text-base font-semibold">
-                {analysis.usersComplexity?.space || "Not Available"}
-              </span>
-            </div>
-          </div>
-          <div className="bg-bg2 flex flex-col gap-2 border border-text_muted px-4 py-2 rounded-md shadow-md">
-            <div className="text-sm text-warning">Best possible solution</div>
-            <div>
-              <span className="text-sm">Time: &nbsp;</span>
-              <span className="text-base font-semibold">
-                {analysis.bestComplexity?.time || "Not Available"}
-              </span>
-            </div>
-            <div>
-              <span className="text-sm">Space: &nbsp;</span>
-              <span className="text-base font-semibold">
-                {analysis.bestComplexity?.space || "Not Available"}
-              </span>
-            </div>
-          </div>
-        </div>
+      <div className="flex flex-row gap-4 rounded-xl">
+        <KeyValueDisplay
+          title="Your solutions complexity"
+          value={`Time: ${analysis.usersComplexity.time}\nSpace: ${analysis.usersComplexity.space}`}
+          className="text-text_primary text-lg"
+        />
+        <KeyValueDisplay
+          title="Best possible solution's complexity:"
+          value={`Time: ${analysis.bestComplexity.time}\nSpace: ${analysis.bestComplexity.space}`}
+          className="text-text_primary text-lg"
+        />
       </div>
-
       <KeyValueDisplay
-        title="💡 Optimizations: "
+        title="Optimizations:"
         value={analysis.optimizations}
-      />
-      <KeyValueDisplay
-        title="📅 Review this problem again on"
-        value={analysis.dueDate}
+        className="text-text_primary"
       />
 
-      {/* make a link that takes user to leetcode (also specify that it takes to leetcode) */}
       <KeyValueDisplay
-        title="🔗 Next challenge:"
-        value="100. Solve Binary Tree      add?"
+        title="Insights:"
+        value={analysis.insights}
+        className="text-text_primary"
+      />
+
+      <KeyValueDisplay
+        title="Review this problem again on:"
+        value={analysis.dueDate}
+        className="text-text_primary"
       />
     </>
   );

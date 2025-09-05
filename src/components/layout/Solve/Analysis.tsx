@@ -1,4 +1,3 @@
-import KeyValueDisplay from "@/components/ui/KeyValueDisplay";
 import Correct from "@/components/layout/Solve/Correct";
 import Incorrect from "@/components/layout/Solve/Incorrect";
 import QuestionInfo from "./QuestionInfo";
@@ -37,7 +36,7 @@ export default function Analysis(props: Props) {
 
   return (
     <>
-      <div className="bg-bg1 flex flex-1 flex-col justify-between p-4 border border-accent rounded-md shadow-md h-full">
+      <div className="bg-bg1 flex flex-1 flex-col justify-between p-4 border-2 border-bg2 rounded-xl shadow-md h-full w-1/2">
         {verdict === "Correct" ? (
           <Correct analysis={analysis} />
         ) : (

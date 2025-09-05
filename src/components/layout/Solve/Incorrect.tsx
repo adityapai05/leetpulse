@@ -1,4 +1,5 @@
-import KeyValueDisplay from "@/components/ui/KeyValueDisplay";
+import KeyValueDisplay from "@/components/layout/Solve/KeyValueDisplay";
+import CodeBlock from "@/components/ui/CodeBlock";
 
 type analysisData = {
   verdict: string;
@@ -15,29 +16,36 @@ type Props = {
 
 export default function Incorrect(props: Props) {
   const analysis = props.analysis;
+  const language = localStorage.getItem("preferredLanguage");
 
   return (
     <>
       <KeyValueDisplay
-        title="❌ Your solution is"
+        title="Your solution is:"
         value="Incorrect"
-        valueColor="text-error"
-        className="text-error font-bold text-xl"
+        className="font-bold text-error text-2xl"
       />
       <KeyValueDisplay
-        title="⚠️ Reason why your code fails submission"
+        title="Failure reason:"
         value={analysis.failureReasons}
+        className="text-text_primary"
       />
       <KeyValueDisplay
-        title="🛠 Ways to correct your solution"
+        title="Correction hints:"
         value={analysis.correctionHints}
+        className="text-text_primary"
       />
-      <KeyValueDisplay title=" Corrected Code" value={analysis.correctCode} />
-
-      {/* make a link that takes user to leetcode (also specify that it takes to leetcode) */}
+      <div className="border-2 border-bg2 p-2 flex flex-row gap-4 rounded-xl">
+        <div className="bg-bg2 flex flex-col items-baseline py-2 px-4 rounded-lg w-full shadow-md">
+          <div className="text-accent text-base">Corrected Code</div>
+          <CodeBlock code={analysis.correctCode} language={language} />
+        </div>
+      </div>
+      {console.log(analysis.correctCode)}
       <KeyValueDisplay
-        title="🧩 Recommended similar problems"
-        value="100. Solve Binary Tree      add?"
+        title="Review this problem again on:"
+        value={analysis.dueDate}
+        className="text-text_primary"
       />
     </>
   );

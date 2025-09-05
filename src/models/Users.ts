@@ -13,15 +13,13 @@ const UserSchema = new mongoose.Schema({
 
   // Progress & stats
   xp: { type: Number, default: 0 },
-  level: { type: Number, default: 0 },
+  level: { type: Number, default: 1 },
   problemsAdded: { type: Number, default: 0 },
   masteryCount: { type: Number, default: 0 },
-  averageIteration: { type: Number, default: 0 },
 
   // Engagement
   streak: { type: Number, default: 0 },
   maxStreak: { type: Number, default: 0 },
-  daysActive: { type: Number, default: 1 },
 });
 
 export default mongoose.model("User", UserSchema);

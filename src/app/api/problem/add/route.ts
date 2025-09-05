@@ -1,42 +1,39 @@
 import connectDB from "@/lib/db";
 import Problem from "@/models/Problems";
-import { cookies } from "next/headers";
-import jwt from "jsonwebtoken";
 import { NextRequest, NextResponse } from "next/server";
-import fs from "fs";
-import path from "path";
+import { getUserFromCookies } from "@/lib/auth";
+import { getQuestions } from "@/lib/questionsCache";
+import mongoose from "mongoose";
+import Users from "@/models/Users";
 
 export async function POST(req: NextRequest) {
+  const user = await getUserFromCookies();
+
+  if (!user) {
+    return NextResponse.json(
+      { error: "Session expired! Please login again" },
+      { status: 401 }
+    );
+  }
+
   try {
-    const cookieStore = await cookies();
-    const userToken = cookieStore.get("authToken")?.value;
-    if (!userToken) {
-      return NextResponse.json(
-        { error: "Unauthorized Request" },
-        { status: 401 }
-      );
-    }
-
-    let user: any;
-    try {
-      user = jwt.verify(userToken, process.env.JWT_SECRET);
-    } catch (err) {
-      return NextResponse.json(
-        { error: "Unauthorized Request" },
-        { status: 401 }
-      );
-    }
-
-    const userId = user.id; // MongoDB userId
+    const userId = new mongoose.Types.ObjectId(user.id);
     const body = await req.json();
     const { problemNo, tags, notes } = body;
-    const filePath = path.join(process.cwd(), "public", "questions.json");
-    const questions = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+    const questions = getQuestions();
     const problemName = questions[problemNo]?.title;
     const slug = questions[problemNo]?.slug;
 
     //Connect Database
     await connectDB();
+
+    //Check if problems in the queue is >= 20.
+    if ((await Problem.countDocuments({ userId })) >= 20) {
+      return NextResponse.json(
+        { error: "You can only have 20 questions in the review queue." },
+        { status: 409 }
+      );
+    }
 
     //Check if problem number already exists in DB
     if (await Problem.findOne({ userId, problemNo }))
@@ -54,6 +51,8 @@ export async function POST(req: NextRequest) {
       tags,
       notes,
     });
+
+    await Users.findByIdAndUpdate(user.id, { $inc: { problemsAdded: 1 } });
 
     //Return success message
     return NextResponse.json(

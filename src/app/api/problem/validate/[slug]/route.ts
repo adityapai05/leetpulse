@@ -6,13 +6,16 @@ import connectDB from "@/lib/db";
 import Problems from "@/models/Problems";
 import NextPulse from "@/lib/nextPulse";
 import mongoose from "mongoose";
+import Users from "@/models/Users";
 
 export async function POST(
   req: NextRequest,
   context: { params: Promise<{ slug: string }> }
 ) {
+  // ------------------------------
+  // 1. Authenticate User
+  // ------------------------------
   const user = await getUserFromCookies();
-
   if (!user) {
     return NextResponse.json(
       { error: "User not authorized." },
@@ -20,33 +23,65 @@ export async function POST(
     );
   }
 
+  // ------------------------------
+  // 2. Parse Request Body & Params
+  // ------------------------------
   const body = await req.json();
-  const code = body.code;
+  const code = body.code; // user's submitted code
   const { slug } = await context.params;
 
-  await connectDB();
+  await connectDB(); // connect to MongoDB
 
+  // ------------------------------
+  // 3. Fetch Problem Data
+  // ------------------------------
   const problemData = await Problems.findOne({
     userId: new mongoose.Types.ObjectId(user.id),
     slug: slug,
   });
-
   if (!problemData) {
     return NextResponse.json(
       {
         error:
-          "Problem is not available in the system. Please add the problems first.",
+          "Problem is not available in the system. Please add the problem first.",
       },
       { status: 404 }
     );
   }
 
+  const now = new Date();
+  const due = new Date(problemData.dueDate);
+
+  const isDueToday =
+    due.getDate() === now.getDate() &&
+    due.getMonth() === now.getMonth() &&
+    due.getFullYear() === now.getFullYear();
+
+  const formattedDate = new Date(problemData.dueDate).toLocaleDateString(
+    "en-GB",
+    {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    }
+  );
+
+  if (!isDueToday) {
+    return NextResponse.json(
+      {
+        error: `Please solve the question on due date i.e ${formattedDate}.`,
+      },
+      { status: 403 }
+    );
+  }
+
+  // ------------------------------
+  // 4. Define AI Result Schema
+  // ------------------------------
   const resultSchema = {
     type: Type.OBJECT,
     properties: {
       verdict: { type: Type.STRING },
-
-      //if code is correct
       insights: { type: Type.STRING },
       usersComplexity: {
         type: Type.OBJECT,
@@ -63,12 +98,9 @@ export async function POST(
         },
       },
       optimizations: { type: Type.STRING },
-
-      //If code fails
       failureReasons: { type: Type.STRING },
       correctionHints: { type: Type.STRING },
       correctCode: { type: Type.STRING },
-
       accuracy: { type: Type.NUMBER },
       recommendedProblems: { type: Type.ARRAY, items: { type: Type.STRING } },
     },
@@ -86,25 +118,22 @@ export async function POST(
     ],
   };
 
+  // ------------------------------
+  // 5. Call AI for Code Analysis
+  // ------------------------------
   const aiResult = await runPrompt(
-    `The following is code (detect language by yourself) solution for question ${slug}: ${code}.
-    return the following data:
-    verdict: 'Correct' or 'Incorrect',
+    `The following is a code solution (detect language automatically) for question ${slug}: 
 
-    if verdict is 'Correct' then
-    insights:Give a very short explanation of how the user's approach works.
-    usersComplexity: only state the time and space complexity of the user's code.  
-    optimalComplexity: Give the best possible time and space complexity for this problem(no explanation).  
-    optimizations: Suggest improvements to make the solution better(keep the sentence very short).
+${code}
 
-    if verdict is 'Incorrect' then
-    failureReason: A short (1-2 sentence , ~15 words) explaination on why the code fails (logic error, edge case, complexity issue, etc.).  
-    correctionHints: Suggest what the user should change to fix their approach(short sentences).  
-    correctCode: Provide a corrected version of the code only if verdict is 'Incorrect'.
+Please analyze the user's code. Ignore function names, arguments, and return types—they are generic. Focus only on the code inside the function. Do not nitpick.
 
-    regardless of verdict return this anyways
-    accuracy: rate the correctness of code out of 100. 
-    recommendedProblems: Suggest 1 similar LeetCode problem number.`,
+Provide the following structured output:
+1. verdict: 'Correct' or 'Incorrect'.
+2. If verdict is 'Correct', include insights, usersComplexity, optimalComplexity, optimizations.
+3. If verdict is 'Incorrect', include failureReasons, correctionHints, correctCode.
+4. Regardless of verdict, include accuracy and recommendedProblems.
+Ensure correctCode is well-formatted.`,
     resultSchema
   );
 
@@ -112,25 +141,50 @@ export async function POST(
     return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
 
+  // ------------------------------
+  // 6. Fetch User Data
+  // ------------------------------
+  const usersData = await Users.findById(user.id);
+  if (!usersData) {
+    return NextResponse.json({ error: "User not found" }, { status: 404 });
+  }
+
+  // ------------------------------
+  // 7. Update Problem & User Stats
+  // ------------------------------
+  problemData.iteration += 1;
+
+  if (aiResult.verdict === "Correct") {
+    problemData.correct += 1;
+    usersData.xp += 5; // XP for correct answer
+  } else {
+    if (usersData.xp > 0) usersData.xp -= 2; // XP penalty for wrong answer
+  }
+
+  const accuracy = (problemData.correct / problemData.iteration) * 100;
+
+  // ------------------------------
+  // 8. Calculate Next Review Interval via NextPulse
+  // ------------------------------
   const NextPulseArgs = {
     iteration: problemData.iteration,
     verdict: aiResult.verdict,
-    accuracy: 100,
-    memoryScore: 100,
+    accuracy,
+    level: usersData.level || 2, // use current level or default
   };
 
-  const interval = NextPulse(NextPulseArgs);
+  const { phase, interval, isMastered } = NextPulse(NextPulseArgs);
 
-  problemData.iteration += 1;
-  if (aiResult.verdict === "Correct") {
-    problemData.correct += 1;
-  }
-  const newDate = new Date(problemData.dueDate);
-  newDate.setDate(newDate.getDate() + interval);
-  problemData.dueDate = newDate;
+  const newDueDate = new Date(problemData.dueDate);
+  newDueDate.setDate(newDueDate.getDate() + interval);
+  problemData.dueDate = newDueDate;
+  problemData.phase = phase;
 
   await problemData.save();
 
+  // ------------------------------
+  // 9. Prepare Response Data
+  // ------------------------------
   const returnData = {
     verdict: aiResult.verdict,
     insights: aiResult.insights || null,
@@ -146,12 +200,36 @@ export async function POST(
     failureReasons: aiResult.failureReasons || null,
     correctionHints: aiResult.correctionHints || null,
     correctCode: aiResult.correctCode || null,
-    dueDate: newDate.toLocaleDateString("en-GB", {
+    dueDate: newDueDate.toLocaleDateString("en-GB", {
       day: "numeric",
       month: "long",
       year: "numeric",
     }),
-    recommendedProblems: aiResult.recommendedProblems,
   };
+
+  // ------------------------------
+  // 10. Handle Mastery
+  // ------------------------------
+  if (isMastered) {
+    await Problems.deleteOne({
+      userId: new mongoose.Types.ObjectId(user.id),
+      slug: slug,
+    });
+    usersData.masteryCount += 1;
+    usersData.xp += 10; // bonus XP for mastering problem
+
+    await usersData.save(); // save user XP & mastery count
+
+    return NextResponse.json(
+      { mastered: true, analysis: returnData },
+      { status: 200 }
+    );
+  }
+
+  // ------------------------------
+  // 11. Save User Data & Return
+  // ------------------------------
+  await usersData.save(); // save updated XP
+
   return NextResponse.json({ analysis: returnData }, { status: 200 });
 }
