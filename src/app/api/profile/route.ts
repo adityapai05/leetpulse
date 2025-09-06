@@ -59,7 +59,7 @@ export async function GET() {
       dueThisWeekCount++;
     }
   }
-  const accuracy = (correct / iteration) * 100;
+  const accuracy = Number(((correct / iteration) * 100).toFixed(2));
 
   const createdAt = UsersData.createdAt;
   const date = new Date(createdAt);

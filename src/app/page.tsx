@@ -8,20 +8,24 @@ import Section5 from "@/components/layout/Landing/Section5";
 import Section6 from "@/components/layout/Landing/Section6";
 
 export default async function Home() {
-  await new Promise((resolve) => setTimeout(resolve, 2000));
   return (
     <main className="bg-[radial-gradient(at_top_left,var(--bg-1),var(--bg-0))]">
       <Navbar />
-      <section className="h-[90vh] flex flex-col justify-evenly">
+
+      {/* Hero + Features Section */}
+      <section className="flex flex-col justify-evenly px-6 md:px-16 py-8 md:h-[90vh] gap-8">
         <Section1 />
         <Section2 />
       </section>
-      <section>
+
+      {/* Other Sections */}
+      <section className="px-6 md:px-16 py-8 flex flex-col gap-12">
         <Section3 />
         <Section4 />
         <Section5 />
         <Section6 />
       </section>
+
       <Footer />
     </main>
   );

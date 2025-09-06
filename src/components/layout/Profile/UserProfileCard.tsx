@@ -28,7 +28,6 @@ export default function UserProfileCard({
     if (!confirmLogout) {
       setConfirmLogout(true);
       toast("Click again to confirm logout", { icon: "⚠️" });
-      // Reset after 3 seconds if user doesn't click again
       setTimeout(() => setConfirmLogout(false), 3000);
     } else {
       const res = await fetch("/api/auth/user/logout");
@@ -42,7 +41,7 @@ export default function UserProfileCard({
   };
 
   return (
-    <div className="bg-[radial-gradient(at_top_left,var(--bg-0),var(--bg-1))] flex flex-col gap-4 items-center px-4 py-8 w-1/5 rounded-md">
+    <div className="bg-[radial-gradient(at_top_left,var(--bg-0),var(--bg-1))] flex flex-col gap-4 items-center px-4 py-8 w-full sm:w-3/4 md:w-1/2 lg:w-full rounded-md">
       <div className="rounded-full h-32 w-32 border flex items-center justify-center bg-bg0">
         <CircleUserRound
           strokeWidth={1}
@@ -51,12 +50,16 @@ export default function UserProfileCard({
           color="var(--text-primary)"
         />
       </div>
+
       <ValueKeyDisplay title={username} value={name} />
-      <div className="flex flex-row gap-8">
+
+      {/* Responsive stats layout */}
+      <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 text-center">
         <ValueKeyDisplay title="Rank" value={rank} />
         <ValueKeyDisplay title="Level" value={level} />
         <ValueKeyDisplay title="XP" value={xp} />
       </div>
+
       <ValueKeyDisplay
         title="Date joined"
         value={dateJoined}
@@ -65,7 +68,7 @@ export default function UserProfileCard({
 
       <button
         onClick={handleLogoutClick}
-        className="rounded-xl px-8 py-2 bg-bg1 border border-bg2 hover:bg-bg2"
+        className="rounded-xl px-8 py-2 bg-error font-semibold border border-error hover:bg-bg2"
       >
         Logout
       </button>

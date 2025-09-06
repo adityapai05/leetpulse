@@ -2,14 +2,17 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="ring-2 ring-bg2 bg-bg0 flex flex-col gap-16 justify-center text-sm text-text_muted px-32 py-8">
-      <div className="flex flex-row justify-between">
-        <div className="flex flex-col gap-4">
+    <footer className="ring-2 ring-bg2 bg-bg0 flex flex-col md:flex-col lg:flex-col gap-12 md:gap-16 justify-center text-sm text-text_muted px-6 md:px-32 py-8">
+      <div className="flex flex-col md:flex-row md:justify-between gap-8 md:gap-16">
+        {/* Logo */}
+        <div className="flex flex-col items-start md:items-start gap-4">
           <Link href="/" className="text-3xl font-bold text-text_primary">
             leetpulse
           </Link>
         </div>
-        <div className="flex flex-col gap-4">
+
+        {/* Social Media */}
+        <div className="flex flex-col items-start gap-4">
           <span className="text-text_primary font-semibold text-lg">
             Social Media
           </span>
@@ -28,13 +31,17 @@ export default function Footer() {
             Instagram
           </Link>
         </div>
-        <div className="flex flex-col gap-4">
+
+        {/* Contact */}
+        <div className="flex flex-col items-start gap-4">
           <span className="text-text_primary font-semibold text-lg">
             Contact
           </span>
           <span className="text-text_primary">leetpulse@gmail.com</span>
         </div>
-        <div className="flex flex-col gap-4">
+
+        {/* Legal */}
+        <div className="flex flex-col items-start gap-4">
           <span className="text-text_primary font-semibold text-lg">
             Legal links
           </span>
@@ -46,7 +53,8 @@ export default function Footer() {
           </Link>
         </div>
       </div>
-      <div className="text-text_primary">
+
+      <div className="text-center text-text_primary mt-8">
         &copy; {new Date().getFullYear()}, leetpulse &middot; v1.0.0
       </div>
     </footer>

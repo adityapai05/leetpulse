@@ -70,10 +70,10 @@ export default function Login() {
 
   return (
     <div className="flex bg-[radial-gradient(at_top_left,var(--bg-2),var(--bg-0))] min-h-screen w-full items-center justify-center">
-      <div className="flex flex-col items-center gap-8 lg:w-1/3  md:w-2/3 sm:w-3/4">
+      <div className="flex flex-col items-center p-2 gap-8 lg:w-1/3  md:w-2/3 sm:w-3/4">
         <form
           onSubmit={handleSubmit}
-          className="flex flex-col w-full bg-bg2 p-8 gap-4 rounded-lg shadow-lg"
+          className="flex flex-col w-full bg-bg2 md:p-8 px-4 py-8 gap-4 rounded-lg shadow-lg"
         >
           <div className="font-bold text-2xl self-center h-16">
             Login to{" "}

@@ -2,11 +2,14 @@ import PricingCard from "./PricingCard";
 
 export default function Section5() {
   return (
-    <section id="pricing" className="h-1/4 flex flex-col py-4 px-16 gap-4">
-      <div className="text-2xl font-semibold tracking-wide">
+    <section
+      id="pricing"
+      className="flex flex-col py-4 px-6 md:px-16 gap-6 md:gap-8"
+    >
+      <div className="text-xl md:text-2xl font-semibold tracking-wide">
         {"</> "}Pricing
       </div>
-      <div className="flex flex-row gap-4 p-4">
+      <div className="flex flex-col sm:flex-col md:flex-row gap-4 p-0 md:p-4">
         <PricingCard
           price="Sounds like free"
           title="Features"
@@ -17,6 +20,7 @@ export default function Section5() {
             "No ads or trackers",
           ]}
         />
+        {/* Add more PricingCard components here if needed */}
       </div>
     </section>
   );

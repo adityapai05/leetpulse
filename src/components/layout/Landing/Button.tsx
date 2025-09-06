@@ -6,6 +6,7 @@ export default function Button({
   size = "small", // small | big | tertiary
   text = "Button",
   href,
+  target = "",
 }) {
   const baseStyles =
     "transition-all duration-300 ease-in-out shadow-md ring-1 ring-inset";
@@ -26,7 +27,7 @@ export default function Button({
   };
 
   return (
-    <Link href={`/${href || ""}`}>
+    <Link href={`${href || ""}`} target={target}>
       <button
         className={clsx(
           baseStyles,

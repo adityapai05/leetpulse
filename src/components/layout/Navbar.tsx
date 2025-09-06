@@ -8,13 +8,14 @@ export default function Navbar() {
   const pathname = usePathname();
 
   const linkClasses = (path: string) =>
-    `hover:text-accent ${
+    `hover:text-accent transition-colors ${
       pathname === path ? "text-accent" : "text-text_primary"
     }`;
 
   return (
-    <nav className="bg-bg1 flex flex-row justify-between px-16 py-4 text-sm shadow-md">
-      <div className="flex flex-row items-center gap-6 px-4 font-medium">
+    <nav className="bg-bg1 flex flex-row justify-between px-4 sm:px-8 lg:px-16 py-4 text-sm shadow-md">
+      {/* Left side: links */}
+      <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 font-medium">
         <Link className={linkClasses("/explore")} href="/explore">
           Explore
         </Link>
@@ -28,9 +29,11 @@ export default function Navbar() {
           Leaderboard
         </Link>
       </div>
-      <div className="flex flex-row items-center gap-6 px-4 font-medium">
+
+      {/* Right side: profile */}
+      <div className="flex justify-center mt-4 sm:mt-0">
         <Link className="cursor-pointer" href="/profile">
-          <CircleUserRound />
+          <CircleUserRound size={24} />
         </Link>
       </div>
     </nav>

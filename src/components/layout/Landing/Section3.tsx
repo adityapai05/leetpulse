@@ -2,12 +2,16 @@ import KeyValueDisplay from "./KeyValueDisplay";
 
 export default function Section3() {
   return (
-    <section id="whyleetpulse" className="flex flex-col py-8 px-16 my-4 gap-8">
+    <section
+      id="whyleetpulse"
+      className="flex flex-col py-8 px-6 md:px-16 my-4 gap-6 md:gap-8"
+    >
       {/* Heading */}
-      <div className="text-2xl font-semibold tracking-wide">
+      <div className="text-xl md:text-2xl font-semibold tracking-wide">
         <span>{"</> "}Why?</span>
         <span className="text-accent">&nbsp;leetpulse</span>
       </div>
+
       {/* Content */}
       <KeyValueDisplay
         title="Tired of tracking problems in Notion, Excel, or random sticky notes?"
@@ -21,7 +25,7 @@ export default function Section3() {
       />
       <KeyValueDisplay
         title="Consistency without burnout"
-        value=" It’s not about grinding 100 problems a day. It’s about remembering the 10 you already solved. leetpulse keeps you consistent without the overwhelm."
+        value="It’s not about grinding 100 problems a day. It’s about remembering the 10 you already solved. leetpulse keeps you consistent without the overwhelm."
       />
     </section>
   );

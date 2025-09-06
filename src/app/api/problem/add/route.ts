@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
     //Check if problem number already exists in DB
     if (await Problem.findOne({ userId, problemNo }))
       return NextResponse.json(
-        { error: "Problem no is already in the review queue" },
+        { error: "This problem is already present in the review queue" },
         { status: 409 }
       );
 

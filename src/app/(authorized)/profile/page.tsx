@@ -8,11 +8,11 @@ import { useEffect, useState } from "react";
 
 interface ProfileData {
   leftContainer: {
-    name: string; // string
-    username: string; // string
-    xp: number; // number
-    rank: number; // number (can be computed)
-    level: number; // number
+    name: string;
+    username: string;
+    xp: number;
+    rank: number;
+    level: number;
     dateJoined: string;
   };
   stats: {
@@ -25,6 +25,7 @@ interface ProfileData {
 
 export default function Profile() {
   const [data, setData] = useState<ProfileData | null>(null);
+
   useEffect(() => {
     async function fetchProfile() {
       const res = await fetch("/api/profile");
@@ -34,28 +35,43 @@ export default function Profile() {
     fetchProfile();
   }, []);
 
-  if (!data) return <div>Loading...</div>;
+  if (!data) return <div className="text-center p-8">Loading...</div>;
+
   return (
     <>
-      <div className=" mx-16 my-8 flex flex-row gap-4 p-4">
-        <UserProfileCard {...data.leftContainer} />
-        <div className="flex flex-col bg-[radial-gradient(at_top_left,var(--bg-0),var(--bg-1))] p-4 w-4/5 rounded-md gap-6">
-          <div className="text-xl text-text_primary font-bold mx-4">
-            User Stats
-          </div>
-          <div className="flex flex-row gap-4 flex-1 p-4">
-            <StatsCard heading="Problem Stats" stats={data.stats.card1} />
-            <div className="flex flex-1 flex-col gap-4">
+      <div className="mx-4 sm:mx-8 lg:mx-16 my-8 flex flex-col lg:flex-row gap-6">
+        {/* Left column: Profile card */}
+        <div className="flex justify-center">
+          <UserProfileCard {...data.leftContainer} />
+        </div>
+
+        {/* Right column: Stats + Chart */}
+        <div className="flex flex-col bg-[radial-gradient(at_top_left,var(--bg-0),var(--bg-1))] p-6 rounded-md gap-6 flex-1">
+          <div className="text-xl text-text_primary font-bold">User Stats</div>
+
+          <div className="flex flex-col xl:flex-row gap-6">
+            {/* Problem stats (left) */}
+            <div className="xl:w-1/3">
+              <StatsCard heading="Problem Stats" stats={data.stats.card1} />
+            </div>
+
+            {/* Middle: Reviews + Streaks stacked */}
+            <div className="flex flex-col gap-6 xl:w-1/3">
               <StatsCard heading="Upcoming Reviews" stats={data.stats.card2} />
               <StatsCard heading="Streaks 🔥 (days)" stats={data.stats.card3} />
             </div>
-            <PerformancePie
-              data={data.performancePie}
-              colors={["var(--success)", "var(--error)"]}
-            />
+
+            {/* Right: Pie chart */}
+            <div className="xl:w-1/3 flex items-center justify-center">
+              <PerformancePie
+                data={data.performancePie}
+                colors={["var(--success)", "var(--error)"]}
+              />
+            </div>
           </div>
         </div>
       </div>
+
       <Footer />
     </>
   );

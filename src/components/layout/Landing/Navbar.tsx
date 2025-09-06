@@ -2,61 +2,62 @@
 
 import Button from "@/components/layout/Landing/Button";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   const handleScroll = (id: string) => {
     const el = document.getElementById(id);
     if (el) {
       el.scrollIntoView({ behavior: "smooth" });
+      setMenuOpen(false); // close menu after click
     }
   };
 
   return (
-    <nav
-      className="
-        sticky top-0 z-50 flex flex-row justify-between px-16 py-4 items-center text-sm
-        bg-[var(--glass-bg)] backdrop-blur-md border-b border-[var(--glass-border)]
-      "
-    >
-      <div className="flex flex-row items-center gap-10">
-        {/* Logo */}
+    <nav className="sticky top-0 z-50 flex flex-col md:flex-row justify-between px-6 md:px-16 py-4 bg-[var(--glass-bg)] backdrop-blur-md border-b border-[var(--glass-border)] gap-4 md:gap-0">
+      {/* Logo and Hamburger */}
+      <div className="flex flex-row justify-between items-center w-full md:w-auto">
         <Link href="/" className="text-xl font-bold text-text_primary">
           leetpulse
         </Link>
 
+        {/* Hamburger for mobile */}
         <button
-          onClick={() => handleScroll("whyleetpulse")}
-          className="hover:text-accent"
+          className="md:hidden text-2xl"
+          onClick={() => setMenuOpen(!menuOpen)}
         >
-          Why leetpulse?
-        </button>
-
-        <button
-          onClick={() => handleScroll("howitworks")}
-          className="hover:text-accent"
-        >
-          How it works
-        </button>
-
-        <button
-          onClick={() => handleScroll("pricing")}
-          className="hover:text-accent"
-        >
-          Pricing
-        </button>
-
-        <button
-          onClick={() => handleScroll("about")}
-          className="hover:text-accent"
-        >
-          About
+          ☰
         </button>
       </div>
 
-      <div className="flex flex-row gap-2 items-center">
-        <Button variant="primary" size="small" text="Login" href="login" />
+      {/* Links */}
+      <div
+        className={`flex flex-col md:flex-row gap-2 md:gap-6 mt-2 md:mt-0 w-full md:w-auto ${
+          menuOpen ? "flex" : "hidden md:flex"
+        }`}
+      >
+        {["whyleetpulse", "howitworks", "pricing", "about"].map((id, i) => (
+          <button
+            key={i}
+            onClick={() => handleScroll(id)}
+            className="hover:text-accent text-left md:text-center"
+          >
+            {id === "whyleetpulse"
+              ? "Why leetpulse?"
+              : id === "howitworks"
+              ? "How it works"
+              : id.charAt(0).toUpperCase() + id.slice(1)}
+          </button>
+        ))}
+      </div>
+
+      {/* Auth Buttons */}
+      <div className="flex flex-row flex-wrap gap-2 md:gap-2 items-center mt-2 md:mt-0">
+        <Button variant="primary" size="small" text="Login" href="/login" />
         <span className="text-sm text-text_muted">or</span>
-        <Button variant="primary" size="small" text="Sign Up" href="signup" />
+        <Button variant="primary" size="small" text="Sign Up" href="/signup" />
       </div>
     </nav>
   );
