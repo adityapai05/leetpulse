@@ -36,8 +36,8 @@ export default function Docs() {
       <section className="flex flex-col gap-2">
         <h2 className="text-2xl font-semibold">For Testers</h2>
         <p className="text-text_primary">
-          You can test the app by submitting sample code for problems. Here's an
-          example:
+          You can test the app by submitting sample code for problems.
+          Here&apos;s an example:
         </p>
         <pre className="bg-bg2 p-4 rounded-md overflow-x-auto">
           {`function twoSum(nums, target) {
@@ -51,8 +51,8 @@ export default function Docs() {
 }`}
         </pre>
         <p className="text-text_primary mt-2">
-          Paste this code into the editor for the "Two Sum" problem and click
-          Submit to see the analysis.
+          Paste this code into the editor for the &quot;Two Sum&quot; problem
+          and click Submit to see the analysis.
         </p>
       </section>
 
@@ -61,7 +61,8 @@ export default function Docs() {
         <ul className="list-disc list-inside gap-1 flex flex-col text-text_primary">
           <li>Preferred language is saved automatically between sessions.</li>
           <li>
-            Focus on improving problems marked as "struggling" or "learning".
+            Focus on improving problems marked as &quot;struggling&quot; or
+            &quot;learning&quot;.
           </li>
           <li>Use the insights and optimizations to improve your solution.</li>
         </ul>
