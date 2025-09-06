@@ -8,7 +8,7 @@ export default function Explore() {
     <>
       <div className="flex flex-col mx-6 md:mx-16 my-8 p-4 gap-8">
         <div className="flex flex-col lg:flex-row gap-8">
-          {/* Content on the LEFT */}
+          {/* LEFT CONTENT */}
           <div className="flex-1 flex flex-col gap-8">
             {/* Welcome Section */}
             <div className="flex flex-col gap-2">
@@ -17,15 +17,15 @@ export default function Explore() {
               </div>
               <div>
                 Hey there! This is the MVP version of the app, so it might not
-                be perfectly seamless yet—but I’m constantly improving it for a
-                better experience.
+                be perfectly seamless yet &mdash; but I&apos;m constantly
+                improving it for a better experience.
               </div>
             </div>
 
             {/* Updates Section */}
             <div className="flex flex-col gap-4">
               <h1 className="text-3xl font-bold text-text_primary">
-                What's New:
+                What&apos;s New:
               </h1>
               {changelog.map((entry, i) => (
                 <div
@@ -33,7 +33,7 @@ export default function Explore() {
                   className="p-4 flex flex-col bg-bg1 gap-2 rounded-lg border border-bg2 shadow-sm"
                 >
                   <h2 className="text-lg font-semibold text-text_primary">
-                    {entry.version} – {entry.title}
+                    {entry.version} &ndash; {entry.title}
                   </h2>
                   <div className="text-text_primary">{entry.message}</div>
                   <div className="text-xs text-text_muted">{entry.date}</div>
@@ -42,7 +42,7 @@ export default function Explore() {
             </div>
           </div>
 
-          {/* Sidebar Image on the RIGHT */}
+          {/* RIGHT IMAGE */}
           <div className="lg:w-1/3 flex justify-center">
             <Image
               src={leetpulseLandingPagePhoto}
