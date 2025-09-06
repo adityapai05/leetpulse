@@ -20,28 +20,30 @@ export default function Footer() {
           >
             Youtube
           </Link>
-          <a href="#pricing" className="hover:text-accent">
+          <Link
+            href="https://www.instagram.com/leetpulse"
+            target="_blank"
+            className="hover:text-accent"
+          >
             Instagram
-          </a>
+          </Link>
         </div>
         <div className="flex flex-col gap-4">
           <span className="text-text_primary font-semibold text-lg">
             Contact
           </span>
-          <a href="#features" className="hover:text-accent">
-            contact@leetpulse.com
-          </a>
+          <span className="text-text_primary">leetpulse@gmail.com</span>
         </div>
         <div className="flex flex-col gap-4">
           <span className="text-text_primary font-semibold text-lg">
             Legal links
           </span>
-          <a href="#features" className="hover:text-accent">
+          <Link href="/terms" className="hover:text-accent">
             Terms of service
-          </a>
-          <a href="#features" className="hover:text-accent">
+          </Link>
+          <Link href="/privacy" className="hover:text-accent">
             Privacy policy
-          </a>
+          </Link>
         </div>
       </div>
       <div className="text-text_primary">

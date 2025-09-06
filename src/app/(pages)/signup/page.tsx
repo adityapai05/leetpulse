@@ -64,7 +64,7 @@ export default function SignUp() {
         toast.error(data.error || "Signup failed");
         return;
       }
-      if (data.message == "token created!") {
+      if (data.message == "Verification email sent!") {
         router.push("/check-mail");
       }
     } catch (error) {
@@ -83,7 +83,7 @@ export default function SignUp() {
           <div className="font-bold text-2xl self-center h-16">
             Create a{" "}
             <Link href="/" className="text-accent">
-              LeetPulse
+              leetpulse
             </Link>{" "}
             account
           </div>
@@ -125,6 +125,25 @@ export default function SignUp() {
               value={formData.confirmPassword}
               onChange={handleChange}
             />
+          </div>
+          <div className="text-text_muted text-sm">
+            By signing up, you agree to our{" "}
+            <Link
+              href="/terms"
+              target="_blank"
+              className="text-accent underline"
+            >
+              Terms
+            </Link>{" "}
+            and{" "}
+            <Link
+              href="/privacy"
+              target="_blank"
+              className="text-accent underline"
+            >
+              Privacy Policy
+            </Link>
+            .
           </div>
 
           <button

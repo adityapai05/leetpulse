@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { CircleUserRound } from "lucide-react";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -28,8 +29,8 @@ export default function Navbar() {
         </Link>
       </div>
       <div className="flex flex-row items-center gap-6 px-4 font-medium">
-        <Link className={linkClasses("/profile")} href="/profile">
-          <div className="bg-text_primary p-3 rounded-full"></div>
+        <Link className="cursor-pointer" href="/profile">
+          <CircleUserRound />
         </Link>
       </div>
     </nav>

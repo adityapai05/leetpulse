@@ -5,6 +5,7 @@ import Input from "@/components/ui/Input";
 import toast from "react-hot-toast";
 import { useState, ChangeEvent, FormEvent, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 interface FormData {
   usernameORemail: string;
@@ -12,6 +13,7 @@ interface FormData {
 }
 
 export default function Login() {
+  const router = useRouter();
   const [formData, setFormData] = useState<FormData>({
     usernameORemail: "",
     password: "",
@@ -56,9 +58,10 @@ export default function Login() {
       if (!res.ok) {
         toast.error(data.error || "Login failed");
         return;
+      } else {
+        toast.success(data.message);
+        router.push("/explore");
       }
-
-      toast.success(data.message);
     } catch (error) {
       console.error(error);
       toast.error("Something went wrong. Please try again.");

@@ -9,6 +9,9 @@ export default function QuestionInfo({
 }) {
   return (
     <div className="bg-bg1 flex flex-1 flex-col gap-6 px-8 py-4 border-2 border-bg2 rounded-md shadow-md">
+      <div className="text-text_muted">
+        Please wait after submitting. The result may take around 7 - 14 seconds.
+      </div>
       {/* Question */}
       <div className="flex flex-row text-2xl font-semibold">
         <span className="text-text_primary">{problem.problemNo}.&nbsp;</span>

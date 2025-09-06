@@ -7,7 +7,8 @@ import Section4 from "@/components/layout/Landing/Section4";
 import Section5 from "@/components/layout/Landing/Section5";
 import Section6 from "@/components/layout/Landing/Section6";
 
-export default function Home() {
+export default async function Home() {
+  await new Promise((resolve) => setTimeout(resolve, 2000));
   return (
     <main className="bg-[radial-gradient(at_top_left,var(--bg-1),var(--bg-0))]">
       <Navbar />

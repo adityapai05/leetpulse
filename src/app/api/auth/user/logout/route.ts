@@ -5,6 +5,5 @@ export async function GET(request: NextRequest) {
   const cookieStore = await cookies();
   cookieStore.delete("authToken");
 
-  // redirect to login after logout
-  return NextResponse.redirect(new URL("/login", request.url));
+  return NextResponse.redirect(new URL("/", request.url));
 }

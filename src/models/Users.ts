@@ -1,6 +1,28 @@
-import mongoose from "mongoose";
+import mongoose, { Document, Model } from "mongoose";
 
-const UserSchema = new mongoose.Schema({
+export interface IUser extends Document {
+  // Auth
+  username: string;
+  firstName: string;
+  email: string;
+  password: string;
+  isVerified: boolean;
+
+  // Meta
+  createdAt: Date;
+
+  // Progress & stats
+  xp: number;
+  level: number;
+  problemsAdded: number;
+  masteryCount: number;
+
+  // Engagement
+  streak: number;
+  maxStreak: number;
+}
+
+const UserSchema = new mongoose.Schema<IUser>({
   // Auth
   username: { type: String, required: true, unique: true, trim: true },
   firstName: { type: String, required: true },
@@ -22,4 +44,10 @@ const UserSchema = new mongoose.Schema({
   maxStreak: { type: Number, default: 0 },
 });
 
-export default mongoose.model("User", UserSchema);
+// Function to get model safely without OverwriteModelError
+export function getUserModel(): Model<IUser> {
+  return (
+    (mongoose.models.User as Model<IUser>) ||
+    mongoose.model<IUser>("User", UserSchema)
+  );
+}

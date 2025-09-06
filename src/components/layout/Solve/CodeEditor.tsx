@@ -64,25 +64,27 @@ export default function CodeEditor({
         `/api/problem/validate/${problem.slug}`,
         requestOptions
       );
-
       const data = await res.json();
+
       if (!res.ok) {
         toast.error(data.error || "Something went wrong");
+        onAnalysis(null, false);
         return;
       }
 
-      onAnalysis(data.analysis);
+      onAnalysis(data.analysis, false);
+
       if (data.mastered) {
         toast.success(
           data.message ||
             `Congratulations! You have mastered the problem ${problem.problemName}`
         );
-        return;
       }
     } catch (err) {
       toast.error(err || "Please try again");
     }
   }
+
   return (
     <div className=" bg-bg1 flex flex-col flex-1 border-2 border-bg2 rounded-md p-4 shadow-md">
       <div className="flex flex-row justify-between bg-stone-900 text-base font-bold text-accent px-4 py-2 rounded-t-md">
@@ -112,7 +114,7 @@ export default function CodeEditor({
       <div className="bg-stone-900 flex flex-row p-4 justify-end rounded-b-md gap-4">
         <Button
           variant="secondary"
-          text={`LC ${problem.problemNo}`}
+          text={`LeetCode ${problem.problemNo}`}
           onClickFunction={handleRedirect}
           type=""
         />

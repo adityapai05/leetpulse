@@ -15,10 +15,10 @@ export default function Section2() {
         <div className="text-text_primary font-bold text-2xl"># 3</div>
         <div className="text-text_muted text-sm">Built-in IDE for practice</div>
       </div>
-      <div className="shadow-md rounded-md bg-bg1 flex flex-col items-center justify-center flex-1 border-2 border-bg2 p-4">
+      {/* <div className="shadow-md rounded-md bg-bg1 flex flex-col items-center justify-center flex-1 border-2 border-bg2 p-4">
         <StarRating rating={4} />
         <div className="text-text_muted text-sm ">2 ratings</div>
-      </div>
+      </div> */}
     </section>
   );
 }

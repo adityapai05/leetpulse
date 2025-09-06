@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getUserFromCookies } from "@/lib/auth";
 import { getQuestions } from "@/lib/questionsCache";
 import mongoose from "mongoose";
-import Users from "@/models/Users";
+import { getUserModel } from "@/models/Users";
 
 export async function POST(req: NextRequest) {
   const user = await getUserFromCookies();
@@ -52,7 +52,8 @@ export async function POST(req: NextRequest) {
       notes,
     });
 
-    await Users.findByIdAndUpdate(user.id, { $inc: { problemsAdded: 1 } });
+    const User = getUserModel();
+    await User.findByIdAndUpdate(user.id, { $inc: { problemsAdded: 1 } });
 
     //Return success message
     return NextResponse.json(

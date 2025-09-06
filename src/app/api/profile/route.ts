@@ -1,5 +1,6 @@
 import Leaderboard from "@/models/Leaderboard";
-import Users from "@/models/Users";
+import { getUserModel } from "@/models/Users";
+
 import { getUserFromCookies } from "@/lib/auth";
 import connectDB from "@/lib/db";
 import { NextResponse } from "next/server";
@@ -18,7 +19,8 @@ export async function GET() {
 
   await connectDB();
 
-  const UsersData = await Users.findById(user.id);
+  const User = getUserModel();
+  const UsersData = await User.findById(user.id);
 
   if (!UsersData) {
     return NextResponse.json({ error: "User not found" }, { status: 404 });
@@ -67,12 +69,14 @@ export async function GET() {
     year: "numeric",
   });
 
+  const totalUsers = await User.estimatedDocumentCount();
+
   const response = {
     leftContainer: {
       name: UsersData.firstName,
       username: UsersData.username,
       xp: UsersData.xp,
-      rank: UserInLeaderboard.rank || NaN,
+      rank: UserInLeaderboard?.rank ?? totalUsers ?? 0,
       level: UsersData?.level || 1,
       dateJoined: formatted,
     },
@@ -80,8 +84,8 @@ export async function GET() {
       card1: [
         { title: "Total problems added", value: UsersData.problemsAdded },
         { title: "Currently in review queue", value: problemsInQueue.length },
-        { title: "Submissions", value: 0 },
-        { title: "Accuracy", value: String(accuracy + "%") },
+        { title: "Submissions", value: iteration },
+        { title: "Accuracy", value: String((accuracy || 0) + "%") },
         { title: "Problems Mastered", value: UsersData.masteryCount },
       ],
       card2: [
@@ -94,8 +98,8 @@ export async function GET() {
       ],
     },
     performancePie: [
-      { name: "Correct", value: accuracy },
-      { name: "Incorrect", value: 100 - accuracy },
+      { name: "Correct", value: accuracy || 0 },
+      { name: "Incorrect", value: 100 - accuracy || 0 },
     ],
   };
 

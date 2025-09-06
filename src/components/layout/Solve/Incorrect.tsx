@@ -7,7 +7,6 @@ type analysisData = {
   correctionHints?: string;
   correctCode?: string;
   dueDate: string;
-  recommendedProblems: string;
 };
 
 type Props = {

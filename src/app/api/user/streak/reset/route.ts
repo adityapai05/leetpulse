@@ -1,4 +1,5 @@
-import Users from "@/models/Users";
+import { getUserModel } from "@/models/Users";
+
 import { getUserFromCookies } from "@/lib/auth";
 import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/lib/db";
@@ -14,7 +15,8 @@ export async function GET(req: NextRequest) {
   try {
     await connectDB();
 
-    const updatedUser = await Users.findByIdAndUpdate(user.id, { streak: 0 });
+    const User = getUserModel();
+    const updatedUser = await User.findByIdAndUpdate(user.id, { streak: 0 });
     if (!updatedUser) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }

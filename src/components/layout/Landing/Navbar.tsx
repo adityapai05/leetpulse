@@ -1,6 +1,7 @@
 "use client";
 
 import Button from "@/components/layout/Landing/Button";
+import Link from "next/link";
 
 export default function Navbar() {
   const handleScroll = (id: string) => {
@@ -19,12 +20,9 @@ export default function Navbar() {
     >
       <div className="flex flex-row items-center gap-10">
         {/* Logo */}
-        <span
-          className="text-xl font-bold text-text_primary cursor-pointer"
-          onClick={() => handleScroll("top")}
-        >
+        <Link href="/" className="text-xl font-bold text-text_primary">
           leetpulse
-        </span>
+        </Link>
 
         <button
           onClick={() => handleScroll("whyleetpulse")}

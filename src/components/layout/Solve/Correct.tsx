@@ -13,7 +13,6 @@ type analysisData = {
   };
   optimizations?: string;
   dueDate: string;
-  recommendedProblems: string;
 };
 
 type Props = {

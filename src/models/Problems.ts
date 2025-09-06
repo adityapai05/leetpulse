@@ -1,6 +1,19 @@
-import mongoose from "mongoose";
+import mongoose, { Document, Model } from "mongoose";
 
-const ProblemSchema = new mongoose.Schema({
+export interface IProblem extends Document {
+  userId: mongoose.Types.ObjectId;
+  problemNo: string;
+  problemName: string;
+  slug: string;
+  iteration: number;
+  correct: number;
+  phase: "learning" | "stable" | "struggling";
+  tags: string[];
+  notes: string;
+  dueDate: Date;
+}
+
+const ProblemSchema = new mongoose.Schema<IProblem>({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
   problemNo: { type: String, required: true },
   problemName: { type: String, required: true },
@@ -12,7 +25,7 @@ const ProblemSchema = new mongoose.Schema({
     enum: ["learning", "stable", "struggling"],
     default: "learning",
   },
-  tags: { type: [String], default: "" },
+  tags: { type: [String], default: [] },
   notes: { type: String, default: "" },
   dueDate: {
     type: Date,
@@ -20,4 +33,7 @@ const ProblemSchema = new mongoose.Schema({
   },
 });
 
-export default mongoose.model("Problems", ProblemSchema);
+const Problem: Model<IProblem> =
+  mongoose.models.Problems ||
+  mongoose.model<IProblem>("Problems", ProblemSchema);
+export default Problem;

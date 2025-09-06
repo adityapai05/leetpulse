@@ -2,7 +2,8 @@ import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
 import bcrypt from "bcrypt";
 import connectDB from "@/lib/db";
-import User from "@/models/Users";
+import { getUserModel } from "@/models/Users";
+
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
@@ -19,6 +20,7 @@ export async function POST(req: NextRequest) {
 
     await connectDB();
 
+    const User = getUserModel();
     const user = await User.findOne({
       $or: [{ username: usernameORemail }, { email: usernameORemail }],
       isVerified: true,

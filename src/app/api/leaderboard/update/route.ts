@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/lib/db";
 import Leaderboard from "@/models/Leaderboard";
-import Users from "@/models/Users";
+import { getUserModel } from "@/models/Users";
 
 export async function POST(req: NextRequest) {
   const authHeader = req.headers.get("Authorization");
@@ -14,7 +14,8 @@ export async function POST(req: NextRequest) {
   try {
     await connectDB();
 
-    const users = await Users.find(
+    const User = getUserModel();
+    const users = await User.find(
       {},
       { _id: 0, username: 1, xp: 1, averageIteration: 1 }
     ).sort({ xp: -1 });

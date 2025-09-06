@@ -1,7 +1,7 @@
 import connectDB from "@/lib/db";
 import { NextResponse, NextRequest } from "next/server";
 import jwt from "jsonwebtoken";
-import Users from "@/models/Users";
+import { getUserModel } from "@/models/Users";
 
 export async function GET(req: NextRequest) {
   const token = req.nextUrl.searchParams.get("token");
@@ -10,9 +10,10 @@ export async function GET(req: NextRequest) {
   }
 
   try {
+    const User = getUserModel();
     const decoded = jwt.verify(token, process.env.JWT_SECRET) as { id: string };
     await connectDB();
-    await Users.findByIdAndUpdate(decoded.id, { isVerified: true });
+    await User.findByIdAndUpdate(decoded.id, { isVerified: true });
 
     return NextResponse.redirect(new URL("/login?verified=success", req.url));
   } catch (err) {

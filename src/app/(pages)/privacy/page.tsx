@@ -5,9 +5,7 @@ export default function PrivacyPage() {
     <main className="min-h-screen bg-bg1 text-text-primary px-6 py-12">
       <div className="max-w-3xl mx-auto">
         <h1 className="text-3xl font-bold mb-4">Privacy Policy</h1>
-        <p className="text-sm text-text-muted mb-8">
-          Last updated: {new Date().toLocaleDateString()}
-        </p>
+        <p className="text-sm text-text-muted mb-8">Last updated: 06/09/2025</p>
 
         <section className="space-y-6">
           <div>
@@ -84,13 +82,7 @@ export default function PrivacyPage() {
             <h2 className="text-xl font-semibold mb-2">8. Contact</h2>
             <p>
               Questions? Contact us at{" "}
-              <a
-                href="mailto:your@email.com"
-                className="text-accent hover:underline"
-              >
-                your@email.com
-              </a>
-              .
+              <span className="text-accent">leetpulse@gmail.com</span>
             </p>
           </div>
         </section>

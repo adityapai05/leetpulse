@@ -3,10 +3,10 @@ import { getUserFromCookies } from "@/lib/auth";
 import { runPrompt } from "@/lib/aiClient";
 import { Type } from "@google/genai";
 import connectDB from "@/lib/db";
-import Problems from "@/models/Problems";
+import Problem from "@/models/Problems";
 import NextPulse from "@/lib/nextPulse";
 import mongoose from "mongoose";
-import Users from "@/models/Users";
+import { getUserModel } from "@/models/Users";
 
 export async function POST(
   req: NextRequest,
@@ -35,7 +35,7 @@ export async function POST(
   // ------------------------------
   // 3. Fetch Problem Data
   // ------------------------------
-  const problemData = await Problems.findOne({
+  const problemData = await Problem.findOne({
     userId: new mongoose.Types.ObjectId(user.id),
     slug: slug,
   });
@@ -49,30 +49,32 @@ export async function POST(
     );
   }
 
-  const now = new Date();
-  const due = new Date(problemData.dueDate);
+  if (user.id != process.env.TESTER_MONGODBID) {
+    const now = new Date();
+    const due = new Date(problemData.dueDate);
 
-  const isDueToday =
-    due.getDate() === now.getDate() &&
-    due.getMonth() === now.getMonth() &&
-    due.getFullYear() === now.getFullYear();
+    const isDueToday =
+      due.getDate() === now.getDate() &&
+      due.getMonth() === now.getMonth() &&
+      due.getFullYear() === now.getFullYear();
 
-  const formattedDate = new Date(problemData.dueDate).toLocaleDateString(
-    "en-GB",
-    {
-      day: "2-digit",
-      month: "short",
-      year: "numeric",
-    }
-  );
-
-  if (!isDueToday) {
-    return NextResponse.json(
+    const formattedDate = new Date(problemData.dueDate).toLocaleDateString(
+      "en-GB",
       {
-        error: `Please solve the question on due date i.e ${formattedDate}.`,
-      },
-      { status: 403 }
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      }
     );
+
+    if (!isDueToday) {
+      return NextResponse.json(
+        {
+          error: `Please solve the question on due date i.e ${formattedDate}.`,
+        },
+        { status: 403 }
+      );
+    }
   }
 
   // ------------------------------
@@ -121,30 +123,52 @@ export async function POST(
   // ------------------------------
   // 5. Call AI for Code Analysis
   // ------------------------------
-  const aiResult = await runPrompt(
-    `The following is a code solution (detect language automatically) for question ${slug}: 
 
-${code}
+  let aiResult;
+  try {
+    aiResult = await runPrompt(
+      `You are an expert code reviewer. Analyze the following solution (detect language automatically) for question ${slug}:
 
-Please analyze the user's code. Ignore function names, arguments, and return types—they are generic. Focus only on the code inside the function. Do not nitpick.
+  ${code}
 
-Provide the following structured output:
-1. verdict: 'Correct' or 'Incorrect'.
-2. If verdict is 'Correct', include insights, usersComplexity, optimalComplexity, optimizations.
-3. If verdict is 'Incorrect', include failureReasons, correctionHints, correctCode.
-4. Regardless of verdict, include accuracy and recommendedProblems.
-Ensure correctCode is well-formatted.`,
-    resultSchema
-  );
+  Instructions:
+  1. Only focus on the code inside the function. Ignore function names, arguments, and return types.
+  2. Provide a strict JSON output matching this schema:
+     - verdict: "Correct" or "Incorrect"
+     - If verdict is "Correct":
+       - insights: max ~20 words, concise observations about the solution
+       - usersComplexity: use exact Big-O notation, e.g., "O(n)"
+       - bestComplexity: use exact Big-O notation, e.g., "O(log n)"
+       - optimizations: max ~20 words
+     - If verdict is "Incorrect":
+       - failureReasons: max ~20 words
+       - correctionHints: max ~20 words
+       - correctCode: provide only the fixed function code, well-formatted
+     - accuracy: number
+     - recommendedProblems: array of slugs
+
+  Output must be strictly JSON and no extra explanations. Do not add text outside JSON.`,
+      resultSchema
+    );
+  } catch (err) {
+    return NextResponse.json(
+      { error: "AI service unavailable. Please try again later." },
+      { status: 503 }
+    );
+  }
 
   if (!aiResult) {
-    return NextResponse.json({ error: "Server error" }, { status: 500 });
+    return NextResponse.json(
+      { error: "AI service did not return a result. Try again." },
+      { status: 500 }
+    );
   }
 
   // ------------------------------
   // 6. Fetch User Data
   // ------------------------------
-  const usersData = await Users.findById(user.id);
+  const User = getUserModel();
+  const usersData = await User.findById(user.id);
   if (!usersData) {
     return NextResponse.json({ error: "User not found" }, { status: 404 });
   }
@@ -211,7 +235,7 @@ Ensure correctCode is well-formatted.`,
   // 10. Handle Mastery
   // ------------------------------
   if (isMastered) {
-    await Problems.deleteOne({
+    await Problem.deleteOne({
       userId: new mongoose.Types.ObjectId(user.id),
       slug: slug,
     });
