@@ -35,7 +35,7 @@ export default function Leaderboard() {
           Leaderboard Ranking
         </span>
         <span className="text-xs sm:text-sm text-text_muted">
-          (based on XP)
+          (based on XP)&nbsp;(resets at 00:00 UTC)
         </span>
       </div>
 

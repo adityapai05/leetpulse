@@ -3,11 +3,11 @@ import connectDB from "@/lib/db";
 import Leaderboard from "@/models/Leaderboard";
 import { getUserModel } from "@/models/Users";
 
-export async function POST(req: NextRequest) {
-  const authHeader = req.headers.get("Authorization");
-  const token = authHeader?.split("Bearer ")[1];
+export const dynamic = "force-dynamic";
 
-  if (!token || token != process.env.CRON_SECRET) {
+export async function GET(req: NextRequest) {
+  const authHeader = req.headers.get("authorization");
+  if (!authHeader || authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
