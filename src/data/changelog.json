@@ -6,6 +6,7 @@
       "Added metadata (titles) to all pages",
       "Users now get assigned profile pictures instead of default",
       "Fixed bugs",
+      "Optimized for smaller screens",
       "Added favicon for the app",
       "Fixed streak updation logic to update only on successful API calls"
     ],

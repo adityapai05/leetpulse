@@ -16,7 +16,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 flex flex-col md:flex-row justify-between px-6 md:px-16 py-4 bg-[var(--glass-bg)] backdrop-blur-md border-b border-[var(--glass-border)] gap-4 md:gap-0">
+    <nav className="sticky top-0 z-50 flex flex-col md:flex-row justify-between px-6 md:px-8 lg:px-32 py-4 bg-[var(--glass-bg)] backdrop-blur-md border-b border-[var(--glass-border)] gap-4 md:gap-0">
       {/* Logo and Hamburger */}
       <div className="flex flex-row justify-between items-center w-full md:w-auto">
         <Link href="/" className="text-xl font-bold text-text_primary">

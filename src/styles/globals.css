@@ -6,6 +6,12 @@ html {
   scroll-padding-top: 10vh;
 }
 
+@media (max-width: 768px) {
+  html {
+    scroll-padding-top: 40vh;
+  }
+}
+
 /* :root {
   --bg-0: theme(colors.slate.300);
   --bg-1: theme(colors.slate.200);

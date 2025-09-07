@@ -1,8 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-        domains: ["img.youtube.com"],
-        domains: ["api.dicebear.com"],
+        remotePatterns: [
+            {
+                protocol: "https",
+                hostname: "img.youtube.com",
+            },
+            {
+                protocol: "https",
+                hostname: "api.dicebear.com",
+            },
+        ],
     },
 };
 

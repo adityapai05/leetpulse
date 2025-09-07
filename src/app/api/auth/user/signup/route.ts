@@ -63,10 +63,42 @@ export async function POST(req: NextRequest) {
     await sendEmail(
       newUser.email,
       "Verify your leetpulse account",
-      `<p>Hi ${newUser.firstName},</p>
-   <p>Click the button below to verify your account:</p>
-   <a href="${verificationUrl}" style="display:inline-block;padding:10px 20px;background:#4F46E5;color:white;text-decoration:none;border-radius:6px;">Verify Email</a>
-   <p>This link expires in 1 hour.</p>`
+      `
+  <div style="background:#0C0A09; padding:32px; font-family:Arial, sans-serif; color:#FAFAF9;">
+    <div style="max-width:480px; margin:0 auto; background:#1C1917; border:1px solid #292524; border-radius:12px; overflow:hidden;">
+      <!-- Header -->
+      <div style="padding:24px; text-align:center; border-bottom:1px solid #292524;">
+        <h1 style="margin:0; font-size:22px; color:#FAFAF9;">leetpulse</h1>
+      </div>
+
+      <!-- Body -->
+      <div style="padding:24px;">
+        <p style="margin:0 0 16px 0;">Hi <strong>${
+          newUser.firstName
+        }</strong>,</p>
+        <p style="margin:0 0 24px 0; color:#A6A09B;">
+          Welcome aboard! Click the button below to verify your account and start using leetpulse.
+        </p>
+
+        <div style="text-align:center; margin-bottom:24px;">
+          <a href="${verificationUrl}"
+             style="display:inline-block; padding:12px 24px; background:#F59E0B; color:#121212; font-weight:bold; text-decoration:none; border-radius:8px;">
+            Verify Email
+          </a>
+        </div>
+
+        <p style="margin:0; font-size:14px; color:#A6A09B;">
+          ⚠️ This link will expire in <strong>1 hour</strong>.
+        </p>
+      </div>
+
+      <!-- Footer -->
+      <div style="padding:16px; text-align:center; font-size:12px; color:#A6A09B; border-top:1px solid #292524;">
+        <p style="margin:0;">© ${new Date().getFullYear()} leetpulse. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+  `
     );
 
     return NextResponse.json(
