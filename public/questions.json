@@ -14586,5 +14586,125 @@
   "3647": {
     "title": "Maximum Weight in Two Bags",
     "slug": "maximum-weight-in-two-bags"
+  },
+  "3648": {
+    "title": "Minimum Sensors to Cover Grid",
+    "slug": "minimum-sensors-to-cover-grid"
+  },
+  "3649": {
+    "title": "Number of Perfect Pairs",
+    "slug": "number-of-perfect-pairs"
+  },
+  "3650": {
+    "title": "Minimum Cost Path with Edge Reversals",
+    "slug": "minimum-cost-path-with-edge-reversals"
+  },
+  "3651": {
+    "title": "Minimum Cost Path with Teleportations",
+    "slug": "minimum-cost-path-with-teleportations"
+  },
+  "3652": {
+    "title": "Best Time to Buy and Sell Stock using Strategy",
+    "slug": "best-time-to-buy-and-sell-stock-using-strategy"
+  },
+  "3653": {
+    "title": "XOR After Range Multiplication Queries I",
+    "slug": "xor-after-range-multiplication-queries-i"
+  },
+  "3654": {
+    "title": "Minimum Sum After Divisible Sum Deletions",
+    "slug": "minimum-sum-after-divisible-sum-deletions"
+  },
+  "3655": {
+    "title": "XOR After Range Multiplication Queries II",
+    "slug": "xor-after-range-multiplication-queries-ii"
+  },
+  "3656": {
+    "title": "Determine if a Simple Graph Exists",
+    "slug": "determine-if-a-simple-graph-exists"
+  },
+  "3657": {
+    "title": "Find Loyal Customers",
+    "slug": "find-loyal-customers"
+  },
+  "3658": {
+    "title": "GCD of Odd and Even Sums",
+    "slug": "gcd-of-odd-and-even-sums"
+  },
+  "3659": {
+    "title": "Partition Array Into K-Distinct Groups",
+    "slug": "partition-array-into-k-distinct-groups"
+  },
+  "3660": {
+    "title": "Jump Game IX",
+    "slug": "jump-game-ix"
+  },
+  "3661": {
+    "title": "Maximum Walls Destroyed by Robots",
+    "slug": "maximum-walls-destroyed-by-robots"
+  },
+  "3662": {
+    "title": "Filter Characters by Frequency",
+    "slug": "filter-characters-by-frequency"
+  },
+  "3663": {
+    "title": "Find The Least Frequent Digit",
+    "slug": "find-the-least-frequent-digit"
+  },
+  "3664": {
+    "title": "Two-Letter Card Game",
+    "slug": "two-letter-card-game"
+  },
+  "3665": {
+    "title": "Twisted Mirror Path Count",
+    "slug": "twisted-mirror-path-count"
+  },
+  "3666": {
+    "title": "Minimum Operations to Equalize Binary String",
+    "slug": "minimum-operations-to-equalize-binary-string"
+  },
+  "3667": {
+    "title": "Sort Array By Absolute Value",
+    "slug": "sort-array-by-absolute-value"
+  },
+  "3668": {
+    "title": "Restore Finishing Order",
+    "slug": "restore-finishing-order"
+  },
+  "3669": {
+    "title": "Balanced K-Factor Decomposition",
+    "slug": "balanced-k-factor-decomposition"
+  },
+  "3670": {
+    "title": "Maximum Product of Two Integers With No Common Bits",
+    "slug": "maximum-product-of-two-integers-with-no-common-bits"
+  },
+  "3671": {
+    "title": "Sum of Beautiful Subsequences",
+    "slug": "sum-of-beautiful-subsequences"
+  },
+  "3672": {
+    "title": "Sum of Weighted Modes in Subarrays",
+    "slug": "sum-of-weighted-modes-in-subarrays"
+  },
+  "3673": {
+    "title": "Find Zombie Sessions",
+    "slug": "find-zombie-sessions"
+  },
+  "3674": {
+    "title": "Minimum Operations to Equalize Array",
+    "slug": "minimum-operations-to-equalize-array"
+  },
+  "3675": {
+    "title": "Minimum Operations to Transform String",
+    "slug": "minimum-operations-to-transform-string"
+  },
+  "3676": {
+    "title": "Count Bowl Subarrays",
+    "slug": "count-bowl-subarrays"
+  },
+  "3677": {
+    "title": "Count Binary Palindromic Numbers",
+    "slug": "count-binary-palindromic-numbers"
   }
 }
