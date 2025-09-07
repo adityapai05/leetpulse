@@ -8,7 +8,7 @@ export default function Docs() {
       <section className="flex flex-col gap-2">
         <h2 className="text-2xl font-semibold">Welcome</h2>
         <p className="text-lg text-text_primary">
-          LeetPulse is a spaced-repetition tool for coding problems. It helps
+          leetpulse is a spaced-repetition tool for coding problems. It helps
           you review and master problems by analyzing your submissions and
           scheduling optimal review dates.
         </p>
@@ -72,7 +72,7 @@ export default function Docs() {
         <h2 className="text-2xl font-semibold">Contact / Feedback</h2>
         <p className="text-text_primary">
           For any bugs or suggestions, contact the developer at{" "}
-          <b>manvith.dev</b>.
+          <span className="text-accent">leetpulse@gmail.com</span>.
         </p>
       </section>
     </div>

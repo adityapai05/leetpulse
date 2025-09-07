@@ -2,11 +2,10 @@ import ValueKeyDisplay from "@/components/ui/ValueKeyDisplay";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { CircleUserRound } from "lucide-react";
+import { useUser } from "@/context/UserContext";
 
 type Props = {
   name: string;
-  username: string;
   rank: number;
   level: number;
   xp: number;
@@ -15,7 +14,6 @@ type Props = {
 
 export default function UserProfileCard({
   name,
-  username,
   rank,
   level,
   xp,
@@ -23,6 +21,9 @@ export default function UserProfileCard({
 }: Props) {
   const router = useRouter();
   const [confirmLogout, setConfirmLogout] = useState(false);
+  const user = useUser();
+  const username = user?.username || "guest";
+  console.log(username);
 
   const handleLogoutClick = async () => {
     if (!confirmLogout) {
@@ -43,11 +44,10 @@ export default function UserProfileCard({
   return (
     <div className="bg-[radial-gradient(at_top_left,var(--bg-0),var(--bg-1))] flex flex-col gap-4 items-center px-4 py-8 w-full sm:w-3/4 md:w-1/2 lg:w-full rounded-md">
       <div className="rounded-full h-32 w-32 border flex items-center justify-center bg-bg0">
-        <CircleUserRound
-          strokeWidth={1}
-          width={100}
-          height={100}
-          color="var(--text-primary)"
+        <img
+          src={`https://api.dicebear.com/9.x/thumbs/svg?seed=${username}&scale=80`}
+          alt={`${username} avatar`}
+          className="rounded-full"
         />
       </div>
 

@@ -1,10 +1,11 @@
 "use client";
 
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import TableHead from "@/components/layout/Review/TableHeading";
 import TableRow from "@/components/layout/Review/TableRow";
 import { Flame, Zap } from "lucide-react";
+import { useUser } from "@/context/UserContext";
 
 const reviewTableHeading = {
   head1: "No.",
@@ -16,7 +17,7 @@ const reviewTableHeading = {
 };
 
 export default function ReviewQueue() {
-  const [user, setUser] = useState({ firstName: "NA", xp: 0, streak: 0 });
+  const user = useUser();
   const [problems, setProblems] = useState([]);
   useEffect(() => {
     async function loadProblems() {
@@ -46,24 +47,21 @@ export default function ReviewQueue() {
       }
 
       if (pastDue) {
-        await fetch("/api/user/streak/reset", { method: "POST" });
+        const res = await fetch("/api/user/streak/reset", { method: "POST" });
+        if (res.ok) {
+          localStorage.setItem("lastStreakIncrement", todayStr);
+        }
       } else if (!dueToday && lastIncrement !== todayStr) {
-        await fetch("/api/user/streak/increment", { method: "POST" });
-        localStorage.setItem("lastStreakIncrement", todayStr);
+        const res = await fetch("/api/user/streak/increment", {
+          method: "POST",
+        });
+        if (res.ok) {
+          localStorage.setItem("lastStreakIncrement", todayStr);
+        }
       }
     }
 
     loadProblems();
-  }, []);
-
-  useEffect(() => {
-    async function getUser() {
-      const res = await fetch("/api/user/summary");
-      const data = await res.json();
-      if (!res.ok) toast.error("Something went wrong. Please try again later.");
-      setUser(data);
-    }
-    getUser();
   }, []);
 
   return (

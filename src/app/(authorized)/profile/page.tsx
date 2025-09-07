@@ -9,7 +9,6 @@ import { useEffect, useState } from "react";
 interface ProfileData {
   leftContainer: {
     name: string;
-    username: string;
     xp: number;
     rank: number;
     level: number;

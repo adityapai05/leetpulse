@@ -5,7 +5,7 @@ export default function TermsPage() {
     <main className="min-h-screen bg-bg1 text-text-primary px-6 py-12">
       <div className="max-w-3xl mx-auto">
         <h1 className="text-3xl font-bold mb-4">Terms &amp; Conditions</h1>
-        <p className="text-sm text-text-muted mb-8">Last updated: 06/09/2025</p>
+        <p className="text-sm text-text-muted mb-8">Last updated: 07/09/2025</p>
 
         <section className="space-y-6">
           <div>
@@ -76,6 +76,19 @@ export default function TermsPage() {
           </div>
 
           <div>
+            <h2 className="text-xl font-semibold mb-2">
+              8. Third-Party References
+            </h2>
+            <p>
+              leetpulse is not affiliated with or endorsed by LeetCode. We only
+              use publicly available metadata (problem number, title, and slug)
+              from LeetCode to help users map and organize their practice.
+              Problem statements and explanations within LeetPulse are original
+              and not sourced from LeetCode.
+            </p>
+          </div>
+
+          <div>
             <h2 className="text-xl font-semibold mb-2">8. Contact</h2>
             <p>
               Questions? Contact us at{" "}
@@ -87,3 +100,8 @@ export default function TermsPage() {
     </main>
   );
 }
+
+export const metadata = {
+  title: "Terms & Conditions | leetpulse",
+  description: "Terms & Conditions of leetpulse",
+};

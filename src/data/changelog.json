@@ -1,8 +1,22 @@
 [
   {
+    "version": "v1.0.1",
+    "title": "Minor Improvements & Bug Fixes",
+    "message": [
+      "Added metadata (titles) to all pages",
+      "Users now get assigned profile pictures instead of default",
+      "Fixed bugs",
+      "Added favicon for the app",
+      "Fixed streak updation logic to update only on successful API calls"
+    ],
+    "date": "7th September 2025"
+  },
+  {
     "version": "v1.0.0",
     "title": "Initial Release",
-    "message": "The very first version of leetpulse 🎉. Updates will be posted here.",
+    "message": [
+      "The very first version of leetpulse 🎉. Updates will be posted here."
+    ],
     "date": "6th September 2025"
   }
 ]

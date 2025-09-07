@@ -9,7 +9,7 @@ export default function Section5() {
       <div className="text-xl md:text-2xl font-semibold tracking-wide">
         {"</> "}Pricing
       </div>
-      <div className="flex flex-col sm:flex-col md:flex-row gap-4 p-0 md:p-4">
+      <div className="flex flex-col sm:flex-col md:flex-row gap-4 p-0 md:p-4 overflow-x-auto">
         <PricingCard
           price="Sounds like free"
           title="Features"

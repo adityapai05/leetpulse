@@ -16,7 +16,7 @@ export async function GET() {
 
     const User = getUserModel();
     const UsersData = await User.findById(user.id).select(
-      "firstName xp streak"
+      " username firstName xp streak"
     );
 
     if (!UsersData) {
@@ -25,6 +25,7 @@ export async function GET() {
 
     return NextResponse.json(
       {
+        username: UsersData.username,
         firstName: UsersData.firstName,
         xp: UsersData.xp,
         streak: UsersData.streak,

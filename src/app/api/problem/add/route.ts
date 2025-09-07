@@ -24,6 +24,13 @@ export async function POST(req: NextRequest) {
     const problemName = questions[problemNo]?.title;
     const slug = questions[problemNo]?.slug;
 
+    if (!problemName || !slug) {
+      return NextResponse.json(
+        { error: "Please enter a valid question number." },
+        { status: 400 }
+      );
+    }
+
     //Connect Database
     await connectDB();
 
@@ -62,7 +69,7 @@ export async function POST(req: NextRequest) {
     );
   } catch (err) {
     return NextResponse.json(
-      { error: err.message || "Something went wrong" },
+      { error: "Something went wrong" },
       { status: 500 }
     );
   }

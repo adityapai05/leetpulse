@@ -35,7 +35,11 @@ export default function Explore() {
                   <h2 className="text-lg font-semibold text-text_primary">
                     {entry.version} &ndash; {entry.title}
                   </h2>
-                  <div className="text-text_primary">{entry.message}</div>
+                  <div className="text-text_primary">
+                    {entry.message.map((line, j) => (
+                      <div key={j}>{"- " + line}</div>
+                    ))}
+                  </div>
                   <div className="text-xs text-text_muted">{entry.date}</div>
                 </div>
               ))}
@@ -44,12 +48,15 @@ export default function Explore() {
 
           {/* RIGHT IMAGE */}
           <div className="lg:w-1/3 flex justify-center">
-            <Image
-              src={leetpulseLandingPagePhoto}
-              alt="Landing Page Preview"
-              className="rounded-xl shadow-lg border border-bg2"
-              priority
-            />
+            <div className="w-full h-[320px] relative rounded-xl shadow-lg border border-bg2">
+              <Image
+                src={leetpulseLandingPagePhoto}
+                alt="Landing Page Preview"
+                fill
+                className="object-contain rounded-xl"
+                priority
+              />
+            </div>
           </div>
         </div>
         <Footer />
@@ -57,3 +64,8 @@ export default function Explore() {
     </>
   );
 }
+
+export const metadata = {
+  title: "Explore | leetpulse",
+  description: "Get latest updates about leetpulse",
+};

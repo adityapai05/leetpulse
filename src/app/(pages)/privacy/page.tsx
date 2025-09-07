@@ -90,3 +90,8 @@ export default function PrivacyPage() {
     </main>
   );
 }
+
+export const metadata = {
+  title: "Privacy Policy | leetpulse",
+  description: "Privacy policy of leetpulse",
+};

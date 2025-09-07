@@ -2,10 +2,13 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { CircleUserRound } from "lucide-react";
+import Image from "next/image";
+import { useUser } from "@/context/UserContext";
 
 export default function Navbar() {
   const pathname = usePathname();
+  const user = useUser();
+  const username = user?.username || "guest";
 
   const linkClasses = (path: string) =>
     `hover:text-accent transition-colors ${
@@ -33,7 +36,11 @@ export default function Navbar() {
       {/* Right side: profile */}
       <div className="flex justify-center mt-4 sm:mt-0">
         <Link className="cursor-pointer" href="/profile">
-          <CircleUserRound size={24} />
+          <img
+            src={`https://api.dicebear.com/9.x/thumbs/svg?seed=${username}&scale=80`}
+            alt={`${username} avatar`}
+            className="w-6 h-6 rounded-full"
+          />
         </Link>
       </div>
     </nav>

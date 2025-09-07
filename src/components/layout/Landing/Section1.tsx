@@ -11,17 +11,25 @@ export default function Section1() {
             style={{ textShadow: "1px 1px 2px rgba(0,0,0,0.3)" }}
           >
             <span className="text-accent">leetpulse&nbsp;</span>
-            <span>- A LeetCode Tracker</span>
+            <span>- A Spaced Repetition Tracker</span>
           </div>
           <div className="text-text_muted text-sm md:text-base">
-            Master coding problems. Never forget them again.
+            Track & retain your LeetCode practice.
           </div>
         </div>
         <div className="text-text_primary text-justify text-sm md:text-base">
           leetpulse uses spaced repetition and the forgetting curve to help you
-          retain LeetCode problems long-term. Track your progress, review
-          problems right when you’re about to forget them, and stay consistent
-          with a sleek, distraction-free interface.
+          retain{" "}
+          <a
+            href="https://leetcode.com/"
+            target="_blank"
+            className="underline text-text_primary"
+          >
+            LeetCode
+          </a>{" "}
+          problems long-term. Track your progress, review problems right when
+          you’re about to forget them, and stay consistent with a sleek,
+          distraction-free interface.
         </div>
         <div className="flex flex-col sm:flex-row gap-4">
           <Button

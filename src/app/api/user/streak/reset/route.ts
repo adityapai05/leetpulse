@@ -4,7 +4,7 @@ import { getUserFromCookies } from "@/lib/auth";
 import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/lib/db";
 
-export async function GET(req: NextRequest) {
+export async function POST(req: NextRequest) {
   const user = await getUserFromCookies();
   if (!user) {
     return NextResponse.json(

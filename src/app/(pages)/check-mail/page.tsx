@@ -13,3 +13,9 @@ export default function CheckMailPage() {
     </div>
   );
 }
+
+export const metadata = {
+  title: "Check Mail | leetpulse",
+  description:
+    "Verify your email address to access your leetpulse account and continue using the app.",
+};
