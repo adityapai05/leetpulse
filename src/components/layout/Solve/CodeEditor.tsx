@@ -115,15 +115,9 @@ export default function CodeEditor({
         <Button
           variant="secondary"
           text={`LeetCode ${problem.problemNo}`}
-          onClickFunction={handleRedirect}
-          type=""
+          onClick={handleRedirect}
         />
-        <Button
-          variant="primary"
-          text="Submit"
-          onClickFunction={handleSubmit}
-          type="submit"
-        />
+        <Button variant="primary" text="Submit" onClick={handleSubmit} />
       </div>
     </div>
   );

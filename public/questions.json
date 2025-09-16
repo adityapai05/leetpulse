@@ -14706,5 +14706,41 @@
   "3677": {
     "title": "Count Binary Palindromic Numbers",
     "slug": "count-binary-palindromic-numbers"
+  },
+  "3678": {
+    "title": "Smallest Absent Positive Greater Than Average",
+    "slug": "smallest-absent-positive-greater-than-average"
+  },
+  "3679": {
+    "title": " Minimum Discards to Balance Inventory",
+    "slug": "minimum-discards-to-balance-inventory"
+  },
+  "3680": {
+    "title": "Generate Schedule",
+    "slug": "generate-schedule"
+  },
+  "3681": {
+    "title": "Maximum XOR of Subsequences",
+    "slug": "maximum-xor-of-subsequences"
+  },
+  "3682": {
+    "title": "Minimum Index Sum of Common Elements",
+    "slug": "minimum-index-sum-of-common-elements"
+  },
+  "3683": {
+    "title": "Earliest Time to Finish One Task",
+    "slug": "earliest-time-to-finish-one-task"
+  },
+  "3684": {
+    "title": "Maximize Sum of At Most K Distinct Elements",
+    "slug": "maximize-sum-of-at-most-k-distinct-elements"
+  },
+  "3685": {
+    "title": "Subsequence Sum After Capping Elements",
+    "slug": "subsequence-sum-after-capping-elements"
+  },
+  "3686": {
+    "title": "Number of Stable Subsequences",
+    "slug": "number-of-stable-subsequences"
   }
 }
