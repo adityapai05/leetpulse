@@ -13,7 +13,7 @@ export async function GET() {
   await connectDB();
 
   try {
-    const top10 = await Leaderboard.find({}).sort({ xp: -1 }).limit(10);
+    const top10 = await Leaderboard.find({}).sort({ rank: 1 }).limit(10);
     return NextResponse.json({ leaderboardList: top10 }, { status: 200 });
   } catch (err) {
     return NextResponse.json(

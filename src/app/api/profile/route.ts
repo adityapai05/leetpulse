@@ -98,7 +98,7 @@ export async function GET() {
       ],
     },
     performancePie: [
-      { name: "Correct", value: accuracy || 0 },
+      { name: "Correct", value: accuracy || -1 },
       { name: "Incorrect", value: 100 - accuracy || 0 },
     ],
   };

@@ -1,33 +1,52 @@
 import clsx from "clsx";
+import { Loader } from "lucide-react";
 
-export default function Button({
-  variant = "primary",
-  text = "Button",
-  onClickFunction,
-  type,
-}) {
-  const baseStyles = "px-8 py-2";
+type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
+  variant?: "primary" | "secondary" | "tertiary" | "inverted" | "error";
+  size?: "small" | "big" | "tertiary";
+  text?: string;
+  loading?: boolean;
+};
+
+export default function Button(props: ButtonProps) {
+  const {
+    variant = "primary",
+    size = "small",
+    text = "Button",
+    loading = false,
+    ...rest
+  } = props;
+
+  const baseStyles =
+    "transition-all duration-300 ease-in-out shadow-md ring-1 ring-inset flex items-center justify-center gap-2";
 
   const variantStyles = {
     primary:
-      "bg-accent text-text_contrast text-base font-semibold ring-1 ring-inset ring-accent rounded-md hover:bg-transparent hover:text-accent transition-colors duration-200 shadow-md",
+      "bg-accent text-text_contrast font-semibold ring-accent hover:bg-transparent hover:text-accent",
     secondary:
-      "bg-transperent text-text_muted text-base font-normal ring-1 ring-inset ring-text_muted rounded-md hover:bg-text_muted hover:text-text_contrast transition-colors duration-200 shadow-[0px_2px_2px_0px_var(--bg-0)] hover:shadow-[0px_2px_2px_0px_var(--bg-0)]",
+      "bg-text_primary text-bg0 font-normal ring-text_primary hover:bg-text_muted hover:text-text_contrast",
     tertiary:
-      "bg-bg2 ring-1 ring-inset ring-bg2 rounded-md text-text_muted hover:bg-bg1 shadow-[0px_2px_2px_2px_var(--bg-0)]",
+      "bg-bg2 text-text_muted ring-bg2 hover:bg-bg1 shadow-[0px_2px_2px_2px_var(--bg-0)]",
+    inverted:
+      "bg-text_primary text-text_contrast font-semibold ring-text_primary hover:bg-transparent hover:text-text_primary",
+    error:
+      "bg-error text-text_contrast font-semibold ring-error hover:bg-transparent hover:text-error",
+  };
+
+  const sizeStyles = {
+    small: "px-3 py-1 text-sm rounded-md",
+    big: "px-5 py-2 text-base rounded-md",
+    tertiary: "px-4 py-2 text-sm rounded-md",
   };
 
   return (
-    <>
-      <div className="flex flex-row gap-4">
-        <button
-          type={type}
-          onClick={onClickFunction}
-          className={clsx(baseStyles, variantStyles[variant])}
-        >
-          {text}
-        </button>
-      </div>
-    </>
+    <button
+      {...rest}
+      disabled={loading || rest.disabled}
+      className={clsx(baseStyles, sizeStyles[size], variantStyles[variant])}
+    >
+      {loading && <Loader className="h-4 w-4 animate-spin" />}
+      {text}
+    </button>
   );
 }

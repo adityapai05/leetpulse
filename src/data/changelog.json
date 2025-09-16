@@ -1,5 +1,11 @@
 [
   {
+    "version": "v1.0.2",
+    "title": "Minor Improvements & Bug Fixes",
+    "message": ["Added loading states", "Leaderboard display fixed"],
+    "date": "16th September 2025"
+  },
+  {
     "version": "v1.0.1",
     "title": "Minor Improvements & Bug Fixes",
     "message": [

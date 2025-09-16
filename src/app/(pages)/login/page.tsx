@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Input from "@/components/ui/Input";
+import Button from "@/components/ui/Button";
 import toast from "react-hot-toast";
 import { useState, ChangeEvent, FormEvent, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
@@ -15,6 +16,7 @@ interface FormData {
 
 export default function Login() {
   const router = useRouter();
+  const [loading, setLoading] = useState<boolean>(false);
   const [formData, setFormData] = useState<FormData>({
     usernameORemail: "",
     password: "",
@@ -47,6 +49,7 @@ export default function Login() {
       toast.error("Please enter password");
       return;
     }
+    setLoading(true);
     try {
       const res = await fetch("/api/auth/user/login", {
         method: "POST",
@@ -66,6 +69,8 @@ export default function Login() {
     } catch (error) {
       console.error(error);
       toast.error("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -110,12 +115,13 @@ export default function Login() {
               </div> */}
             </div>
 
-            <button
+            <Button
+              variant="inverted"
               type="submit"
-              className="flex justify-center items-center font-bold text-base border p-2 rounded-lg bg-text_primary text-text_contrast hover:border hover:border-text_primary hover:text-text_primary hover:bg-bg2 transition-colors duration-300"
-            >
-              Login
-            </button>
+              size="big"
+              text={loading ? "Logging in..." : "Login"}
+              loading={loading}
+            />
 
             <div className="flex text-sm self-center">
               New here?&nbsp;

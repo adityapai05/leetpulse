@@ -3,6 +3,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { useUser } from "@/context/UserContext";
+import Button from "@/components/ui/Button";
 
 type Props = {
   name: string;
@@ -20,24 +21,31 @@ export default function UserProfileCard({
   dateJoined,
 }: Props) {
   const router = useRouter();
+  const [loading, setLoading] = useState<boolean>(false);
   const [confirmLogout, setConfirmLogout] = useState(false);
   const user = useUser();
   const username = user?.username || "guest";
   console.log(username);
 
   const handleLogoutClick = async () => {
-    if (!confirmLogout) {
-      setConfirmLogout(true);
-      toast("Click again to confirm logout", { icon: "⚠️" });
-      setTimeout(() => setConfirmLogout(false), 3000);
-    } else {
-      const res = await fetch("/api/auth/user/logout");
-      if (res.ok) {
-        toast.success("Logged out successfully!");
-        router.push("/");
+    try {
+      if (!confirmLogout) {
+        setConfirmLogout(true);
+        toast("Click again to confirm logout", { icon: "⚠️" });
+        setTimeout(() => setConfirmLogout(false), 3000);
       } else {
-        toast.error("Log out failed, please try again.");
+        setLoading(true);
+        const res = await fetch("/api/auth/user/logout");
+        if (res.ok) {
+          toast.success("Logged out successfully!");
+          router.push("/");
+        } else {
+          toast.error("Log out failed, please try again.");
+        }
       }
+    } catch {
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -66,12 +74,13 @@ export default function UserProfileCard({
         className="text-sm mt-auto"
       />
 
-      <button
+      <Button
+        variant="error"
+        size="big"
+        text={loading ? "Logging out.." : "Logout"}
         onClick={handleLogoutClick}
-        className="rounded-xl px-8 py-2 bg-error font-semibold border border-error hover:bg-bg2"
-      >
-        Logout
-      </button>
+        loading={loading}
+      />
     </div>
   );
 }

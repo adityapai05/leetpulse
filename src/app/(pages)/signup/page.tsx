@@ -1,6 +1,7 @@
 "use client";
 
 import Input from "@/components/ui/Input";
+import Button from "@/components/ui/Button";
 import Link from "next/link";
 import toast from "react-hot-toast";
 import { ChangeEvent, FormEvent, useState } from "react";
@@ -8,6 +9,7 @@ import { useRouter } from "next/navigation";
 
 export default function SignUp() {
   const router = useRouter();
+  const [loading, setLoading] = useState<boolean>(false);
   const [formData, setFormData] = useState({
     firstName: "",
     username: "",
@@ -46,7 +48,7 @@ export default function SignUp() {
         return;
       }
     }
-
+    setLoading(true);
     try {
       const res = await fetch("/api/auth/user/signup", {
         method: "POST",
@@ -70,6 +72,8 @@ export default function SignUp() {
     } catch (error) {
       console.error(error);
       toast.error("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -146,12 +150,13 @@ export default function SignUp() {
             .
           </div>
 
-          <button
+          <Button
+            variant="inverted"
             type="submit"
-            className="flex justify-center items-center font-bold text-base border p-2 rounded-lg bg-text_primary text-text_contrast shadow-md hover:border-text_primary hover:text-text_primary hover:bg-bg2 transition-colors duration-300"
-          >
-            Sign Up
-          </button>
+            size="big"
+            text={loading ? "Signing Up..." : "Sign Up"}
+            loading={loading}
+          />
 
           <div className="flex text-sm text-text_muted self-center">
             Already have an account?&nbsp;

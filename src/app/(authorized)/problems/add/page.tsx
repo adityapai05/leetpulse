@@ -3,8 +3,7 @@
 import toast from "react-hot-toast";
 import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
-import { MouseEvent, ChangeEvent, FormEvent, useState } from "react";
-import { redirect } from "next/navigation";
+import { MouseEvent, ChangeEvent, useState } from "react";
 
 export default function AddQuestion() {
   const [formData, setFormData] = useState({
@@ -13,6 +12,8 @@ export default function AddQuestion() {
     notes: "",
   });
 
+  const [loading, setLoading] = useState<boolean>(false);
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
@@ -20,8 +21,9 @@ export default function AddQuestion() {
     });
   };
 
-  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
+    setLoading(true);
     if (!(Number(formData.problemNo) > 0)) {
       toast.error("Please enter a valid question number.");
       return;
@@ -55,6 +57,8 @@ export default function AddQuestion() {
     } catch (error) {
       console.error(error);
       toast.error("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
     }
   }
   async function handleCancel(e: MouseEvent<HTMLButtonElement>) {
@@ -96,14 +100,17 @@ export default function AddQuestion() {
         <div className="flex justify-center items-center  flex-col-reverse gap-8 md:flex-row pt-4">
           <Button
             variant="secondary"
+            size="big"
             text="Cancel"
-            onClickFunction={handleCancel}
+            onClick={handleCancel}
             type="reset"
           />
           <Button
             variant="primary"
-            text="Add to list"
-            onClickFunction={handleSubmit}
+            size="big"
+            text={loading ? "Adding..." : "Add to queue"}
+            onClick={handleSubmit}
+            loading={loading}
             type="submit"
           />
         </div>
