@@ -1,7 +1,9 @@
 "use client";
 
 import Button from "@/components/layout/Landing/Button";
+import Image from "next/image";
 import Link from "next/link";
+import logo from "@/assets/logo.webp";
 import { useState } from "react";
 
 export default function Navbar() {
@@ -16,10 +18,14 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 flex flex-col md:flex-row justify-between px-6 md:px-8 lg:px-32 py-4 bg-[var(--glass-bg)] backdrop-blur-md border-b border-[var(--glass-border)] gap-4 md:gap-0">
+    <nav className="sticky top-0 z-50 flex flex-col md:flex-row justify-between px-6 md:px-8 lg:px-32 py-4 bg-[var(--glass-bg)] backdrop-blur-md border-b border-border gap-4 md:gap-0">
       {/* Logo and Hamburger */}
       <div className="flex flex-row justify-between items-center w-full md:w-auto">
-        <Link href="/" className="text-xl font-bold text-text_primary">
+        <Link
+          href="/"
+          className="flex items-center gap-2 text-xl font-bold text-text_primary"
+        >
+          <Image src={logo} width={30} alt="app logo"></Image>
           leetpulse
         </Link>
 

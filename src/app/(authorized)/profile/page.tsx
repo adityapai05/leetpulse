@@ -45,7 +45,7 @@ export default function Profile() {
         </div>
 
         {/* Right column: Stats + Chart */}
-        <div className="flex flex-col bg-[radial-gradient(at_top_left,var(--bg-0),var(--bg-1))] p-6 rounded-md gap-6 flex-1">
+        <div className="flex flex-col p-6 rounded-md gap-6 flex-1">
           <div className="text-xl text-text_primary font-bold">User Stats</div>
 
           <div className="flex flex-col xl:flex-row gap-6">

@@ -50,7 +50,7 @@ export default function UserProfileCard({
   };
 
   return (
-    <div className="bg-[radial-gradient(at_top_left,var(--bg-0),var(--bg-1))] flex flex-col gap-4 items-center px-4 py-8 w-full sm:w-3/4 md:w-1/2 lg:w-full rounded-md">
+    <div className=" flex flex-col gap-4 items-center px-4 py-8 w-full sm:w-3/4 md:w-1/2 lg:w-full rounded-md">
       <div className="rounded-full h-32 w-32 border flex items-center justify-center bg-bg0">
         <img
           src={`https://api.dicebear.com/9.x/thumbs/svg?seed=${username}&scale=80`}

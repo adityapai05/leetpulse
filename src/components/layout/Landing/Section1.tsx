@@ -6,11 +6,10 @@ export default function Section1() {
       {/* Left Content */}
       <div className="flex flex-1 flex-col gap-6">
         <div className="flex flex-col gap-2">
-          <div
-            className="text-2xl md:text-3xl font-extrabold tracking-wide"
-            style={{ textShadow: "1px 1px 2px rgba(0,0,0,0.3)" }}
-          >
-            <span className="text-accent">leetpulse&nbsp;</span>
+          <div className="text-2xl md:text-3xl font-extrabold tracking-wide">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--accent)] to-[var(--accent-light)]">
+              leetpulse&nbsp;
+            </span>
             <span>- A Spaced Repetition Tracker</span>
           </div>
           <div className="text-text_muted text-sm md:text-base">

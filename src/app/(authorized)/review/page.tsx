@@ -66,7 +66,6 @@ export default function ReviewQueue() {
 
   return (
     <div className="flex flex-col mx-4 gap-8 p-4 md:mx-16">
-      <Header user={user} />
       <ReviewTable problems={problems} />
     </div>
   );
@@ -158,12 +157,12 @@ function ReviewTable({ problems }: { problems: any[] }) {
     }
   }
   return (
-    <div className="bg-bg1 flex flex-col rounded-md border-2 border-bg2 shadow-md p-4">
+    <div className="flex flex-col gap-4">
       <div className="flex flex-col p-4">
-        <span className="font-bold text-text_primary text-3xl">Review</span>
-        <span className="text-sm text-text_muted">
+        <h1 className="font-bold text-text_primary text-3xl">Review</h1>
+        <p className="text-sm text-text_muted">
           You have solved it once. Now let’s make it stick
-        </span>
+        </p>
       </div>
       <div className="flex flex-col p-4">
         <div className="overflow-x-auto">

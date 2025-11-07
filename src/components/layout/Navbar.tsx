@@ -5,6 +5,8 @@ import { usePathname } from "next/navigation";
 import { useUser } from "@/context/UserContext";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import logo from "@/assets/logo.webp";
+import Image from "next/image";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -13,20 +15,20 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   const linkClasses = (path: string) =>
-    `hover:text-accent transition-colors ${
-      pathname === path ? "text-accent" : "text-text_primary"
+    `hover:text-transparent bg-clip-text bg-gradient-to-br from-[var(--accent)] to-[var(--accent-light)] transition-colors ${
+      pathname === path
+        ? "text-transparent font-bold bg-clip-text bg-gradient-to-br from-[var(--accent)] to-[var(--accent-light)]"
+        : "text-text_primary"
     }`;
 
   return (
-    <nav className="bg-bg1 flex flex-row justify-between px-8 sm:px-8 lg:px-20 py-4 text-sm shadow-md relative">
+    <nav className="border-b border-border flex flex-row justify-between px-8 sm:px-8 lg:px-20 py-4 text-sm shadow-md relative">
       {/* Left side: desktop links */}
-      <div className="flex items-center gap-10">
-        <Link href="/" className="font-bold text-lg">
-          leetpulse
-        </Link>
+      <div className="flex items-center gap-4">
+        <Image src={logo} alt="app logo" width={24}></Image>
 
         {/* Desktop nav links */}
-        <div className="hidden sm:flex gap-6 font-medium">
+        <div className="hidden sm:flex gap-6">
           <Link className={linkClasses("/explore")} href="/explore">
             Explore
           </Link>

@@ -9,7 +9,9 @@ export default function Section3() {
       {/* Heading */}
       <div className="text-xl md:text-2xl font-semibold tracking-wide">
         <span>{"</> "}Why?</span>
-        <span className="text-accent">&nbsp;leetpulse</span>
+        <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--accent)] to-[var(--accent-light)]">
+          &nbsp;leetpulse
+        </span>
       </div>
 
       {/* Content */}

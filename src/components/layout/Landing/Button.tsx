@@ -8,12 +8,11 @@ export default function Button({
   href,
   target = "",
 }) {
-  const baseStyles =
-    "transition-all duration-300 ease-in-out shadow-md ring-1 ring-inset";
+  const baseStyles = "transition-all duration-300 ease-in-out shadow-md";
 
   const variantStyles = {
     primary:
-      "bg-accent text-text_contrast font-semibold ring-accent hover:bg-transparent hover:text-accent",
+      "bg-gradient-to-r from-[var(--accent)] to-[var(--accent-light)] text-text_contrast font-semibold transition-duration-500 ease-out bg-[length:200%_200%] bg-[position:left_center] hover:bg-[position:right_center] hover:shadow-lg",
     secondary:
       "bg-text_primary text-bg0 font-normal ring-text_primary hover:bg-text_muted hover:text-text_contrast",
     tertiary:

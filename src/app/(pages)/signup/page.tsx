@@ -4,8 +4,10 @@ import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
 import Link from "next/link";
 import toast from "react-hot-toast";
+import logo from "@/assets/logo.webp";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function SignUp() {
   const router = useRouter();
@@ -78,94 +80,114 @@ export default function SignUp() {
   }
 
   return (
-    <div className="flex bg-[radial-gradient(at_top_left,var(--bg-2),var(--bg-0))] min-h-screen w-full items-center justify-center">
-      <div className="flex flex-col items-center gap-8 lg:w-1/3 md:w-2/3 sm:w-3/4">
-        <form
-          onSubmit={handleSubmit}
-          className="flex flex-col w-full bg-bg2 p-8 gap-4 rounded-lg shadow-md"
-        >
-          <div className="font-bold text-2xl self-center h-16">
-            Create a{" "}
-            <Link href="/" className="text-accent">
-              leetpulse
-            </Link>{" "}
-            account
-          </div>
+    <>
+      <div className="flex w-screen h-screen">
+        <div className="bg-bg1 hidden md:flex flex-col justify-center items-center flex-1">
+          <h2 className="text-base font-medium text-text_primary tracking-wide mt-2">
+            Welcome to leetpulse — where consistency builds mastery.
+          </h2>
+          <Image
+            src={logo}
+            alt="leetpulse logo"
+            width={128 * 2}
+            className="opacity-90"
+          />
+          <p className="text-sm text-text_secondary max-w-md mt-1">
+            Sign up to begin your spaced-repetition journey and turn every
+            solved problem into progress.
+          </p>
+        </div>
+        <div className="flex flex-1 justify-center items-center">
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col w-3/4 p-8 gap-4 rounded-lg shadow-md"
+          >
+            <div className="font-bold text-2xl self-center h-16">
+              Create a{" "}
+              <Link
+                href="/"
+                className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--accent)] to-[var(--accent-light)]"
+              >
+                leetpulse
+              </Link>{" "}
+              account
+            </div>
 
-          <Input
-            label="First name"
-            name="firstName"
-            type="text"
-            value={formData.firstName}
-            onChange={handleChange}
-          />
-          <Input
-            label="Create a username"
-            name="username"
-            type="text"
-            value={formData.username}
-            onChange={handleChange}
-          />
-          <Input
-            label="Email"
-            name="email"
-            type="email"
-            value={formData.email}
-            onChange={handleChange}
-          />
-
-          <div className="flex flex-col gap-2 justify-between sm:flex-row">
             <Input
-              label="Password"
-              name="password"
-              type="password"
-              value={formData.password}
+              label="First name"
+              name="firstName"
+              type="text"
+              value={formData.firstName}
               onChange={handleChange}
             />
             <Input
-              label="Confirm Password"
-              name="confirmPassword"
-              type="password"
-              value={formData.confirmPassword}
+              label="Create a username"
+              name="username"
+              type="text"
+              value={formData.username}
               onChange={handleChange}
             />
-          </div>
-          <div className="text-text_muted text-sm">
-            By signing up, you agree to our{" "}
-            <Link
-              href="/terms"
-              target="_blank"
-              className="text-accent underline"
-            >
-              Terms
-            </Link>{" "}
-            and{" "}
-            <Link
-              href="/privacy"
-              target="_blank"
-              className="text-accent underline"
-            >
-              Privacy Policy
-            </Link>
-            .
-          </div>
+            <Input
+              label="Email"
+              name="email"
+              type="email"
+              value={formData.email}
+              onChange={handleChange}
+            />
 
-          <Button
-            variant="inverted"
-            type="submit"
-            size="big"
-            text={loading ? "Signing Up..." : "Sign Up"}
-            loading={loading}
-          />
+            <div className="flex flex-col gap-2 justify-between sm:flex-row">
+              <Input
+                label="Password"
+                name="password"
+                type="password"
+                value={formData.password}
+                onChange={handleChange}
+              />
+              <Input
+                label="Confirm Password"
+                name="confirmPassword"
+                type="password"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="text-text_muted text-sm">
+              By signing up, you agree to our{" "}
+              <Link
+                href="/terms"
+                target="_blank"
+                className="text-accent underline"
+              >
+                Terms
+              </Link>{" "}
+              and{" "}
+              <Link
+                href="/privacy"
+                target="_blank"
+                className="text-accent underline"
+              >
+                Privacy Policy
+              </Link>
+              .
+            </div>
 
-          <div className="flex text-sm text-text_muted self-center">
-            Already have an account?&nbsp;
-            <Link href="/login" className="text-accent underline font-bold">
-              login
-            </Link>
-          </div>
-        </form>
+            <Button
+              variant="inverted"
+              type="submit"
+              size="big"
+              text={loading ? "Signing Up..." : "Sign Up"}
+              loading={loading}
+            />
+
+            <div className="flex text-sm text-text_muted self-center">
+              Already have an account?&nbsp;
+              <Link href="/login" className="text-accent underline font-bold">
+                login
+              </Link>
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
+    </>
   );
 }

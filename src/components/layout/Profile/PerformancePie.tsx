@@ -24,6 +24,7 @@ export default function PerformancePie({ data, colors }: Props) {
               outerRadius="70%"
               dataKey="value"
               stroke="var(--bg-1)"
+              label
             >
               {data.map((entry, index) => (
                 <Cell key={index} fill={colors[index % colors.length]} />

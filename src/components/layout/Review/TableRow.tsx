@@ -13,53 +13,55 @@ type Props = {
   dueDate: string;
 };
 
-export default function TableRow(props: Props) {
-  const { idx, questionNo, question, iteration, accuracy, phase, dueDate } =
-    props;
+export default function TableRow({
+  idx,
+  questionNo,
+  question,
+  iteration,
+  accuracy,
+  phase,
+  dueDate,
+}: Props) {
+  const bgColor = idx % 2 === 0 ? "bg-bg2" : "";
 
-  const bgColor = idx % 2 === 0 ? "bg-bg2" : "bg-bg1";
-
-  // ------------------------------
-  // Determine dueDate text color
-  // ------------------------------
   const now = new Date();
   const due = new Date(dueDate);
   let dueTextColor = "text-text_primary";
-
   if (
     due.getDate() === now.getDate() &&
     due.getMonth() === now.getMonth() &&
     due.getFullYear() === now.getFullYear()
   ) {
-    dueTextColor = "text-warning"; // due today
+    dueTextColor = "text-warning";
   } else if (due < now) {
-    dueTextColor = "text-error"; // past due
+    dueTextColor = "text-error";
   }
 
   return (
-    <Link href={`/problems/solve/${questionNo}`} className="block">
+    <Link
+      href={`/problems/solve/${questionNo}`}
+      className={clsx("block transition-colors")}
+    >
       <div
         className={clsx(
-          bgColor,
-          "flex flex-row w-full justify-between h-12 rounded-xl"
+          "grid grid-cols-[1fr_10fr_1fr_2fr_2fr_2fr] h-12 text-sm rounded-lg hover:bg-bg1",
+          bgColor
         )}
       >
-        <div className="flex justify-center items-center w-[5%]">
-          {questionNo}
+        <div className="flex justify-center items-center">{questionNo}</div>
+        <div className="flex items-center px-4">{question}</div>
+        <div className="flex justify-center items-center">{iteration}</div>
+        <div className="flex justify-center items-center">
+          <div className="w-1/2">
+            <ProgressBar value={accuracy} />
+          </div>
         </div>
-        <div className="flex items-center px-4 w-[50%]">{question}</div>
-        <div className="flex items-center justify-center px-4 w-[10%]">
-          {iteration}
-        </div>
-        <div className="px-4 flex justify-center items-center w-[10%]">
-          <ProgressBar value={accuracy} />
-        </div>
-        <div className="flex px-4 justify-center items-center w-[10%]">
+        <div className="flex justify-center items-center">
           <Phases variant={phase} />
         </div>
         <div
           className={clsx(
-            "flex p-4 justify-center items-center w-[15%] text-xs md:text-sm",
+            "flex justify-center items-center text-xs md:text-sm",
             dueTextColor
           )}
         >

@@ -9,9 +9,11 @@ type Props = {
 export default function TableRow(props: Props) {
   const { rank, username, xp } = props;
   let bgColor: string;
-
-  if (rank % 2 == 0) {
-    bgColor = "bg-bg1";
+  if (rank == 1) {
+    bgColor =
+      "bg-gradient-to-r from-[var(--accent)] to-[var(--accent-light)] text-text_contrast";
+  } else if (rank % 2 == 0 && rank != 1) {
+    bgColor = "";
   } else {
     bgColor = "bg-bg2";
   }
@@ -20,7 +22,7 @@ export default function TableRow(props: Props) {
     <div
       className={clsx(
         bgColor,
-        "flex flex-row w-full justify-between h-12 rounded-md"
+        "flex flex-row w-full justify-between h-11 rounded-md text-sm"
       )}
     >
       <div className="flex justify-center items-center w-[10%]">{rank}</div>

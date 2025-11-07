@@ -1,9 +1,9 @@
 import { Toaster } from "react-hot-toast";
-import { Work_Sans } from "next/font/google";
+import { Instrument_Sans } from "next/font/google";
 import "@/styles/globals.css";
 
-const workSans = Work_Sans({
-  variable: "--font-work-sans",
+const instrumentSans = Instrument_Sans({
+  variable: "--font-instrument-sans",
   subsets: ["latin"],
 });
 
@@ -18,7 +18,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${workSans.variable} antialiased`}>
+      <body className={`${instrumentSans.variable} antialiased`}>
         {children}
 
         <Toaster

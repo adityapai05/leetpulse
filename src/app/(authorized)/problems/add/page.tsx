@@ -71,8 +71,14 @@ export default function AddQuestion() {
   }
 
   return (
-    <div className="bg-bg1 mx-16 my-8 ring-2 ring-bg2 rounded-lg py-16 px-4 md:px-32">
-      <form className="flex flex-col gap-4 p-4 md:p-16">
+    <div className="flex flex-col mx-2 my-8 px-4 md:px-32 gap-4 ">
+      <div className="flex flex-col m-4">
+        <h1 className="font-bold text-text_primary text-3xl">Add Problems</h1>
+        <p className="text-sm text-text_muted">
+          add the LeetCode questions using the question number to track it
+        </p>
+      </div>
+      <form className="flex flex-col gap-4 m-4 ">
         <Input
           label="Problem No:"
           name="problemNo"
@@ -97,7 +103,7 @@ export default function AddQuestion() {
           onChange={handleChange}
           placeholder="your notes"
         />
-        <div className="flex justify-center items-center  flex-col-reverse gap-8 md:flex-row pt-4">
+        <div className="flex flex-row justify-center items-center gap-8 pt-4">
           <Button
             variant="secondary"
             size="big"

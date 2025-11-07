@@ -28,9 +28,9 @@ export default function Leaderboard() {
   }, []);
 
   return (
-    <div className="bg-bg1 flex flex-col gap-6 mx-4 sm:mx-16 my-8 p-6 sm:p-8 rounded-md shadow-md border-2 border-bg2">
+    <div className="flex flex-col gap-6 py-8 px-4 md:px-32">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row gap-2 items-center">
+      <div className="flex flex-col">
         <span className="text-xl sm:text-2xl font-bold">
           Leaderboard Ranking
         </span>

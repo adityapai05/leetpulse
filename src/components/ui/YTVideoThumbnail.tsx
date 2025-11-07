@@ -4,7 +4,7 @@ import YouTubeVideoThumbnail from "@/assets/leetpulseTutorialThumbnail.png";
 
 export default function VideoThumbnail() {
   return (
-    <div className="bg-bg1 max-w-lg mx-auto border-2 border-bg2 rounded-xl p-2 shadow-lg">
+    <div className="bg-bg1 max-w-lg mx-auto border-2 border-border rounded-xl p-2 shadow-lg">
       <Image
         src={YouTubeVideoThumbnail}
         alt="YouTube video thumbnail"

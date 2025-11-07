@@ -30,18 +30,20 @@ html {
 /* @media (prefers-color-scheme: dark) 
 { */
 :root {
-  --bg-0: #0C0A09;
-  --bg-1: #1C1917;
-  --bg-2: #292524;
-  --accent: theme(colors.amber.500);
+  --bg-0: #171717;
+  --bg-1: #262626;
+  --bg-2: #404040;
+  --accent: #FE6A0E;
+  --accent-light: #FEC72E;
   --text-primary: #FAFAF9;
   --text-contrast: #121212;
   --text-muted: #A6A09B;
   --success: #3CCF91;
   --warning: #FFC857;
   --error: #FF5C5C;
-  --glass-bg: rgba(28, 25, 23, 0.6);
+  --glass-bg: #262626ad;
   --glass-border: rgba(250, 250, 249, 0.1);
+  --border: #43403E;
 }
 
 /* } */
@@ -49,7 +51,7 @@ html {
 body {
   background: var(--bg-0);
   color: var(--text-primary);
-  font-family: var(--font-work-sans, sans-serif);
+  font-family: var(--font-instrument-sans, sans-serif);
 }
 
 /* For Webkit browsers (Chrome, Edge, Safari) */

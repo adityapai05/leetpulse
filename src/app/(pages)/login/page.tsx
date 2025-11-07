@@ -8,6 +8,8 @@ import { useState, ChangeEvent, FormEvent, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import Head from "next/head";
+import logo from "@/assets/logo.webp";
+import Image from "next/image";
 
 interface FormData {
   usernameORemail: string;
@@ -79,15 +81,33 @@ export default function Login() {
       <Head>
         <title>Login | leetpulse</title>
       </Head>
-      <div className="flex bg-[radial-gradient(at_top_left,var(--bg-2),var(--bg-0))] min-h-screen w-full items-center justify-center">
-        <div className="flex flex-col items-center p-2 gap-8 lg:w-1/3  md:w-2/3 sm:w-3/4">
+      <div className="flex w-screen h-screen">
+        <div className="bg-bg1 hidden md:flex flex-col justify-center items-center flex-1">
+          <h1 className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--accent)] to-[var(--accent-light)] text-2xl font-semibold tracking-wide">
+            leetpulse
+          </h1>
+          <Image
+            src={logo}
+            alt="leetpulse logo"
+            width={128 * 2}
+            className="opacity-90"
+          />
+
+          <h2 className="text-base font-medium text-text_primary tracking-wide mt-2">
+            You’re back. Let’s finish what you started.
+          </h2>
+        </div>
+        <div className="flex flex-1 justify-center items-center">
           <form
             onSubmit={handleSubmit}
-            className="flex flex-col w-full bg-bg2 md:p-8 px-4 py-8 gap-4 rounded-lg shadow-lg"
+            className="flex flex-col w-3/4 md:p-8 px-4 py-8 gap-4 rounded-lg shadow-lg"
           >
             <div className="font-bold text-2xl self-center h-16">
               Login to{" "}
-              <Link href="/" className="text-accent">
+              <Link
+                href="/"
+                className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--accent)] to-[var(--accent-light)]"
+              >
                 leetpulse
               </Link>{" "}
               account
