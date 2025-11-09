@@ -11,7 +11,7 @@ export default function TableRow(props: Props) {
   let bgColor: string;
   if (rank == 1) {
     bgColor =
-      "bg-gradient-to-r from-[var(--accent)] to-[var(--accent-light)] text-text_contrast";
+      "bg-gradient-to-r from-[var(--accent)] to-[var(--accent-light)] text-text_contrast font-medium";
   } else if (rank % 2 == 0 && rank != 1) {
     bgColor = "";
   } else {
@@ -25,7 +25,7 @@ export default function TableRow(props: Props) {
         "flex flex-row w-full justify-between h-11 rounded-md text-sm"
       )}
     >
-      <div className="flex justify-center items-center w-[10%]">{rank}</div>
+      <div className="flex justify-center items-center w-[10%] ">{rank}</div>
       <div className="flex items-center px-4 w-[80%]">{username}</div>
       <div className="flex justify-center items-center w-[10%]">{xp}</div>
     </div>

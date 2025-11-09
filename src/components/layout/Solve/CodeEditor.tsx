@@ -28,12 +28,16 @@ export default function CodeEditor({
   }, [language]);
 
   function handleEditorMount(editor, monaco) {
+    const bg = getComputedStyle(document.documentElement)
+      .getPropertyValue("--bg-1")
+      .trim();
+
     monaco.editor.defineTheme("customTheme", {
       base: "vs-dark",
       inherit: true,
       rules: [],
       colors: {
-        "editor.background": "#1C1917",
+        "editor.background": bg,
       },
     });
 
@@ -86,13 +90,13 @@ export default function CodeEditor({
   }
 
   return (
-    <div className=" bg-bg1 flex flex-col flex-1 border-2 border-bg2 rounded-md p-4 shadow-md">
-      <div className="flex flex-row justify-between bg-stone-900 text-base font-bold text-accent px-4 py-2 rounded-t-md">
+    <div className=" bg-bg1 flex flex-col flex-1 border-2 border-bg2 rounded-md">
+      <div className="bg-bg2 flex flex-row justify-between text-base font-bold text-accent px-4 py-2 rounded-t-md mb-4">
         {"</>"}
         <select
           value={language}
           onChange={(e) => handleLanguageChange(e.target.value)}
-          className="bg-stone-900 rounded px-2 font-medium text-white"
+          className="bg-bg2 rounded font-medium text-white text-sm"
         >
           <option value="javascript">JavaScript</option>
           <option value="typescript">TypeScript</option>
@@ -111,7 +115,7 @@ export default function CodeEditor({
         onMount={handleEditorMount}
         theme="customTheme"
       />
-      <div className="bg-stone-900 flex flex-row p-4 justify-end rounded-b-md gap-4">
+      <div className="bg-bg1 flex flex-row p-4 justify-end rounded-b-md gap-4">
         <Button
           variant="secondary"
           text={`LeetCode ${problem.problemNo}`}
