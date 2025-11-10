@@ -2,33 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  scroll-padding-top: 10vh;
-}
-
-@media (max-width: 768px) {
-  html {
-    scroll-padding-top: 40vh;
-  }
-}
-
-/* :root {
-  --bg-0: theme(colors.slate.300);
-  --bg-1: theme(colors.slate.200);
-  --bg-2: theme(colors.slate.100);
-  --accent: #E7000B;
-  --text-primary: theme(colors.slate.950);
-  --text-contrast: #F8FAFC;
-  --text-muted: theme(colors.stone.500);
-  --glass-bg: rgba(255, 255, 255, 0.6);
-  --glass-border: rgba(0, 0, 0, 0.05);
-  --success: #00C950;
-  --warning: #FE9A00;
-  --error: #C10007;
-} */
-
-/* @media (prefers-color-scheme: dark) 
-{ */
 :root {
   --bg-0: #171717;
   --bg-1: #262626;
@@ -46,39 +19,38 @@ html {
   --border: #43403E;
 }
 
-/* } */
-
 body {
   background: var(--bg-0);
   color: var(--text-primary);
   font-family: var(--font-instrument-sans, sans-serif);
+  scroll-padding-top: 10vh;
 }
 
-/* For Webkit browsers (Chrome, Edge, Safari) */
+@media (max-width: 768px) {
+  html {
+    scroll-padding-top: 40vh;
+  }
+}
+
 ::-webkit-scrollbar {
   width: 8px;
-  /* scrollbar width */
 }
 
 ::-webkit-scrollbar-track {
   background: var(--bg-1);
-  /* track color */
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
   background: var(--text-muted);
-  /* thumb color */
   border-radius: 4px;
   transition: background 0.3s;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--text-muted);
-  /* slightly lighter on hover */
+  background: var(--text-primary);
 }
 
-/* For Firefox */
 * {
   scrollbar-width: thin;
   scrollbar-color: var(--text-muted) var(--bg-1);

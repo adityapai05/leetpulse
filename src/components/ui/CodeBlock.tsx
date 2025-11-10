@@ -1,17 +1,20 @@
+"use client";
+
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { okaidia } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 type Props = {
   code: string;
-  language: string;
 };
 
 export default function CodeBlock(props: Props) {
-  const { code, language } = props;
+  const { code } = props;
+  const language = localStorage.getItem("preferredLanguage");
+
   return (
     <SyntaxHighlighter
       language={language}
-      style={okaidia}
+      style={oneDark}
       showLineNumbers
       wrapLongLines={true}
       customStyle={{ whiteSpace: "pre-wrap" }}

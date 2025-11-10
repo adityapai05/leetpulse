@@ -6,7 +6,6 @@ import GlobalProblems from "@/models/GlobalProblems";
 
 import { NextRequest, NextResponse } from "next/server";
 import { getUserFromCookies } from "@/lib/auth";
-import { getQuestions } from "@/lib/questionsCache";
 
 export async function GET(
   req: NextRequest,
@@ -25,11 +24,11 @@ export async function GET(
 
     //Connect DB
     await connectDB();
-    let problemNumber = slug;
+    await GlobalProblems.syncIndexes();
 
     //Check if problem statements exist in DB
     const problemStatement = await GlobalProblems.findOne({
-      problemNumber,
+      slug,
     });
 
     if (problemStatement) {
@@ -38,33 +37,51 @@ export async function GET(
         { status: 200 }
       );
     } else {
-      const questions = getQuestions();
-      const problemName = questions[problemNumber]?.title;
-
       const schema = {
         type: Type.OBJECT,
         properties: {
           problemStatement: { type: Type.STRING },
-          input: { type: Type.STRING },
-          output: { type: Type.STRING },
+          inputArguments: { type: Type.STRING },
+          outputDataType: { type: Type.STRING },
         },
-        propertyOrdering: ["problemStatement", "input", "output"],
+        propertyOrdering: [
+          "problemStatement",
+          "inputArguments",
+          "outputDataType",
+        ],
       };
 
+      console.log("Running prompt ahh");
+
       const aiResult = await runPrompt(
-        `for LeetCode problem ${problemNumber} titled ${problemName}, generate:
-        - problemStatement:A simple statement about the LeetCode problem.  
-        - input: an example input of test case.  
-        - output: an example output of test case`,
+        `You are helping generate structured metadata for a LeetCode problem identified by slug: "${slug}".
+    
+        Return results in concise, plain English.
+  
+        Generate the following fields:
+        1. problemStatement — A short, clear summary of the problem (2–4 sentences) followed by one small test case example **on a new line**, like:
+        "Example:
+        Input: ...
+        Output: ..."
+        Use line breaks ("\\n") for formatting where needed.
+        2. inputArguments — A comma-separated list describing all inputs in the format: "name: type" (e.g., "nums: int[], target: int").
+        3. outputDataType — The return data type (e.g., "int", "boolean", "string[]").
+  
+      Keep everything clean, factual, and formatted for display — no markdown, no bullet points, no code fences.`,
         schema
       );
 
+      console.log("Propmt ran ahh");
+
       const newProblem = await GlobalProblems.create({
-        problemNumber,
+        slug,
         problemStatement: aiResult.problemStatement,
-        input: aiResult.input,
-        output: aiResult.output,
+        inputArguments: aiResult.inputArguments,
+        outputDataType: aiResult.outputDataType,
       });
+
+      console.log(newProblem);
+      console.log("added that shit into DB ahh");
 
       return NextResponse.json(
         { problemStatement: newProblem },

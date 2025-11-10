@@ -152,6 +152,7 @@ function ReviewTable({ problems }: { problems: any[] }) {
           accuracy={accuracy}
           phase={p.phase}
           dueDate={formattedDate}
+          slug={p.slug}
         />
       );
     }

@@ -32,7 +32,7 @@ export async function GET(
 
     await connectDB();
 
-    const problem = await Problem.findOne({ userId: user.id, problemNo: slug }); // ✅ await
+    const problem = await Problem.findOne({ userId: user.id, slug: slug });
     if (!problem) {
       return NextResponse.json({ error: "Problem not found" }, { status: 404 });
     }

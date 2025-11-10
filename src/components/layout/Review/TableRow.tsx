@@ -11,6 +11,7 @@ type Props = {
   accuracy: number;
   phase: string;
   dueDate: string;
+  slug: string;
 };
 
 export default function TableRow({
@@ -21,6 +22,7 @@ export default function TableRow({
   accuracy,
   phase,
   dueDate,
+  slug,
 }: Props) {
   const bgColor = idx % 2 === 0 ? "bg-bg2" : "";
 
@@ -39,7 +41,7 @@ export default function TableRow({
 
   return (
     <Link
-      href={`/problems/solve/${questionNo}`}
+      href={`/problems/solve/${slug}`}
       className={clsx("block transition-colors")}
     >
       <div
