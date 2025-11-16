@@ -84,29 +84,38 @@ export async function POST(
     type: Type.OBJECT,
     properties: {
       verdict: { type: Type.STRING },
+
       insights: { type: Type.STRING },
+
       usersComplexity: {
         type: Type.OBJECT,
         properties: {
           time: { type: Type.STRING },
           space: { type: Type.STRING },
         },
+        required: ["time", "space"],
       },
+
       bestComplexity: {
         type: Type.OBJECT,
         properties: {
           time: { type: Type.STRING },
           space: { type: Type.STRING },
         },
+        required: ["time", "space"],
       },
+
       optimizations: { type: Type.STRING },
       failureReasons: { type: Type.STRING },
       correctionHints: { type: Type.STRING },
       correctCode: { type: Type.STRING },
+
       accuracy: { type: Type.NUMBER },
-      recommendedProblems: { type: Type.ARRAY, items: { type: Type.STRING } },
+
+      dueDate: { type: Type.STRING },
     },
-    propertyOrdering: [
+
+    required: [
       "verdict",
       "insights",
       "usersComplexity",
@@ -115,8 +124,8 @@ export async function POST(
       "failureReasons",
       "correctionHints",
       "correctCode",
-      "recommendedProblems",
       "accuracy",
+      "dueDate",
     ],
   };
 
@@ -127,27 +136,45 @@ export async function POST(
   let aiResult;
   try {
     aiResult = await runPrompt(
-      `You are an expert code reviewer. Analyze the following solution (detect language automatically) for question ${slug}:
+      `You are an AI code mentor. Analyze the user's submitted code ${code} solution for a programming problem ${slug}.  
+Your goal is NOT strict LeetCode judging. Your goal is to help the user improve their reasoning, correctness, and problem-solving ability.
 
-  ${code}
+General rules:
+- Always return a JSON object matching the required schema exactly.
+- Never add fields outside the schema.
+- The code you output in correctCode must be in the SAME programming language the user used.
+- Keep explanations simple, accurate, and educational.
+- Avoid hallucinating APIs or syntax.
+- Provide corrections only when needed.
+- Give improvements and deeper insights even when the user's solution is correct.
+- The user is practicing spaced repetition; focus on teaching and clarity, not harsh grading.
 
-  Instructions:
-  1. Only focus on the code inside the function. Ignore function names, arguments, and return types.
-  2. Provide a strict JSON output matching this schema:
-     - verdict: "Correct" or "Incorrect"
-     - If verdict is "Correct":
-       - insights: max ~20 words, concise observations about the solution
-       - usersComplexity: use exact Big-O notation, e.g., "O(n)"
-       - bestComplexity: use exact Big-O notation, e.g., "O(log n)"
-       - optimizations: max ~20 words
-     - If verdict is "Incorrect":
-       - failureReasons: max ~20 words
-       - correctionHints: max ~20 words
-       - correctCode: provide only the fixed function code, well-formatted
-     - accuracy: number
-     - recommendedProblems: array of slugs
+Return a JSON object with the following fields:
 
-  Output must be strictly JSON and no extra explanations. Do not add text outside JSON.`,
+{
+  "verdict": "Correct" | "Incorrect" | "Partially Correct",
+  "insights": "<Explain the core idea of solving this problem and useful patterns>",
+  "usersComplexity": {
+      "time": "<User solution time complexity>",
+      "space": "<User solution space complexity>"
+  },
+  "bestComplexity": {
+      "time": "<Best known time complexity for this problem>",
+      "space": "<Best known space complexity>"
+  },
+  "optimizations": "<Explain how their logic can be improved, rewritten, or simplified. If already optimal, explain why.>",
+  "failureReasons": "<If the solution is incorrect, list the failing logic, mistakes, or edge cases. If correct, return an empty string.>",
+  "correctionHints": "<Give hints or small nudges to fix mistakes. Do NOT rewrite the whole solution unless required.>",
+  "correctCode": "<A clean, correct, improved version of the solution — ONLY if a rewrite is necessary. Otherwise return their logic slightly cleaned up in the same language.>",
+  "accuracy": <A number from 0 to 100 rating how close the user’s solution is to ideal>
+}
+
+Rules for correctCode:
+- Only rewrite the function when needed to fix logic.
+- Always match the user’s language (JS → JS, Python → Python, etc.).
+- Keep formatting clean and minimal.
+
+Return ONLY the JSON. No additional text.`,
       resultSchema
     );
   } catch (err) {

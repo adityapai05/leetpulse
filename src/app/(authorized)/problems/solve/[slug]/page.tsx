@@ -9,6 +9,7 @@ import Button from "@/components/ui/Button";
 import Phases from "@/components/ui/Phases";
 import { getBoilerplate } from "@/utils/boilerplateGenerator";
 import { useRouter } from "next/navigation";
+import { useCodeStore } from "@/lib/stores/CodeStore";
 
 // -------------------- Page Component --------------------
 
@@ -137,7 +138,7 @@ function TagRow({ tags }: { tags: string[] }) {
 
 function CodeEditorPanel({ problem, statement }: any) {
   const [language, setLanguage] = useState("cpp");
-  const [code, setCode] = useState("// Write your code here");
+  const { code, setCode } = useCodeStore();
   const router = useRouter();
 
   // load preferred language
@@ -179,23 +180,8 @@ function CodeEditorPanel({ problem, statement }: any) {
     );
   }
 
-  async function handleSubmit() {
-    try {
-      const res = await fetch(`/api/problem/validate/${problem.slug}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ code }),
-      });
-
-      const data = await res.json();
-      if (!res.ok) return toast.error(data.error || "Validation failed.");
-
-      toast.success(
-        data.message || `🎉 You’ve mastered ${problem.problemName}!`
-      );
-    } catch {
-      toast.error("Submission failed. Please try again.");
-    }
+  function handleSubmit() {
+    router.push(`/problems/analyze/${problem.slug}`);
   }
 
   return (

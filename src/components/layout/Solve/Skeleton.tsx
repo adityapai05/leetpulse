@@ -1,3 +1,5 @@
+"use client";
+
 export default function Skeleton() {
   const sections = [];
   for (let i = 0; i < 3; i++) {
