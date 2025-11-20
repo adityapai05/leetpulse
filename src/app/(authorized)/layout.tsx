@@ -3,7 +3,7 @@ import { getUserFromCookies } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import Navbar from "@/components/layout/Navbar";
 
-export default async function AuthorizedLayout({ children }) {
+export default async function AuthorizedLayout({ children, modal }) {
   const user = getUserFromCookies();
 
   if (!user) {
@@ -12,9 +12,10 @@ export default async function AuthorizedLayout({ children }) {
 
   return (
     <UserProvider>
-      <main className="min-h-screen bg-[radial-gradient(at_top_left,var(--bg-1),var(--bg-0))]">
+      <main className="min-h-screen flex flex-col bg-[radial-gradient(at_top_left,var(--bg-1),var(--bg-0))]">
         <Navbar />
         {children}
+        {modal}
       </main>
     </UserProvider>
   );

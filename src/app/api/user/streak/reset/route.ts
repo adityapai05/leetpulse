@@ -1,4 +1,4 @@
-import { getUserModel } from "@/models/Users";
+import getUserModel from "@/models/Users";
 
 import { getUserFromCookies } from "@/lib/auth";
 import { NextRequest, NextResponse } from "next/server";

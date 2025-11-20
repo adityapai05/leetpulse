@@ -7,6 +7,7 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import logo from "@/assets/logo.webp";
 import Image from "next/image";
+import { Cog6ToothIcon } from "@heroicons/react/24/outline";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -45,10 +46,13 @@ export default function Navbar() {
       </div>
 
       {/* Right side: profile (desktop only) */}
-      <div className="hidden sm:flex items-center">
+      <div className="flex-row gap-2 hidden sm:flex items-center">
+        <Link className="" href="/settings">
+          <Cog6ToothIcon className="w-6 h-6 text-text_primary hover:text-text_muted mr-4" />
+        </Link>
         <Link className="cursor-pointer" href="/profile">
           <img
-            src={`https://api.dicebear.com/9.x/thumbs/svg?seed=${username}&scale=80`}
+            src={`https://api.dicebear.com/9.x/shapes/svg?seed=${username}&scale=80`}
             alt={`${username} avatar`}
             className="w-6 h-6 rounded-full"
           />

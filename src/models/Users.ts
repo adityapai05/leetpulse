@@ -45,7 +45,7 @@ const UserSchema = new mongoose.Schema<IUser>({
 });
 
 // Function to get model safely without OverwriteModelError
-export function getUserModel(): Model<IUser> {
+export default function getUserModel(): Model<IUser> {
   return (
     (mongoose.models.User as Model<IUser>) ||
     mongoose.model<IUser>("User", UserSchema)

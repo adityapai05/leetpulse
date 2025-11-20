@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import { sendEmail } from "@/lib/sendEmail";
 import bcrypt from "bcrypt";
 import connectDB from "@/lib/db";
-import { getUserModel } from "@/models/Users";
+import getUserModel from "@/models/Users";
 
 import { NextRequest, NextResponse } from "next/server";
 

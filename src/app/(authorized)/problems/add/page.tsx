@@ -4,8 +4,10 @@ import toast from "react-hot-toast";
 import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
 import { MouseEvent, ChangeEvent, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function AddQuestion() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     problemNo: "",
     tags: "",
@@ -54,6 +56,7 @@ export default function AddQuestion() {
       }
 
       toast.success(data.success);
+      router.push("/review");
     } catch (error) {
       console.error(error);
       toast.error("Something went wrong. Please try again.");

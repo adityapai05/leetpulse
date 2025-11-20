@@ -1,5 +1,5 @@
 import Leaderboard from "@/models/Leaderboard";
-import { getUserModel } from "@/models/Users";
+import getUserModel from "@/models/Users";
 
 import { getUserFromCookies } from "@/lib/auth";
 import connectDB from "@/lib/db";

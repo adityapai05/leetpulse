@@ -24,9 +24,9 @@ export default function Button(props: ButtonProps) {
     primary:
       "bg-gradient-to-r from-[var(--accent)] to-[var(--accent-light)] text-text_contrast font-semibold transition-duration-500 ease-out bg-[length:200%_200%] bg-[position:left_center] hover:bg-[position:right_center] hover:shadow-lg",
     secondary:
-      "bg-text_primary text-bg0 font-normal ring-text_primary hover:bg-text_muted hover:text-text_contrast",
+      "bg-text_primary text-bg0 font-bold ring-text_primary hover:bg-text_muted hover:text-text_contrast",
     tertiary:
-      "bg-bg2 text-text_muted ring-bg2 hover:bg-bg1 shadow-[0px_2px_2px_2px_var(--bg-0)]",
+      "bg-bg2 text-text_muted ring-bg2 hover:bg-bg1 shadow-[0px_2px_2px_2px_var(--bg-0)] font-bold",
     inverted:
       "bg-text_primary text-text_contrast hover:ring-1 font-semibold ring-text_primary hover:bg-transparent hover:text-text_primary",
     error:

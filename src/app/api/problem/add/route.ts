@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getUserFromCookies } from "@/lib/auth";
 import { getQuestions } from "@/lib/questionsCache";
 import mongoose from "mongoose";
-import { getUserModel } from "@/models/Users";
+import getUserModel from "@/models/Users";
 
 export async function POST(req: NextRequest) {
   const user = await getUserFromCookies();

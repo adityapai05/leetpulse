@@ -19,7 +19,7 @@ export default function VerifyEmailPage() {
 
     const verify = async () => {
       try {
-        const res = await fetch(`/api/auth/user/verify?token=${token}`);
+        const res = await fetch(`/api/auth/verify?token=${token}`);
         if (res.ok) {
           toast.success("Email verified successfully!");
           router.push("/login");

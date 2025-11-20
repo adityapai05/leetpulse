@@ -1,5 +1,5 @@
 // /api/user/summary/route.ts
-import { getUserModel } from "@/models/Users";
+import getUserModel from "@/models/Users";
 import { getUserFromCookies } from "@/lib/auth";
 import connectDB from "@/lib/db";
 import { NextResponse } from "next/server";

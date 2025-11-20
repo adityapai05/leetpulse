@@ -1,7 +1,7 @@
 import connectDB from "@/lib/db";
 import { NextResponse, NextRequest } from "next/server";
 import jwt from "jsonwebtoken";
-import { getUserModel } from "@/models/Users";
+import getUserModel from "@/models/Users";
 
 export async function GET(req: NextRequest) {
   const token = req.nextUrl.searchParams.get("token");

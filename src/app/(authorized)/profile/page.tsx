@@ -57,7 +57,6 @@ export default function Profile() {
             {/* Middle: Reviews + Streaks stacked */}
             <div className="flex flex-col gap-6 xl:w-1/3">
               <StatsCard heading="Upcoming Reviews" stats={data.stats.card2} />
-              <StatsCard heading="Streaks 🔥 (days)" stats={data.stats.card3} />
             </div>
 
             {/* Right: Pie chart */}

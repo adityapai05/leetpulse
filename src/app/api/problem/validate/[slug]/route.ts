@@ -6,7 +6,7 @@ import connectDB from "@/lib/db";
 import Problem from "@/models/Problems";
 import NextPulse from "@/lib/nextPulse";
 import mongoose from "mongoose";
-import { getUserModel } from "@/models/Users";
+import getUserModel from "@/models/Users";
 
 export async function POST(
   req: NextRequest,

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/lib/db";
 import Leaderboard from "@/models/Leaderboard";
-import { getUserModel } from "@/models/Users";
+import getUserModel from "@/models/Users";
 
 export const dynamic = "force-dynamic";
 
@@ -29,7 +29,6 @@ export async function GET(req: NextRequest) {
     }));
 
     await Leaderboard.insertMany(bulk);
-
     return NextResponse.json(
       { message: "Leaderboard updated", count: bulk.length },
       { status: 200 }
