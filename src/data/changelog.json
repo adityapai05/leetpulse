@@ -1,29 +1,53 @@
 [
   {
+    "version": "v2.0.0",
+    "date": "20th November 2025",
+    "title": "Major UI overhaul & New Features",
+    "improvements": [
+      "UI improvements",
+      "Better AI responses",
+      "Users can switch between light and dark themes",
+      "Delete account and delete progess feature added"
+    ],
+    "fixes": [
+      "Code block bug fixes",
+      "Some bug fixes",
+      "Streaks is removed, due to inconsistent behavior"
+    ],
+    "message": []
+  },
+  {
     "version": "v1.0.2",
+    "date": "16th September 2025",
     "title": "Minor Improvements & Bug Fixes",
-    "message": ["Added loading states", "Leaderboard display fixed"],
-    "date": "16th September 2025"
+    "improvements": ["Minor Improvements", "Added loading states"],
+    "fixes": ["Bug Fixes", "Leaderboard display fixed"],
+    "message": []
   },
   {
     "version": "v1.0.1",
     "title": "Minor Improvements & Bug Fixes",
-    "message": [
+    "date": "7th September 2025",
+    "improvements": [
       "Added metadata (titles) to all pages",
       "Users now get assigned profile pictures instead of default",
-      "Fixed bugs",
       "Optimized for smaller screens",
-      "Added favicon for the app",
-      "Fixed streak updation logic to update only on successful API calls"
+      "Added favicon for the app"
     ],
-    "date": "7th September 2025"
+    "fixes": [
+      "Fixed streak updation logic to update only on successful API calls",
+      "Fixed bugs"
+    ],
+    "message": []
   },
   {
     "version": "v1.0.0",
+    "date": "6th September 2025",
     "title": "Initial Release",
-    "message": [
-      "The very first version of leetpulse 🎉. Updates will be posted here."
+    "improvements": [
+      "The very first version of leetpulse. Updates will be posted here."
     ],
-    "date": "6th September 2025"
+    "fixes": [],
+    "message": []
   }
 ]

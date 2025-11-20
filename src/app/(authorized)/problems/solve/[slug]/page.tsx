@@ -167,7 +167,7 @@ function CodeEditorPanel({ problem, statement }: any) {
       base: "vs-dark",
       inherit: true,
       rules: [],
-      colors: { "editor.background": bg },
+      colors: { "editor.background": "#262626" },
     });
 
     monaco.editor.setTheme("customTheme");
@@ -185,13 +185,13 @@ function CodeEditorPanel({ problem, statement }: any) {
   }
 
   return (
-    <div className="bg-bg1 flex flex-col flex-1 border border-border rounded-t-lg rounded-b-md">
-      <div className="bg-bg2 flex justify-between text-base font-bold text-accent px-4 py-2 mb-4 rounded-t-md">
+    <div className="bg-[#262626] flex flex-col flex-1 border border-border rounded-t-lg rounded-b-md">
+      <div className="bg-[#404040] flex justify-between text-base font-bold text-accent px-4 py-2 mb-4 rounded-t-md">
         {"</>"}
         <select
           value={language}
           onChange={(e) => setLanguage(e.target.value)}
-          className="bg-bg2 rounded font-medium text-white text-sm"
+          className="bg-[#404040] rounded font-medium text-white text-sm"
         >
           <option value="javascript">JavaScript</option>
           <option value="typescript">TypeScript</option>
@@ -211,7 +211,7 @@ function CodeEditorPanel({ problem, statement }: any) {
         theme="customTheme"
       />
 
-      <div className="bg-bg1 flex flex-row p-4 justify-end rounded-b-md gap-4">
+      <div className="bg-[#262626] flex flex-row p-4 justify-end rounded-b-md gap-4">
         <Button
           variant="secondary"
           text={`LeetCode ${problem.problemNo}`}

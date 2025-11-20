@@ -17,7 +17,7 @@ export default function CodeBlock({ code }: Props) {
   }, []);
 
   return (
-    <div className="">
+    <div className="max-w-full overflow-x-auto">
       <SyntaxHighlighter
         language={language}
         style={oneDark}

@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 import Button from "@/components/ui/Button";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import toast from "react-hot-toast";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function SettingsModal() {
   const router = useRouter();
@@ -21,7 +21,7 @@ export default function SettingsModal() {
     transition-opacity duration-200 opacity-100 will-change-opacity"
     >
       <div
-        className="w-full md:w-1/2 lg:w-1/3 bg-bg1 p-6 rounded-lg shadow-xl border-2 border-border
+        className="w-full md:w-1/2 lg:w-1/3 bg-bg1 p-4 rounded-lg shadow-xl border-2 border-border
         transition-all duration-200 translate-y-0 opacity-100 will-change-transform will-change-opacity"
       >
         <div className="flex flex-row justify-between p-4">
@@ -43,6 +43,11 @@ export default function SettingsModal() {
 }
 
 function SettingOption1() {
+  const [theme, setTheme] = useState("System");
+  useEffect(() => {
+    const saved = localStorage.getItem("theme") || "System";
+    setTheme(saved);
+  }, []);
   return (
     <div className="flex flex-col p-2">
       <h2 className="text-transparent bg-clip-text bg-gradient-to-br from-[var(--accent)] to-[var(--accent-light)] font-semibold">
@@ -50,9 +55,27 @@ function SettingOption1() {
       </h2>
       <div className="flex flex-row w-full justify-between items-center border-b border-border p-2">
         <h3 className="text-sm">Appearance</h3>
-        <Select>
+        <Select
+          value={theme.toLowerCase()}
+          onValueChange={(value) => {
+            setTheme(value);
+            localStorage.setItem("theme", value);
+
+            if (value === "system") {
+              const prefersDark = window.matchMedia(
+                "(prefers-color-scheme: dark)"
+              ).matches;
+              document.documentElement.classList.toggle("dark", prefersDark);
+            } else {
+              document.documentElement.classList.toggle(
+                "dark",
+                value === "dark"
+              );
+            }
+          }}
+        >
           <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Theme" />
+            <SelectValue placeholder={theme} />
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="light">Light</SelectItem>

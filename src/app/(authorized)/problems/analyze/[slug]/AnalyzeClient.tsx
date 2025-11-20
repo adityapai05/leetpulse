@@ -57,7 +57,7 @@ function Analysis({ analysis }: { analysis: any }) {
   if (!analysis) return <Skeleton />;
 
   return (
-    <div className="bg-bg1 flex flex-1 flex-col border-2 border-border rounded-t-lg rounded-b-md">
+    <div className="bg-bg1 flex flex-1 w-1/2 flex-col border-2 border-border rounded-t-lg rounded-b-md">
       <div className="bg-bg2 py-2 px-6 font-thin rounded-t-md text-sm">
         Submission
       </div>

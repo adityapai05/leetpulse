@@ -1,13 +1,17 @@
 "use client";
 
+import CodeBlock from "@/components/ui/CodeBlock";
+
 export default function Docs() {
+  const code = `function twoSum(nums, target) {\n\tconst map = {};\n\tfor (let i = 0; i < nums.length; i++) {\n\t\tconst complement = target - nums[i];\n\t\tif (map[complement] !== undefined) return [map[complement], i];\t
+  \tmap[nums[i]] = i;\n\t}\n\treturn [];\n}`;
   return (
-    <div className="p-8 max-w-4xl mx-auto flex flex-col gap-8">
-      <h1 className="text-4xl font-bold mb-4">leetpulse Documentation</h1>
+    <div className="bg-bg0 p-8 flex flex-col gap-8">
+      <h1 className="text-2xl font-bold mb-4">leetpulse Documentation</h1>
 
       <section className="flex flex-col gap-2">
-        <h2 className="text-2xl font-semibold">Welcome</h2>
-        <p className="text-lg text-text_primary">
+        <h2 className="text-xl font-semibold">Welcome</h2>
+        <p className="text-base text-text_primary">
           leetpulse is a spaced-repetition tool for coding problems. It helps
           you review and master problems by analyzing your submissions and
           scheduling optimal review dates.
@@ -15,7 +19,7 @@ export default function Docs() {
       </section>
 
       <section className="flex flex-col gap-2">
-        <h2 className="text-2xl font-semibold">How to Use the App</h2>
+        <h2 className="text-xl font-semibold">How to Use the App</h2>
         <ol className="list-decimal list-inside gap-2 flex flex-col text-text_primary">
           <li>Sign in to your account.</li>
           <li>Browse or add coding problems to your review queue.</li>
@@ -34,22 +38,14 @@ export default function Docs() {
       </section>
 
       <section className="flex flex-col gap-2">
-        <h2 className="text-2xl font-semibold">For Testers</h2>
+        <h2 className="text-xl font-semibold">For Testers</h2>
         <p className="text-text_primary">
           You can test the app by submitting sample code for problems.
           Here&apos;s an example:
         </p>
-        <pre className="bg-bg2 p-4 rounded-md overflow-x-auto">
-          {`function twoSum(nums, target) {
-  const map = {};
-  for (let i = 0; i < nums.length; i++) {
-    const complement = target - nums[i];
-    if (map[complement] !== undefined) return [map[complement], i];
-    map[nums[i]] = i;
-  }
-  return [];
-}`}
-        </pre>
+        <div className="flex p-4">
+          <CodeBlock code={code} />
+        </div>
         <p className="text-text_primary mt-2">
           Paste this code into the editor for the &quot;Two Sum&quot; problem
           and click Submit to see the analysis.
@@ -57,7 +53,7 @@ export default function Docs() {
       </section>
 
       <section className="flex flex-col gap-2">
-        <h2 className="text-2xl font-semibold">Tips</h2>
+        <h2 className="text-xl font-semibold">Tips</h2>
         <ul className="list-disc list-inside gap-1 flex flex-col text-text_primary">
           <li>Preferred language is saved automatically between sessions.</li>
           <li>
@@ -69,7 +65,7 @@ export default function Docs() {
       </section>
 
       <section className="flex flex-col gap-2">
-        <h2 className="text-2xl font-semibold">Contact / Feedback</h2>
+        <h2 className="text-xl font-semibold">Contact / Feedback</h2>
         <p className="text-text_primary">
           For any bugs or suggestions, contact the developer at{" "}
           <span className="text-accent">leetpulse@gmail.com</span>.

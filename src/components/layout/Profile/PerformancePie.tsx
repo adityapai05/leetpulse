@@ -10,7 +10,7 @@ type Props = {
 
 export default function PerformancePie({ data, colors }: Props) {
   return (
-    <div className="bg-bg1 flex flex-1 flex-col p-4 border-2 border-bg2 rounded-md h-[350px]">
+    <div className="bg-bg1 flex flex-1 flex-col p-4 border-2 border-border rounded-md h-[350px]">
       <div className="text-xl font-bold mb-4">Performance Insights</div>
       {/* Responsive container auto-adjusts to parent size */}
       <ResponsiveContainer width="100%" height="100%">
