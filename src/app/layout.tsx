@@ -1,6 +1,7 @@
 import { Toaster } from "react-hot-toast";
 import { Instrument_Sans } from "next/font/google";
 import "@/styles/globals.css";
+import { cookies } from "next/headers";
 
 const instrumentSans = Instrument_Sans({
   variable: "--font-instrument-sans",
@@ -15,10 +16,23 @@ export const metadata = {
   },
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const cookieStore = await cookies();
+  const savedTheme = cookieStore.get("theme")?.value || "dark";
+
+  let themeClass = savedTheme;
+  if (savedTheme === "system") {
+    const prefersDark = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    ).matches;
+    themeClass = prefersDark ? "dark" : "light";
+  } else {
+    themeClass = savedTheme;
+  }
+
   return (
     <html lang="en">
-      <body className={`${instrumentSans.variable} antialiased dark`}>
+      <body className={`${instrumentSans.variable} antialiased ${themeClass}`}>
         {children}
 
         <Toaster

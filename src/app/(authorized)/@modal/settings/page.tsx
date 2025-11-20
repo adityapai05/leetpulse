@@ -43,10 +43,15 @@ export default function SettingsModal() {
 }
 
 function SettingOption1() {
-  const [theme, setTheme] = useState("System");
+  const [theme, setTheme] = useState("system");
   useEffect(() => {
-    const saved = localStorage.getItem("theme") || "System";
-    setTheme(saved);
+    const value =
+      document.cookie
+        .split("; ")
+        .find((row) => row.startsWith("theme="))
+        ?.split("=")[1] || "system";
+
+    setTheme(value);
   }, []);
   return (
     <div className="flex flex-col p-2">
@@ -59,19 +64,12 @@ function SettingOption1() {
           value={theme.toLowerCase()}
           onValueChange={(value) => {
             setTheme(value);
-            localStorage.setItem("theme", value);
 
-            if (value === "system") {
-              const prefersDark = window.matchMedia(
-                "(prefers-color-scheme: dark)"
-              ).matches;
-              document.documentElement.classList.toggle("dark", prefersDark);
-            } else {
-              document.documentElement.classList.toggle(
-                "dark",
-                value === "dark"
-              );
-            }
+            // Write cookie (server can read this during SSR)
+            document.cookie = `theme=${value}; path=/; max-age=31536000`;
+
+            // Reload so the server layout applies the right class *before hydration*
+            window.location.reload();
           }}
         >
           <SelectTrigger className="w-[180px]">
@@ -80,6 +78,7 @@ function SettingOption1() {
           <SelectContent>
             <SelectItem value="light">Light</SelectItem>
             <SelectItem value="dark">Dark</SelectItem>
+            <SelectItem value="dark-contrast">Dark Constrast</SelectItem>
             <SelectItem value="system">System</SelectItem>
           </SelectContent>
         </Select>
@@ -91,6 +90,7 @@ function SettingOption1() {
 function SettingOption2() {
   const [confirmLogout, setConfirmLogout] = useState(false);
   const [confirmDeleteUser, setConfirmDeleteUser] = useState(false);
+  const [confirmDeleteProgress, setConfirmDeleteProgress] = useState(false);
 
   const router = useRouter();
   async function handleLogout() {
@@ -114,6 +114,13 @@ function SettingOption2() {
   }
   async function handleDeleteProgress() {
     try {
+      if (!confirmDeleteProgress) {
+        setConfirmDeleteProgress(true);
+        toast("Click again to confirm progress deletion", { icon: "⚠️" });
+        setTimeout(() => setConfirmDeleteProgress(false), 3000);
+        return;
+      }
+
       const res = await fetch("/api/progress/delete", { method: "DELETE" });
       if (!res.ok) {
         toast.error("Failed to delete progress");
