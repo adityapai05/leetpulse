@@ -20,6 +20,37 @@ export default function SignUp() {
     confirmPassword: "",
   });
 
+  const strongPassword =
+    /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};:"\\|,.<>/?]).{8,}$/;
+
+  const pwChecks = {
+    length: formData.password.length >= 8,
+    upper: /[A-Z]/.test(formData.password),
+    number: /\d/.test(formData.password),
+    special: /[!@#$%^&*()_+\-=[\]{};:"\\|,.<>/?]/.test(formData.password),
+  };
+
+  const validations = [
+    {
+      valid: formData.firstName.trim(),
+      msg: "Please enter your first name.",
+    },
+    { valid: formData.username.trim(), msg: "Please enter username." },
+    { valid: formData.email.trim(), msg: "Please enter email." },
+    {
+      valid: formData.password.trim() && formData.confirmPassword.trim(),
+      msg: "Please enter password in both fields",
+    },
+    {
+      valid: formData.password === formData.confirmPassword,
+      msg: "Password and Confirm Password must match",
+    },
+    {
+      valid: strongPassword.test(formData.password),
+      msg: "Password must be at least 8 characters long and include at least 1 uppercase letter, 1 number, and 1 special character.",
+    },
+  ];
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -27,30 +58,15 @@ export default function SignUp() {
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    const validations = [
-      {
-        valid: formData.firstName.trim(),
-        msg: "Please enter your first name.",
-      },
-      { valid: formData.username.trim(), msg: "Please enter username." },
-      { valid: formData.email.trim(), msg: "Please enter email." },
-      {
-        valid: formData.password.trim() && formData.confirmPassword.trim(),
-        msg: "Please enter password in both fields",
-      },
-      {
-        valid: formData.password === formData.confirmPassword,
-        msg: "Password and Confirm Password must match",
-      },
-    ];
-
     for (const v of validations) {
       if (!v.valid) {
         toast.error(v.msg);
         return;
       }
     }
+
     setLoading(true);
+
     try {
       const res = await fetch("/api/auth/signup", {
         method: "POST",
@@ -82,25 +98,11 @@ export default function SignUp() {
   return (
     <>
       <div className="flex w-screen h-screen">
-        <div className="bg-bg1 hidden md:flex flex-col justify-center items-center flex-1">
-          <h2 className="text-base font-medium text-text_primary tracking-wide mt-2">
-            Welcome to leetpulse — where consistency builds mastery.
-          </h2>
-          <Image
-            src={logo}
-            alt="leetpulse logo"
-            width={128 * 2}
-            className="opacity-90"
-          />
-          <p className="text-sm text-text_secondary max-w-md mt-1">
-            Sign up to begin your spaced-repetition journey and turn every
-            solved problem into progress.
-          </p>
-        </div>
+        <div className="bg-bg1 hidden md:flex flex-col justify-center items-center flex-1 rounded-3xl"></div>
         <div className="flex flex-1 justify-center items-center">
           <form
             onSubmit={handleSubmit}
-            className="flex flex-col w-3/4 p-8 gap-4 rounded-lg shadow-md"
+            className="bg-bg1 flex flex-col w-3/4 p-8 gap-4 rounded-lg shadow-md border border-border"
           >
             <div className="font-bold text-2xl self-center h-16">
               Create a{" "}
@@ -117,6 +119,7 @@ export default function SignUp() {
               label="First name"
               name="firstName"
               type="text"
+              placeholder="Minimum 3 characters"
               value={formData.firstName}
               onChange={handleChange}
             />
@@ -124,6 +127,7 @@ export default function SignUp() {
               label="Create a username"
               name="username"
               type="text"
+              placeholder="min. 5 characters, max. 12 characters"
               value={formData.username}
               onChange={handleChange}
             />
@@ -131,6 +135,7 @@ export default function SignUp() {
               label="Email"
               name="email"
               type="email"
+              placeholder="put your actual mail, I will send a verification link, dont bullshit"
               value={formData.email}
               onChange={handleChange}
             />

@@ -10,6 +10,13 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     let { firstName, username, email, password } = body;
+    const strongPassword =
+      /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};:"\\|,.<>/?]).{8,}$/;
+
+    firstName = firstName.toUpperCase().trim();
+    username = username.trim();
+    email = email.toLowerCase().trim();
+    password = password.toLowerCase().trim();
 
     if (!firstName || !username || !email || !password) {
       return NextResponse.json(
@@ -18,9 +25,12 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    firstName = firstName.toUpperCase().trim();
-    username = username.trim();
-    email = email.toLowerCase().trim();
+    if (!strongPassword.test(password)) {
+      return NextResponse.json(
+        { error: "Weak password. Include 1 uppercase, 1 number, 1 special." },
+        { status: 400 }
+      );
+    }
 
     await connectDB();
 

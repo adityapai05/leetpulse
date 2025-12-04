@@ -2,6 +2,7 @@ import { Toaster } from "react-hot-toast";
 import { Instrument_Sans } from "next/font/google";
 import "@/styles/globals.css";
 import { cookies } from "next/headers";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const instrumentSans = Instrument_Sans({
   variable: "--font-instrument-sans",
@@ -17,34 +18,28 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-  const cookieStore = await cookies();
-  const savedTheme = cookieStore.get("theme")?.value || "dark";
-
-  let themeClass = savedTheme;
-  if (savedTheme === "system") {
-    const prefersDark = window.matchMedia(
-      "(prefers-color-scheme: dark)"
-    ).matches;
-    themeClass = prefersDark ? "dark" : "light";
-  } else {
-    themeClass = savedTheme;
-  }
-
   return (
-    <html lang="en">
-      <body className={`${instrumentSans.variable} antialiased ${themeClass}`}>
-        {children}
+    <html lang="en" suppressHydrationWarning className="">
+      <body className={`${instrumentSans.variable} antialiased`}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
 
-        <Toaster
-          position="top-right"
-          reverseOrder={false}
-          toastOptions={{
-            style: {
-              background: "var(--bg-2)",
-              color: "var(--text-primary)",
-            },
-          }}
-        />
+          <Toaster
+            position="top-right"
+            reverseOrder={false}
+            toastOptions={{
+              style: {
+                background: "var(--bg-2)",
+                color: "var(--text-primary)",
+              },
+            }}
+          />
+        </ThemeProvider>
       </body>
     </html>
   );

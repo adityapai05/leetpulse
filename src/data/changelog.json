@@ -1,5 +1,13 @@
 [
   {
+    "version": "v2.0.1",
+    "date": "4th December 2025",
+    "title": "Minor Improvements & Bug Fixes",
+    "improvements": ["Better mobile navigation menu"],
+    "fixes": ["Theme switching bug fixed"],
+    "message": []
+  },
+  {
     "version": "v2.0.0",
     "date": "20th November 2025",
     "title": "Major UI overhaul & New Features",

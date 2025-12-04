@@ -11,10 +11,12 @@ import { useRouter } from "next/navigation";
 import Button from "@/components/ui/Button";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import toast from "react-hot-toast";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useTheme } from "next-themes";
 
 export default function SettingsModal() {
   const router = useRouter();
+
   return (
     <div
       className="p-4 sm:flex fixed inset-0 bg-black/50 items-start justify-end sm:pr-20 sm:pt-20
@@ -43,16 +45,7 @@ export default function SettingsModal() {
 }
 
 function SettingOption1() {
-  const [theme, setTheme] = useState("system");
-  useEffect(() => {
-    const value =
-      document.cookie
-        .split("; ")
-        .find((row) => row.startsWith("theme="))
-        ?.split("=")[1] || "system";
-
-    setTheme(value);
-  }, []);
+  const { setTheme } = useTheme();
   return (
     <div className="flex flex-col p-2">
       <h2 className="text-transparent bg-clip-text bg-gradient-to-br from-[var(--accent)] to-[var(--accent-light)] font-semibold">
@@ -61,24 +54,16 @@ function SettingOption1() {
       <div className="flex flex-row w-full justify-between items-center border-b border-border p-2">
         <h3 className="text-sm">Appearance</h3>
         <Select
-          value={theme.toLowerCase()}
           onValueChange={(value) => {
             setTheme(value);
-
-            // Write cookie (server can read this during SSR)
-            document.cookie = `theme=${value}; path=/; max-age=31536000`;
-
-            // Reload so the server layout applies the right class *before hydration*
-            window.location.reload();
           }}
         >
           <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder={theme} />
+            <SelectValue placeholder="theme" />
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="light">Light</SelectItem>
             <SelectItem value="dark">Dark</SelectItem>
-            <SelectItem value="dark-contrast">Dark Constrast</SelectItem>
             <SelectItem value="system">System</SelectItem>
           </SelectContent>
         </Select>

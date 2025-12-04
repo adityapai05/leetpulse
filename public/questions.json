@@ -14994,5 +14994,65 @@
   "3749": {
     "title": "Evaluate Valid Expressions",
     "slug": "evaluate-valid-expressions"
+  },
+  "3750": {
+    "title": "Minimum Number of Flips to Reverse Binary String",
+    "slug": "minimum-number-of-flips-to-reverse-binary-string"
+  },
+  "3751": {
+    "title": "Total Waviness of Numbers in Range I",
+    "slug": "total-waviness-of-numbers-in-range-i"
+  },
+  "3752": {
+    "title": "Lexicographically Smallest Negated Permutation that Sums to Target",
+    "slug": "lexicographically-smallest-negated-permutation-that-sums-to-target"
+  },
+  "3753": {
+    "title": "Total Waviness of Numbers in Range II",
+    "slug": "total-waviness-of-numbers-in-range-ii"
+  },
+  "3754": {
+    "title": "Concatenate Non-Zero Digits and Multiply by Sum I",
+    "slug": "concatenate-non-zero-digits-and-multiply-by-sum-i"
+  },
+  "3755": {
+    "title": "Find Maximum Balanced XOR Subarray Length",
+    "slug": "find-maximum-balanced-xor-subarray-length"
+  },
+  "3756": {
+    "title": "Concatenate Non-Zero Digits and Multiply by Sum II",
+    "slug": "concatenate-non-zero-digits-and-multiply-by-sum-ii"
+  },
+  "3757": {
+    "title": "Number of Effective Subsequences",
+    "slug": "number-of-effective-subsequences"
+  },
+  "3758": {
+    "title": "Convert Number Words to Digits",
+    "slug": "convert-number-words-to-digits"
+  },
+  "3759": {
+    "title": "Count Elements With at Least K Greater Values",
+    "slug": "count-elements-with-at-least-k-greater-values"
+  },
+  "3760": {
+    "title": "Maximum Substrings With Distinct Start",
+    "slug": "maximum-substrings-with-distinct-start"
+  },
+  "3761": {
+    "title": "Minimum Absolute Distance Between Mirror Pairs",
+    "slug": "minimum-absolute-distance-between-mirror-pairs"
+  },
+  "3762": {
+    "title": "Minimum Operations to Equalize Subarrays",
+    "slug": "minimum-operations-to-equalize-subarrays"
+  },
+  "3763": {
+    "title": "Maximum Total Sum with Threshold Constraints",
+    "slug": "maximum-total-sum-with-threshold-constraints"
+  },
+  "3764": {
+    "title": "Most Common Course Pairs",
+    "slug": "most-common-course-pairs"
   }
 }

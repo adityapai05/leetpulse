@@ -100,9 +100,9 @@ export default function Login() {
         <div className="flex flex-1 justify-center items-center">
           <form
             onSubmit={handleSubmit}
-            className="flex flex-col w-3/4 md:p-8 px-4 py-8 gap-4 rounded-lg shadow-lg"
+            className="bg-bg1 flex flex-col w-3/4 md:p-8 px-4 py-8 gap-4 rounded-xl shadow-lg"
           >
-            <div className="font-bold text-2xl self-center h-16">
+            <div className="font-bold text-xl self-center h-16">
               Login to{" "}
               <Link
                 href="/"

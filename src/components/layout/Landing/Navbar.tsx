@@ -18,9 +18,15 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 flex flex-col md:flex-row justify-between px-6 md:px-8 lg:px-32 py-4 bg-[var(--glass-bg)] backdrop-blur-md border-b border-border gap-4 md:gap-0">
+    <nav className="sticky top-0 z-50 flex md:flex-row justify-between px-6 md:px-8 lg:px-32 py-4 bg-[var(--glass-bg)] backdrop-blur-md border-b border-border gap-4 md:gap-0">
       {/* Logo and Hamburger */}
-      <div className="flex flex-row justify-between items-center w-full md:w-auto">
+      <div className="flex flex-row gap-2 items-center w-full md:w-auto">
+        <button
+          className="md:hidden text-xl"
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          ☰
+        </button>
         <Link
           href="/"
           className="flex items-center gap-2 text-xl font-bold text-text_primary"
@@ -30,12 +36,6 @@ export default function Navbar() {
         </Link>
 
         {/* Hamburger for mobile */}
-        <button
-          className="md:hidden text-2xl"
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
-          ☰
-        </button>
       </div>
 
       {/* Links */}

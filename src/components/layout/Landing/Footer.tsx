@@ -60,7 +60,7 @@ export default function Footer() {
       </div>
 
       <div className="text-center text-text_primary my-2 ">
-        &copy; {new Date().getFullYear()}, leetpulse &middot; v2.0.0
+        &copy; {new Date().getFullYear()}, leetpulse &middot; v2.0.1
       </div>
     </footer>
   );

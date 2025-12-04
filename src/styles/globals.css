@@ -53,23 +53,6 @@
   --border: #43403E;
 }
 
-.dark-contrast {
-  --bg-0: #0a0a0a;
-  --bg-1: #171717;
-  --bg-2: #262626;
-  --accent: #9ae600;
-  --accent-light: #9ae600;
-  --text-primary: #fafafa;
-  --text-contrast: #121212;
-  --text-muted: #a1a1a1;
-  --success: #00a63e;
-  --warning: #fdc700;
-  --error: #fb2c36;
-  --glass-bg: rgba(38, 38, 38, 0.7);
-  --glass-border: #f5f5f5;
-  --border: #f5f5f5;
-}
-
 body {
   background: var(--bg-0);
   color: var(--text-primary);
