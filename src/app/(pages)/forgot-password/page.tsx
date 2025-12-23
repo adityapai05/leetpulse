@@ -7,24 +7,28 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 
 export default function ForgotPassword() {
-  const [email, setEmail] = useState<string>("");
+  const [emailOrUsername, setEmailOrUsername] = useState<string>("");
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setEmail(e.target.value);
+    setEmailOrUsername(e.target.value);
   }
 
-  async function handleSubmit() {
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
     try {
-      const res = await fetch("/api/forgot-password", {
+      const res = await fetch("/api/auth/forgot-password", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(email),
+        body: JSON.stringify({ emailOrUsername }),
       });
-      const data = res.json();
+      const data = await res.json();
       if (!res.ok) {
-        // toast.error(data.error || "Something went wrong, please try again");
+        toast.error(data.error || "Something went wrong, please try again");
       }
-    } catch {}
+      toast.success(data.message);
+    } catch {
+      toast.error("Network error, please try again");
+    }
   }
 
   return (
@@ -33,12 +37,13 @@ export default function ForgotPassword() {
       <p className="text-text_muted">
         A code will be sent to your email to help you reset your password
       </p>
-      <form action={handleSubmit} className="flex flex-col gap-6 p-4 w-1/3">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-6 p-4 w-1/3">
         <Input
-          label="Email Address"
-          name="email"
-          type="email"
-          value={email}
+          label="Email Address or Username"
+          name="emailOrUsername"
+          type="text"
+          placeholder="Enter email id or username"
+          value={emailOrUsername}
           onChange={handleChange}
         />
         <Button variant="primary" type="submit" size="big" text="Send email" />
