@@ -26,7 +26,7 @@ export default function Button(props: ButtonProps) {
     secondary:
       "bg-text_primary text-bg0 font-bold ring-text_primary hover:bg-text_muted hover:text-text_contrast",
     tertiary:
-      "bg-bg2 text-text_muted ring-bg2 hover:bg-bg1 shadow-[0px_2px_2px_2px_var(--bg-0)] font-bold",
+      "text-text_muted ring-bg2 shadow-[0px_2px_2px_2px_var(--bg-0)] font-semibold",
     inverted:
       "bg-text_primary text-text_contrast hover:ring-1 font-semibold ring-text_primary hover:bg-transparent hover:text-text_primary",
     error:
