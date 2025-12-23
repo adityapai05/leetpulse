@@ -22,7 +22,7 @@ export default async function Home() {
       <section className="px-6 md:px-16 py-8 flex flex-col gap-12">
         <Section3 />
         <Section4 />
-        <Section5 />
+        {/* <Section5 /> */}
         <Section6 />
       </section>
 

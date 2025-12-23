@@ -8,8 +8,10 @@ import { useState, ChangeEvent, FormEvent, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import Head from "next/head";
-import logo from "@/assets/logo.webp";
+
 import Image from "next/image";
+
+import logo from "@/assets/logo.webp";
 
 interface FormData {
   usernameORemail: string;
@@ -81,77 +83,57 @@ export default function Login() {
       <Head>
         <title>Login | leetpulse</title>
       </Head>
-      <div className="flex w-screen h-screen">
-        <div className="bg-bg1 hidden md:flex flex-col justify-center items-center flex-1">
-          <h1 className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--accent)] to-[var(--accent-light)] text-2xl font-semibold tracking-wide">
-            leetpulse
-          </h1>
-          <Image
-            src={logo}
-            alt="leetpulse logo"
-            width={128 * 2}
-            className="opacity-90"
+      <main className="flex items-center justify-center w-screen h-screen p-4">
+        <form
+          onSubmit={handleSubmit}
+          className="bg-bg1 w-full rounded-md border border-border flex flex-col sm:w-4/5 md:2/3 lg:w-1/3 md:p-8 px-4 py-8 gap-4"
+        >
+          <div className="flex flex-col items-center justify-center">
+            <Image src={logo} alt="leetpulse logo" width={64} height={64} />
+            <h2 className="text-2xl font-medium tracking-wide">leetpulse</h2>
+          </div>
+
+          <Input
+            label="Username or email"
+            name="usernameORemail"
+            type="text"
+            value={formData.usernameORemail}
+            onChange={handleChange}
           />
-
-          <h2 className="text-base font-medium text-text_primary tracking-wide mt-2">
-            You’re back. Let’s finish what you started.
-          </h2>
-        </div>
-        <div className="flex flex-1 justify-center items-center">
-          <form
-            onSubmit={handleSubmit}
-            className="bg-bg1 flex flex-col w-3/4 md:p-8 px-4 py-8 gap-4 rounded-xl shadow-lg"
-          >
-            <div className="font-bold text-xl self-center h-16">
-              Login to{" "}
-              <Link
-                href="/"
-                className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--accent)] to-[var(--accent-light)]"
-              >
-                leetpulse
-              </Link>{" "}
-              account
-            </div>
-
+          <div className="flex flex-col gap-1">
             <Input
-              label="Username or email"
-              name="usernameORemail"
-              type="text"
-              value={formData.usernameORemail}
+              label="Password"
+              name="password"
+              type="password"
+              value={formData.password}
               onChange={handleChange}
             />
-            <div className="flex flex-col gap-1">
-              <Input
-                label="Password"
-                name="password"
-                type="password"
-                value={formData.password}
-                onChange={handleChange}
-              />
-              {/* <div className="flex self-end">
-              <Link href="" className="text-accent text-sm underline">
-              forgot password?
-              </Link>
-              </div> */}
-            </div>
-
-            <Button
-              variant="inverted"
-              type="submit"
-              size="big"
-              text={loading ? "Logging in..." : "Login"}
-              loading={loading}
-            />
-
-            <div className="flex text-sm self-center">
-              New here?&nbsp;
-              <Link href="/signup" className="text-accent underline font-bold">
-                sign up
+            <div className="flex self-end">
+              <Link
+                href="/forgot-password"
+                className="text-accent text-sm underline"
+              >
+                forgot password?
               </Link>
             </div>
-          </form>
-        </div>
-      </div>
+          </div>
+
+          <Button
+            variant="inverted"
+            type="submit"
+            size="big"
+            text={loading ? "Logging in..." : "Login"}
+            loading={loading}
+          />
+
+          <div className="flex text-sm self-center">
+            New here?&nbsp;
+            <Link href="/signup" className="text-accent underline font-bold">
+              sign up
+            </Link>
+          </div>
+        </form>
+      </main>
     </>
   );
 }

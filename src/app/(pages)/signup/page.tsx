@@ -4,10 +4,10 @@ import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
 import Link from "next/link";
 import toast from "react-hot-toast";
-import logo from "@/assets/logo.webp";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import logo from "@/assets/logo.webp";
 
 export default function SignUp() {
   const router = useRouter();
@@ -97,102 +97,111 @@ export default function SignUp() {
 
   return (
     <>
-      <div className="flex w-screen h-screen">
-        <div className="bg-bg1 hidden md:flex flex-col justify-center items-center flex-1 rounded-3xl"></div>
-        <div className="flex flex-1 justify-center items-center">
-          <form
-            onSubmit={handleSubmit}
-            className="bg-bg1 flex flex-col w-3/4 p-8 gap-4 rounded-lg shadow-md border border-border"
-          >
-            <div className="font-bold text-2xl self-center h-16">
-              Create a{" "}
-              <Link
-                href="/"
-                className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--accent)] to-[var(--accent-light)]"
+      <main className="flex items-center justify-center p-4">
+        <form
+          onSubmit={handleSubmit}
+          className="bg-bg1 flex flex-col w-full sm:w-3/4 md:w-2/3 lg:w-1/3 px-8 py-4 gap-3 border border-border rounded-lg"
+        >
+          <div className="flex flex-col items-center justify-center">
+            <Image src={logo} alt="leetpulse logo" width={32} height={32} />
+            <h2 className="text-2xl font-medium tracking-wide">leetpulse</h2>
+          </div>
+
+          <Input
+            label="First name"
+            name="firstName"
+            type="text"
+            placeholder="Minimum 3 characters"
+            value={formData.firstName}
+            onChange={handleChange}
+          />
+          <Input
+            label="Create a username"
+            name="username"
+            type="text"
+            placeholder="min. 5 characters, max. 12 characters"
+            value={formData.username}
+            onChange={handleChange}
+          />
+          <Input
+            label="Email"
+            name="email"
+            type="email"
+            placeholder="put your actual mail, I will send a verification link, dont bullshit"
+            value={formData.email}
+            onChange={handleChange}
+          />
+          <Input
+            label="Password"
+            name="password"
+            type="password"
+            value={formData.password}
+            onChange={handleChange}
+          />
+          <div className="flex flex-col gap-1 text-xs text-text_muted">
+            <div className="flex flex-row gap-4">
+              <span className={pwChecks.length ? "text-success" : "text-error"}>
+                • At least 8 characters
+              </span>
+              <span className={pwChecks.upper ? "text-success" : "text-error"}>
+                • One uppercase letter
+              </span>
+            </div>
+            <div className="flex flex-row gap-4">
+              <span className={pwChecks.number ? "text-success" : "text-error"}>
+                • One number
+              </span>
+              <span
+                className={pwChecks.special ? "text-success" : "text-error"}
               >
-                leetpulse
-              </Link>{" "}
-              account
+                • One special character
+              </span>
             </div>
+          </div>
 
-            <Input
-              label="First name"
-              name="firstName"
-              type="text"
-              placeholder="Minimum 3 characters"
-              value={formData.firstName}
-              onChange={handleChange}
-            />
-            <Input
-              label="Create a username"
-              name="username"
-              type="text"
-              placeholder="min. 5 characters, max. 12 characters"
-              value={formData.username}
-              onChange={handleChange}
-            />
-            <Input
-              label="Email"
-              name="email"
-              type="email"
-              placeholder="put your actual mail, I will send a verification link, dont bullshit"
-              value={formData.email}
-              onChange={handleChange}
-            />
+          <Input
+            label="Confirm Password"
+            name="confirmPassword"
+            type="password"
+            value={formData.confirmPassword}
+            onChange={handleChange}
+          />
+          <div className="text-text_muted text-sm">
+            By signing up, you agree to our{" "}
+            <Link
+              href="/terms"
+              target="_blank"
+              className="text-accent underline"
+            >
+              Terms
+            </Link>{" "}
+            and{" "}
+            <Link
+              href="/privacy"
+              target="_blank"
+              className="text-accent underline"
+            >
+              Privacy Policy
+            </Link>
+            .
+          </div>
 
-            <div className="flex flex-col gap-2 justify-between sm:flex-row">
-              <Input
-                label="Password"
-                name="password"
-                type="password"
-                value={formData.password}
-                onChange={handleChange}
-              />
-              <Input
-                label="Confirm Password"
-                name="confirmPassword"
-                type="password"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="text-text_muted text-sm">
-              By signing up, you agree to our{" "}
-              <Link
-                href="/terms"
-                target="_blank"
-                className="text-accent underline"
-              >
-                Terms
-              </Link>{" "}
-              and{" "}
-              <Link
-                href="/privacy"
-                target="_blank"
-                className="text-accent underline"
-              >
-                Privacy Policy
-              </Link>
-              .
-            </div>
+          <Button
+            variant="inverted"
+            type="submit"
+            size="big"
+            text={loading ? "Signing Up..." : "Sign Up"}
+            loading={loading}
+          />
 
-            <Button
-              variant="inverted"
-              type="submit"
-              size="big"
-              text={loading ? "Signing Up..." : "Sign Up"}
-              loading={loading}
-            />
-
-            <div className="flex text-sm text-text_muted self-center">
-              Already have an account?&nbsp;
-              <Link href="/login" className="text-accent underline font-bold">
-                login
-              </Link>
-            </div>
-          </form>
-        </div>
-      </div>
+          <div className="flex text-sm text-text_muted self-center">
+            Already have an account?&nbsp;
+            <Link href="/login" className="text-accent underline font-bold">
+              login
+            </Link>
+          </div>
+        </form>
+      </main>
     </>
   );
 }

@@ -1,5 +1,13 @@
 [
   {
+    "version": "v2.1.5",
+    "date": "24th December 2025",
+    "title": "Minor Improvements & Bug Fixes",
+    "improvements": ["Added forgot password feature", "Minor UI improvements"],
+    "fixes": ["Sign up problem solved"],
+    "message": []
+  },
+  {
     "version": "v2.0.1",
     "date": "4th December 2025",
     "title": "Minor Improvements & Bug Fixes",

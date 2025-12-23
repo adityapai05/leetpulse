@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="ring-2 ring-bg2 bg-bg0 flex flex-col md:flex-col lg:flex-col gap-8 md:gap-8 justify-center text-sm text-text_muted px-6 md:px-32 py-8">
+    <footer className="ring-2 ring-bg2 bg-bg0 flex flex-col md:flex-col lg:flex-col gap-8 md:gap-8 justify-center text-sm text-text_muted px-6 md:px-16 lg:px-64 py-8">
       <div className="flex flex-col md:flex-row md:justify-between gap-8 md:gap-16">
         {/* Logo */}
         <div className="flex flex-col items-start md:items-start gap-4">
@@ -32,14 +32,6 @@ export default function Footer() {
           </Link>
         </div>
 
-        {/* Contact */}
-        <div className="flex flex-col items-start gap-4">
-          <span className="text-text_primary font-semibold text-lg">
-            Contact
-          </span>
-          <span className="text-text_primary">leetpulse@gmail.com</span>
-        </div>
-
         {/* Legal */}
         <div className="flex flex-col items-start gap-4">
           <span className="text-text_primary font-semibold text-lg">
@@ -54,13 +46,19 @@ export default function Footer() {
         </div>
       </div>
 
+      {/* Contact */}
+      <div className="flex flex-col items-start gap-4">
+        <span className="text-text_primary font-semibold text-lg">Contact</span>
+        <span className="text-text_primary">leetpulse@gmail.com</span>
+      </div>
+
       <div className="text-center p-4">
         Problem metadata &copy; LeetCode. This app is not affiliated with or
         endorsed by LeetCode.
       </div>
 
       <div className="text-center text-text_primary my-2 ">
-        &copy; {new Date().getFullYear()}, leetpulse &middot; v2.0.1
+        &copy; {new Date().getFullYear()}, leetpulse &middot; v2.1.5
       </div>
     </footer>
   );
