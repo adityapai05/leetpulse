@@ -33,7 +33,7 @@ export default function Input({
           onChange={onChange}
           placeholder={placeholder}
           className={clsx(
-            `bg-transparent font-normal text-base rounded-md border border-text_muted p-2 w-${width}
+            `bg-transparent font-normal text-base rounded-md border border-border px-2 py-2 w-${width}
              focus:outline-none cursor-pointer placeholder:text-text_muted placeholder:text-sm
              ${isPassword ? "pr-10" : ""}`,
             className

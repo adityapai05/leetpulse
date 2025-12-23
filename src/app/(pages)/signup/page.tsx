@@ -97,13 +97,13 @@ export default function SignUp() {
 
   return (
     <>
-      <main className="flex items-center justify-center w-screen h-screen p-4">
+      <main className="flex items-center justify-center p-4">
         <form
           onSubmit={handleSubmit}
-          className="bg-bg1 flex flex-col w-full sm:w-3/4 md:w-2/3 lg:w-1/3 p-8 gap-3 border border-border rounded-lg"
+          className="bg-bg1 flex flex-col w-full sm:w-3/4 md:w-2/3 lg:w-1/3 px-8 py-4 gap-3 border border-border rounded-lg"
         >
           <div className="flex flex-col items-center justify-center">
-            <Image src={logo} alt="leetpulse logo" width={64} height={64} />
+            <Image src={logo} alt="leetpulse logo" width={32} height={32} />
             <h2 className="text-2xl font-medium tracking-wide">leetpulse</h2>
           </div>
 
@@ -131,23 +131,41 @@ export default function SignUp() {
             value={formData.email}
             onChange={handleChange}
           />
-
-          <div className="flex flex-col gap-2 justify-between sm:flex-row">
-            <Input
-              label="Password"
-              name="password"
-              type="password"
-              value={formData.password}
-              onChange={handleChange}
-            />
-            <Input
-              label="Confirm Password"
-              name="confirmPassword"
-              type="password"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-            />
+          <Input
+            label="Password"
+            name="password"
+            type="password"
+            value={formData.password}
+            onChange={handleChange}
+          />
+          <div className="flex flex-col gap-1 text-xs text-text_muted">
+            <div className="flex flex-row gap-4">
+              <span className={pwChecks.length ? "text-success" : "text-error"}>
+                • At least 8 characters
+              </span>
+              <span className={pwChecks.upper ? "text-success" : "text-error"}>
+                • One uppercase letter
+              </span>
+            </div>
+            <div className="flex flex-row gap-4">
+              <span className={pwChecks.number ? "text-success" : "text-error"}>
+                • One number
+              </span>
+              <span
+                className={pwChecks.special ? "text-success" : "text-error"}
+              >
+                • One special character
+              </span>
+            </div>
           </div>
+
+          <Input
+            label="Confirm Password"
+            name="confirmPassword"
+            type="password"
+            value={formData.confirmPassword}
+            onChange={handleChange}
+          />
           <div className="text-text_muted text-sm">
             By signing up, you agree to our{" "}
             <Link
