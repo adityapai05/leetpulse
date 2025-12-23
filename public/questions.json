@@ -15054,5 +15054,97 @@
   "3764": {
     "title": "Most Common Course Pairs",
     "slug": "most-common-course-pairs"
+  },
+  "3765": {
+    "title": "Complete Prime Number",
+    "slug": "complete-prime-number"
+  },
+  "3766": {
+    "title": "Minimum Operations to Make Binary Palindrome",
+    "slug": "minimum-operations-to-make-binary-palindrome"
+  },
+  "3767": {
+    "title": "Maximize Points After Choosing K Tasks",
+    "slug": "maximize-points-after-choosing-k-tasks"
+  },
+  "3768": {
+    "title": "Minimum Inversion Count in Subarrays of Fixed Length",
+    "slug": "minimum-inversion-count-in-subarrays-of-fixed-length"
+  },
+  "3769": {
+    "title": "Sort Integers by Binary Reflection",
+    "slug": "sort-integers-by-binary-reflection"
+  },
+  "3770": {
+    "title": "Largest Prime from Consecutive Prime Sum",
+    "slug": "largest-prime-from-consecutive-prime-sum"
+  },
+  "3771": {
+    "title": "Total Score of Dungeon Runs",
+    "slug": "total-score-of-dungeon-runs"
+  },
+  "3772": {
+    "title": "Maximum Subgraph Score in a Tree",
+    "slug": "maximum-subgraph-score-in-a-tree"
+  },
+  "3773": {
+    "title": "Maximum Number of Equal Length Runs",
+    "slug": "maximum-number-of-equal-length-runs"
+  },
+  "3774": {
+    "title": "Absolute Difference Between Maximum and Minimum K Elements",
+    "slug": "absolute-difference-between-maximum-and-minimum-k-elements"
+  },
+  "3775": {
+    "title": "Reverse Words With Same Vowel Count",
+    "slug": "reverse-words-with-same-vowel-count"
+  },
+  "3776": {
+    "title": "Minimum Moves to Balance Circular Array",
+    "slug": "minimum-moves-to-balance-circular-array"
+  },
+  "3777": {
+    "title": "Minimum Deletions to Make Alternating Substring",
+    "slug": "minimum-deletions-to-make-alternating-substring"
+  },
+  "3778": {
+    "title": "Minimum Distance Excluding One Maximum Weighted Edge",
+    "slug": "minimum-distance-excluding-one-maximum-weighted-edge"
+  },
+  "3779": {
+    "title": "Minimum Number of Operations to Have Distinct Elements",
+    "slug": "minimum-number-of-operations-to-have-distinct-elements"
+  },
+  "3780": {
+    "title": "Maximum Sum of Three Numbers Divisible by Three",
+    "slug": "maximum-sum-of-three-numbers-divisible-by-three"
+  },
+  "3781": {
+    "title": "Maximum Score After Binary Swaps",
+    "slug": "maximum-score-after-binary-swaps"
+  },
+  "3782": {
+    "title": "Last Remaining Integer After Alternating Deletion Operations",
+    "slug": "last-remaining-integer-after-alternating-deletion-operations"
+  },
+  "3783": {
+    "title": "Mirror Distance of an Integer",
+    "slug": "mirror-distance-of-an-integer"
+  },
+  "3784": {
+    "title": "Minimum Deletion Cost to Make All Characters Equal",
+    "slug": "minimum-deletion-cost-to-make-all-characters-equal"
+  },
+  "3785": {
+    "title": "Minimum Swaps to Avoid Forbidden Values",
+    "slug": "minimum-swaps-to-avoid-forbidden-values"
+  },
+  "3786": {
+    "title": "Total Sum of Interaction Cost in Tree Groups",
+    "slug": "total-sum-of-interaction-cost-in-tree-groups"
+  },
+  "3787": {
+    "title": "Find Diameter Endpoints of a Tree",
+    "slug": "find-diameter-endpoints-of-a-tree"
   }
 }
