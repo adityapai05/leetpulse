@@ -50,27 +50,27 @@ export async function POST(
   }
 
   if (user.id != process.env.TESTER_MONGODBID) {
-    const now = new Date();
-    const due = new Date(problemData.dueDate);
+    function toUtcDateOnly(d: Date) {
+      return new Date(
+        Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate())
+      );
+    }
 
-    const isDueToday =
-      due.getDate() === now.getDate() &&
-      due.getMonth() === now.getMonth() &&
-      due.getFullYear() === now.getFullYear();
+    const now = toUtcDateOnly(new Date());
+    const due = toUtcDateOnly(new Date(problemData.dueDate));
 
-    const formattedDate = new Date(problemData.dueDate).toLocaleDateString(
-      "en-GB",
-      {
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
-      }
-    );
-
-    if (!isDueToday) {
+    if (now < due) {
       return NextResponse.json(
         {
-          error: `Please solve the question on due date i.e ${formattedDate}.`,
+          error: `You can solve this problem on or after ${due.toLocaleDateString(
+            "en-GB",
+            {
+              day: "2-digit",
+              month: "short",
+              year: "numeric",
+              timeZone: "UTC",
+            }
+          )}.`,
         },
         { status: 403 }
       );
