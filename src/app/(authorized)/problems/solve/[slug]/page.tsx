@@ -100,6 +100,7 @@ function ProblemPanel({
             day: "2-digit",
             month: "short",
             year: "numeric",
+            timeZone: "UTC",
           })}
         />
       </div>

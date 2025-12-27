@@ -63,6 +63,7 @@ function ReviewTable({ problems }: { problems: any[] }) {
         day: "2-digit",
         month: "short",
         year: "numeric",
+        timeZone: "UTC",
       });
 
       rows.push(
