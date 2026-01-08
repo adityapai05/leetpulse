@@ -47,9 +47,14 @@ export default function ResetPasswordClient() {
   //     return <h1>No Valid Token</h1>;
   //   }
   return (
-    <div className="flex flex-col justify-center items-center p-32 gap-4">
-      <h2 className="text-2xl font-semibold">Reset your password</h2>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-6 p-4 w-1/3">
+    <div className="min-h-screen flex flex-col justify-center items-center p-8 sm:p-16 lg:p-32 gap-4">
+      <h2 className="text-2xl font-semibold text-center">
+        Reset your password
+      </h2>
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-6 p-4  w-full md:w-2/3 lg:w-1/2"
+      >
         <Input
           label="Password"
           name="password"
@@ -66,7 +71,7 @@ export default function ResetPasswordClient() {
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
-        <div className="flex flex-col gap-1 text-xs text-text_muted">
+        <div className="flex flex-col items-center justify-center lg:flex-row gap-4 text-xs text-text_muted">
           <div className="flex flex-row gap-4">
             <span className={pwChecks.length ? "text-success" : "text-error"}>
               • At least 8 characters

@@ -32,12 +32,17 @@ export default function ForgotPassword() {
   }
 
   return (
-    <div className="flex flex-col justify-center items-center p-32 gap-4">
-      <h2 className="text-2xl font-semibold">Forgot your password?</h2>
-      <p className="text-text_muted">
+    <div className="min-h-screen flex flex-col justify-center items-center p-16 lg:p-32 gap-4">
+      <h2 className="text-xl sm:text-2xl font-semibold text-center">
+        Forgot your password?
+      </h2>
+      <p className="text-text_muted text-center">
         A code will be sent to your email to help you reset your password
       </p>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-6 p-4 w-1/3">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-6 p-4 w-full md:w-2/3 lg:w-1/2"
+      >
         <Input
           label="Email Address or Username"
           name="emailOrUsername"
