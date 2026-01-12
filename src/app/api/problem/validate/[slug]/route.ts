@@ -49,7 +49,7 @@ export async function POST(
     );
   }
 
-  if (user.id != process.env.TESTER_MONGODBID) {
+  if (user.id !== process.env.TESTER_MONGODBID) {
     function toUtcDateOnly(d: Date) {
       return new Date(
         Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate())
@@ -208,8 +208,6 @@ Return ONLY the JSON. No additional text.`,
   if (aiResult.verdict === "Correct") {
     problemData.correct += 1;
     usersData.xp += 5; // XP for correct answer
-  } else {
-    if (usersData.xp > 0) usersData.xp -= 2; // XP penalty for wrong answer
   }
 
   const accuracy = (problemData.correct / problemData.iteration) * 100;
@@ -225,11 +223,21 @@ Return ONLY the JSON. No additional text.`,
   };
 
   const { phase, interval, isMastered } = NextPulse(NextPulseArgs);
-
-  const newDueDate = new Date(problemData.dueDate);
-  newDueDate.setDate(newDueDate.getDate() + interval);
-  problemData.dueDate = newDueDate;
   problemData.phase = phase;
+
+  function getTodayUtcMidnight() {
+    const now = new Date();
+    return new Date(
+      Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate())
+    );
+  }
+
+  const baseDate = getTodayUtcMidnight();
+
+  const newDueDate = new Date(baseDate);
+  newDueDate.setUTCDate(newDueDate.getUTCDate() + interval);
+
+  problemData.dueDate = newDueDate;
 
   await problemData.save();
 
@@ -255,6 +263,7 @@ Return ONLY the JSON. No additional text.`,
       day: "numeric",
       month: "long",
       year: "numeric",
+      timeZone: "UTC",
     }),
   };
 

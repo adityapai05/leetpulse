@@ -24,7 +24,6 @@ export async function GET(
 
     //Connect DB
     await connectDB();
-    await GlobalProblems.syncIndexes();
 
     //Check if problem statements exist in DB
     const problemStatement = await GlobalProblems.findOne({
