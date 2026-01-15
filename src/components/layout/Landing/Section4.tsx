@@ -17,10 +17,7 @@ export default function Section4() {
         <div className="flex flex-1 p-2 md:p-4 items-start min-w-0">
           <div className="bg-bg1 flex flex-col gap-4 md:gap-6 p-4 rounded-xl border-2 border-border w-full">
             <span className="text-lg md:text-xl font-bold">
-              Take a Tour of{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--accent)] to-[var(--accent-light)]">
-                leetpulse
-              </span>
+              Take a Tour of <span className="text-accent">leetpulse</span>
             </span>
             <span className="text-text_primary text-justify text-sm md:text-base">
               See how leetpulse helps you track, review, and master coding

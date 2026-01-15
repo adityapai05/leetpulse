@@ -11,10 +11,7 @@ export default function Section6() {
       <div className="bg-bg1 flex flex-col gap-4 md:gap-8 p-4 rounded-md border-2 border-border w-full">
         <div className="flex flex-col gap-2">
           <span className="text-text_primary font-semibold text-lg md:text-xl">
-            About{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--accent)] to-[var(--accent-light)]">
-              leetpulse
-            </span>
+            About <span className="text-accent">leetpulse</span>
           </span>
           <span className="text-text_muted text-sm md:text-base">
             leetpulse helps coding enthusiasts retain solved problems

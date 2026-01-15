@@ -10,8 +10,7 @@ export default function TableRow(props: Props) {
   const { rank, username, xp } = props;
   let bgColor: string;
   if (rank == 1) {
-    bgColor =
-      "bg-gradient-to-r from-[var(--accent)] to-[var(--accent-light)] text-text_contrast font-medium";
+    bgColor = "bg-accent text-text_contrast font-medium";
   } else if (rank % 2 == 0 && rank != 1) {
     bgColor = "";
   } else {

@@ -16,10 +16,8 @@ export default function Navbar() {
   const username = user?.username || "guest";
 
   const linkClasses = (path: string) =>
-    `hover:text-transparent bg-clip-text bg-gradient-to-br from-[var(--accent)] to-[var(--accent-light)] transition-colors ${
-      pathname === path
-        ? "text-transparent font-bold bg-clip-text bg-gradient-to-br from-[var(--accent)] to-[var(--accent-light)]"
-        : "text-text_primary"
+    `hover:text-accent transition-colors ${
+      pathname === path ? "text-accent" : "text-text_primary"
     }`;
 
   return (
