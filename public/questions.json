@@ -15226,5 +15226,329 @@
   "3807": {
     "title": "Minimum Cost to Repair Edges to Traverse a Graph",
     "slug": "minimum-cost-to-repair-edges-to-traverse-a-graph"
+  },
+  "3808": {
+    "title": "Find Emotionally Consistent Users",
+    "slug": "find-emotionally-consistent-users"
+  },
+  "3809": {
+    "title": "Best Reachable Tower",
+    "slug": "best-reachable-tower"
+  },
+  "3810": {
+    "title": "Minimum Operations to Reach Target Array",
+    "slug": "minimum-operations-to-reach-target-array"
+  },
+  "3811": {
+    "title": "Number of Alternating XOR Partitions",
+    "slug": "number-of-alternating-xor-partitions"
+  },
+  "3812": {
+    "title": "Minimum Edge Toggles on a Tree",
+    "slug": "minimum-edge-toggles-on-a-tree"
+  },
+  "3813": {
+    "title": "Vowel-Consonant Score",
+    "slug": "vowel-consonant-score"
+  },
+  "3814": {
+    "title": "Maximum Capacity Within Budget",
+    "slug": "maximum-capacity-within-budget"
+  },
+  "3815": {
+    "title": "Design Auction System",
+    "slug": "design-auction-system"
+  },
+  "3816": {
+    "title": "Lexicographically Smallest String After Deleting Duplicate Characters",
+    "slug": "lexicographically-smallest-string-after-deleting-duplicate-characters"
+  },
+  "3817": {
+    "title": "Good Indices in a Digit String",
+    "slug": "good-indices-in-a-digit-string"
+  },
+  "3818": {
+    "title": "Minimum Prefix Removal to Make Array Strictly Increasing",
+    "slug": "minimum-prefix-removal-to-make-array-strictly-increasing"
+  },
+  "3819": {
+    "title": "Rotate Non Negative Elements",
+    "slug": "rotate-non-negative-elements"
+  },
+  "3820": {
+    "title": "Pythagorean Distance Nodes in a Tree",
+    "slug": "pythagorean-distance-nodes-in-a-tree"
+  },
+  "3821": {
+    "title": "Find Nth Smallest Integer With K One Bits",
+    "slug": "find-nth-smallest-integer-with-k-one-bits"
+  },
+  "3822": {
+    "title": "Design Order Management System",
+    "slug": "design-order-management-system"
+  },
+  "3823": {
+    "title": "Reverse Letters Then Special Characters in a String",
+    "slug": "reverse-letters-then-special-characters-in-a-string"
+  },
+  "3824": {
+    "title": "Minimum K to Reduce Array Within Limit",
+    "slug": "minimum-k-to-reduce-array-within-limit"
+  },
+  "3825": {
+    "title": "Longest Strictly Increasing Subsequence With Non-Zero Bitwise AND",
+    "slug": "longest-strictly-increasing-subsequence-with-non-zero-bitwise-and"
+  },
+  "3826": {
+    "title": "Minimum Partition Score",
+    "slug": "minimum-partition-score"
+  },
+  "3827": {
+    "title": "Count Monobit Integers",
+    "slug": "count-monobit-integers"
+  },
+  "3828": {
+    "title": "Final Element After Subarray Deletions",
+    "slug": "final-element-after-subarray-deletions"
+  },
+  "3829": {
+    "title": "Design Ride Sharing System",
+    "slug": "design-ride-sharing-system"
+  },
+  "3830": {
+    "title": "Longest Alternating Subarray After Removing At Most One Element",
+    "slug": "longest-alternating-subarray-after-removing-at-most-one-element"
+  },
+  "3831": {
+    "title": "Median of a Binary Search Tree Level",
+    "slug": "median-of-a-binary-search-tree-level"
+  },
+  "3832": {
+    "title": "Find Users with Persistent Behavior Patterns",
+    "slug": "find-users-with-persistent-behavior-patterns"
+  },
+  "3833": {
+    "title": "Count Dominant Indices",
+    "slug": "count-dominant-indices"
+  },
+  "3834": {
+    "title": "Merge Adjacent Equal Elements",
+    "slug": "merge-adjacent-equal-elements"
+  },
+  "3835": {
+    "title": "Count Subarrays With Cost Less Than or Equal to K",
+    "slug": "count-subarrays-with-cost-less-than-or-equal-to-k"
+  },
+  "3836": {
+    "title": "Maximum Score Using Exactly K Pairs",
+    "slug": "maximum-score-using-exactly-k-pairs"
+  },
+  "3837": {
+    "title": "Delayed Count of Equal Elements",
+    "slug": "delayed-count-of-equal-elements"
+  },
+  "3838": {
+    "title": "Weighted Word Mapping",
+    "slug": "weighted-word-mapping"
+  },
+  "3839": {
+    "title": "Number of Prefix Connected Groups",
+    "slug": "number-of-prefix-connected-groups"
+  },
+  "3840": {
+    "title": "House Robber V",
+    "slug": "house-robber-v"
+  },
+  "3841": {
+    "title": "Palindromic Path Queries in a Tree",
+    "slug": "palindromic-path-queries-in-a-tree"
+  },
+  "3842": {
+    "title": "Toggle Light Bulbs",
+    "slug": "toggle-light-bulbs"
+  },
+  "3843": {
+    "title": "First Element with Unique Frequency",
+    "slug": "first-element-with-unique-frequency"
+  },
+  "3844": {
+    "title": "Longest Almost-Palindromic Substring",
+    "slug": "longest-almost-palindromic-substring"
+  },
+  "3845": {
+    "title": "Maximum Subarray XOR with Bounded Range",
+    "slug": "maximum-subarray-xor-with-bounded-range"
+  },
+  "3846": {
+    "title": "Total Distance to Type a String Using One Finger",
+    "slug": "total-distance-to-type-a-string-using-one-finger"
+  },
+  "3847": {
+    "title": "Find the Score Difference in a Game",
+    "slug": "find-the-score-difference-in-a-game"
+  },
+  "3848": {
+    "title": "Check Digitorial Permutation",
+    "slug": "check-digitorial-permutation"
+  },
+  "3849": {
+    "title": "Maximum Bitwise XOR After Rearrangement",
+    "slug": "maximum-bitwise-xor-after-rearrangement"
+  },
+  "3850": {
+    "title": "Count Sequences to K",
+    "slug": "count-sequences-to-k"
+  },
+  "3851": {
+    "title": "Maximum Requests Without Violating the Limit",
+    "slug": "maximum-requests-without-violating-the-limit"
+  },
+  "3852": {
+    "title": "Smallest Pair With Different Frequencies",
+    "slug": "smallest-pair-with-different-frequencies"
+  },
+  "3853": {
+    "title": "Merge Close Characters",
+    "slug": "merge-close-characters"
+  },
+  "3854": {
+    "title": "Minimum Operations to Make Array Parity Alternating",
+    "slug": "minimum-operations-to-make-array-parity-alternating"
+  },
+  "3855": {
+    "title": "Sum of K-Digit Numbers in a Range",
+    "slug": "sum-of-k-digit-numbers-in-a-range"
+  },
+  "3856": {
+    "title": "Trim Trailing Vowels",
+    "slug": "trim-trailing-vowels"
+  },
+  "3857": {
+    "title": "Minimum Cost to Split into Ones",
+    "slug": "minimum-cost-to-split-into-ones"
+  },
+  "3858": {
+    "title": "Minimum Bitwise OR From Grid",
+    "slug": "minimum-bitwise-or-from-grid"
+  },
+  "3859": {
+    "title": "Count Subarrays With K Distinct Integers",
+    "slug": "count-subarrays-with-k-distinct-integers"
+  },
+  "3860": {
+    "title": "Unique Email Groups",
+    "slug": "unique-email-groups"
+  },
+  "3861": {
+    "title": "Minimum Capacity Box",
+    "slug": "minimum-capacity-box"
+  },
+  "3862": {
+    "title": "Find the Smallest Balanced Index",
+    "slug": "find-the-smallest-balanced-index"
+  },
+  "3863": {
+    "title": "Minimum Operations to Sort a String",
+    "slug": "minimum-operations-to-sort-a-string"
+  },
+  "3864": {
+    "title": "Minimum Cost to Partition a Binary String",
+    "slug": "minimum-cost-to-partition-a-binary-string"
+  },
+  "3865": {
+    "title": "Reverse K Subarrays",
+    "slug": "reverse-k-subarrays"
+  },
+  "3866": {
+    "title": "First Unique Even Element",
+    "slug": "first-unique-even-element"
+  },
+  "3867": {
+    "title": "Sum of GCD of Formed Pairs",
+    "slug": "sum-of-gcd-of-formed-pairs"
+  },
+  "3868": {
+    "title": "Minimum Cost to Equalize Arrays Using Swaps",
+    "slug": "minimum-cost-to-equalize-arrays-using-swaps"
+  },
+  "3869": {
+    "title": "Count Fancy Numbers in a Range",
+    "slug": "count-fancy-numbers-in-a-range"
+  },
+  "3870": {
+    "title": "Count Commas in Range",
+    "slug": "count-commas-in-range"
+  },
+  "3871": {
+    "title": "Count Commas in Range II",
+    "slug": "count-commas-in-range-ii"
+  },
+  "3872": {
+    "title": "Longest Arithmetic Sequence After Changing At Most One Element",
+    "slug": "longest-arithmetic-sequence-after-changing-at-most-one-element"
+  },
+  "3873": {
+    "title": "Maximum Points Activated with One Addition",
+    "slug": "maximum-points-activated-with-one-addition"
+  },
+  "3874": {
+    "title": "Valid Subarrays With Exactly One Peak",
+    "slug": "valid-subarrays-with-exactly-one-peak"
+  },
+  "3875": {
+    "title": "Construct Uniform Parity Array I",
+    "slug": "construct-uniform-parity-array-i"
+  },
+  "3876": {
+    "title": "Construct Uniform Parity Array II",
+    "slug": "construct-uniform-parity-array-ii"
+  },
+  "3877": {
+    "title": "Minimum Removals to Achieve Target XOR",
+    "slug": "minimum-removals-to-achieve-target-xor"
+  },
+  "3878": {
+    "title": "Count Good Subarrays",
+    "slug": "count-good-subarrays"
+  },
+  "3879": {
+    "title": "Maximum Distinct Path Sum in a Binary Tree",
+    "slug": "maximum-distinct-path-sum-in-a-binary-tree"
+  },
+  "3880": {
+    "title": "Minimum Absolute Difference Between Two Values",
+    "slug": "minimum-absolute-difference-between-two-values"
+  },
+  "3881": {
+    "title": "Direction Assignments with Exactly K Visible People",
+    "slug": "direction-assignments-with-exactly-k-visible-people"
+  },
+  "3882": {
+    "title": "Minimum XOR Path in a Grid",
+    "slug": "minimum-xor-path-in-a-grid"
+  },
+  "3883": {
+    "title": "Count Non Decreasing Arrays With Given Digit Sums",
+    "slug": "count-non-decreasing-arrays-with-given-digit-sums"
+  },
+  "3884": {
+    "title": "First Matching Character From Both Ends",
+    "slug": "first-matching-character-from-both-ends"
+  },
+  "3885": {
+    "title": "Design Event Manager",
+    "slug": "design-event-manager"
+  },
+  "3886": {
+    "title": "Sum of Sortable Integers",
+    "slug": "sum-of-sortable-integers"
+  },
+  "3887": {
+    "title": "Incremental Even-Weighted Cycle Queries",
+    "slug": "incremental-even-weighted-cycle-queries"
+  },
+  "3888": {
+    "title": "Minimum Operations to Make All Grid Elements Equal",
+    "slug": "minimum-operations-to-make-all-grid-elements-equal"
   }
 }
