@@ -9,7 +9,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    let { usernameORemail, password } = body;
+    const { usernameORemail, password } = body;
 
     if (!usernameORemail || !password) {
       return NextResponse.json(

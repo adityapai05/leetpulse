@@ -12,7 +12,7 @@ interface ITokenPayload extends JwtPayload {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    let { token, password } = body;
+    const { token, password } = body;
     const strongPassword =
       /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};:"\\|,.<>/?]).{8,}$/;
 
