@@ -42,7 +42,7 @@ function ReviewTable({ problems }: { problems: any[] }) {
   function handleRedirect() {
     router.push("/problems/add");
   }
-  let rows = [];
+  const rows = [];
 
   if (problems.length === 0) {
     rows.push(

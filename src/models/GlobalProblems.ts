@@ -7,4 +7,5 @@ const GlobalProblemSchema = new mongoose.Schema({
   outputDataType: { type: String, required: true },
 });
 
-export default mongoose.model("GlobalProblems", GlobalProblemSchema);
+export default mongoose.models.GlobalProblems ||
+  mongoose.model("GlobalProblems", GlobalProblemSchema);

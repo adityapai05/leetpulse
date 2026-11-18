@@ -5,10 +5,7 @@ type Props = {
 };
 
 export default function Stats(props: Props) {
-  let { title, value, className } = props;
-  if (!className) {
-    className = "text-2xl ";
-  }
+  const { title, value, className = "text-2xl " } = props;
   return (
     <div className="flex flex-row items-center justify-between px-2 rounded-md">
       <div className="text-sm text-text_muted">{title}</div>
