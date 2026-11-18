@@ -6,13 +6,14 @@ type Props = {
 };
 
 export default function KeyValueDisplay(props: Props) {
-  let { title, value, valueColor, className } = props;
-  if (!valueColor) {
-    valueColor = "text-text_primary";
-  }
-  if (!className) {
-    className = "text-sm";
-  }
+  const {
+    title,
+    value,
+    valueColor = "text-text_primary",
+    className = "text-sm",
+  } = props;
+  void valueColor;
+  void className;
   return (
     <div className="flex flex-col">
       <div className="text-text_primary text-lg font-medium">{title}</div>
