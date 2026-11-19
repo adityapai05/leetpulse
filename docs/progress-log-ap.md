@@ -1,9 +1,9 @@
-# Progress log
+# Progress log - Aditya Pai
 
-Team: Aditya Pai, Harshad Parab, Soham Parab. One entry per working day, newest at the bottom.
+One entry per working day, newest at the bottom.
 Each entry says what was done, what was learned and what is next.
 
-## Wed 18 Nov 2026 (Aditya Pai)
+## Wed 18 Nov 2026
 
 Branches: `chore/test-ci`, `fix/local-setup`, `feat/google-signin`
 
@@ -18,3 +18,17 @@ Notes
 Blockers: none
 
 Next: Google account model, account resolver, start and callback routes; project board and issues for the team.
+
+
+## Thu 19 Nov 2026
+
+Branches: `feat/google-signin`
+
+Done
+- Created the project board (Backlog, In progress, In review, Done) and one issue per requirement group for all three owners.
+- EN-1: `User` model now allows accounts without a password and stores an optional `googleId`. Added the account resolver (create, link by verified email, refuse a different Google account), the MongoDB repository for it, and the Google config helper, with unit tests.
+- Found during code reading: the session cookie is `SameSite=Strict`, so a plain redirect from the Google callback would lose the cookie and send the visitor to the landing page. The callback will answer with a page that moves on by itself.
+
+Blockers: none
+
+Next: Google start and callback routes, Continue with Google button, then local manual tests TC-01 to TC-12.
