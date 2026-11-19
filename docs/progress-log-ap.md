@@ -28,6 +28,7 @@ Done
 - Created the project board (Backlog, In progress, In review, Done) and one issue per requirement group for all three owners.
 - EN-1: `User` model now allows accounts without a password and stores an optional `googleId`. Added the account resolver (create, link by verified email, refuse a different Google account), the MongoDB repository for it, and the Google config helper, with unit tests.
 - Found during code reading: the session cookie is `SameSite=Strict`, so a plain redirect from the Google callback would lose the cookie and send the visitor to the landing page. The callback will answer with a page that moves on by itself.
+- Fixed a TypeScript error in the `GlobalProblems` model, introduced by the earlier Mongoose fix, that would have failed the Vercel production build. Merged as PR #40 without a reviewer; Soham has been asked to review it afterwards.
 
 Blockers: none
 
