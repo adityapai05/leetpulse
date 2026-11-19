@@ -1,11 +1,21 @@
-import mongoose from "mongoose";
+import mongoose, { Model } from "mongoose";
 
-const GlobalProblemSchema = new mongoose.Schema({
+export interface IGlobalProblem {
+  slug: string;
+  problemStatement: string;
+  inputArguments: string;
+  outputDataType: string;
+}
+
+const GlobalProblemSchema = new mongoose.Schema<IGlobalProblem>({
   slug: { type: String, required: true, unique: true },
   problemStatement: { type: String, required: true },
   inputArguments: { type: String, required: true },
   outputDataType: { type: String, required: true },
 });
 
-export default mongoose.models.GlobalProblems ||
-  mongoose.model("GlobalProblems", GlobalProblemSchema);
+const GlobalProblems: Model<IGlobalProblem> =
+  (mongoose.models.GlobalProblems as Model<IGlobalProblem>) ||
+  mongoose.model<IGlobalProblem>("GlobalProblems", GlobalProblemSchema);
+
+export default GlobalProblems;
