@@ -33,3 +33,22 @@ Done
 Blockers: none
 
 Next: Google start and callback routes, Continue with Google button, then local manual tests TC-01 to TC-12.
+
+
+## Fri 20 Nov 2026
+
+Branches: `feat/google-signin`, `chore/fix-scripts`
+
+Done
+- EN-1: added the Google sign-in start route and the callback route. The callback checks the OAuth state cookie, exchanges the code with Google, validates the ID token claims, then finds, links or creates the account and sets the session cookie. It answers with a small page that moves on to `/explore`, because the session cookie is `SameSite=Strict`.
+- Added plain-language messages for cancelled, failed and unverified Google sign-in, and the Continue with Google button on the login and sign-up pages.
+- Set up the Google Cloud project, consent screen and OAuth client for localhost.
+- Manual tests TC-01 to TC-12 run locally: All Passed
+- EN-4: split the question-list update into its own script and switched `update-questions` to `tsx`, because the old script path did not exist.
+- Opened [PR #41 for `chore/fix-scripts`]. Waiting for a teammate's review.
+
+Learned: handling Google OAuth callbacks and redirects.
+
+Blockers: waiting for teammate reviews on the open PR and on the earlier merged PRs #1, #2 and #40.
+
+Next: deploy the fork to Vercel and test Google sign-in there (Checkpoint 1), finalise and open google sign in PR, then the reset-token and login hardening on `feat/auth-hardening` (Should Enhancements).
