@@ -3,6 +3,8 @@
 import Link from "next/link";
 import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
+import GoogleButton from "@/components/ui/GoogleButton";
+import { googleErrorMessage } from "@/lib/google/messages";
 import toast from "react-hot-toast";
 import { useState, ChangeEvent, FormEvent, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
@@ -33,6 +35,11 @@ export default function Login() {
     const verified = searchParams.get("verified");
     if (verified === "success") {
       toast.success("Your email has been verified! You can now log in.");
+    }
+
+    const googleMessage = googleErrorMessage(searchParams.get("google"));
+    if (googleMessage) {
+      toast.error(googleMessage);
     }
   }, [searchParams]);
 
@@ -125,6 +132,13 @@ export default function Login() {
             text={loading ? "Logging in..." : "Login"}
             loading={loading}
           />
+
+          <div className="flex items-center gap-3 text-xs text-text_muted">
+            <span className="h-px flex-1 bg-border" />
+            or
+            <span className="h-px flex-1 bg-border" />
+          </div>
+          <GoogleButton />
 
           <div className="flex text-sm self-center">
             New here?&nbsp;
