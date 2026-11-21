@@ -52,3 +52,21 @@ Learned: handling Google OAuth callbacks and redirects.
 Blockers: waiting for teammate reviews on the open PR and on the earlier merged PRs #1, #2 and #40.
 
 Next: deploy the fork to Vercel and test Google sign-in there (Checkpoint 1), finalise and open google sign in PR, then the reset-token and login hardening on `feat/auth-hardening` (Should Enhancements).
+
+
+## Sat 21 Nov 2026 (Checkpoint 1)
+
+Branches: `feat/google-signin`
+
+Done
+- Deployed the fork to Vercel (production from `main`, preview of `feat/google-signin`) with its own MongoDB Atlas database, and added the Vercel addresses to the Google OAuth client.
+- Online testing found three separate causes behind failed logins and a wrong redirect: `NODE_ENV` was set to `development`, `NEXT_PUBLIC_BASE_URL` still pointed at `localhost` so Google redirected back to my laptop, and MongoDB Atlas Network Access only allowed my own IP, so login and Google sign-in timed out on Vercel. After fixing all three, Google sign-in works on the preview deployment.
+- Ran manual tests TC-01 to TC-12 locally and on the preview. All passed.
+- Added Vitest tests for the callback route (refused consent, wrong or missing state, bad code, Google unreachable, unverified email, database failure, success).
+- Opened PR #42 for Google sign-in (EN-1 Must items) and asked Harshad and Soham to review.
+
+Learned: three unrelated settings (environment name, base URL and the database network list) all produced the same symptom, a slow failure, so I had to check and fix each one.
+
+Blockers: waiting for reviews from Harshad and Soham on the open PRs, and Harshad's and Soham's branches have no commits yet.
+
+Next: `feat/auth-hardening` (reset token, forgot-password, login), test cases TC-13 to TC-23.
