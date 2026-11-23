@@ -70,3 +70,18 @@ Learned: three unrelated settings (environment name, base URL and the database n
 Blockers: waiting for reviews from Harshad and Soham on the open PRs, and Harshad's and Soham's branches have no commits yet.
 
 Next: `feat/auth-hardening` (reset token, forgot-password, login), test cases TC-13 to TC-23.
+
+## Mon 23 Nov 2026
+
+Branches: `feat/auth-hardening`
+
+Done
+- EN-2: added the reset token helper (`src/lib/resetToken.ts`) with unit tests. Reset links expire after 20 minutes, are checked for the `password_reset` purpose, and carry a short fingerprint of the current password hash so each link stops working as soon as the password changes, without adding a database field. Also works for Google-only accounts setting a password for the first time.
+- Updated `reset-password` (`src/app/api/auth/reset-password/route.ts`) to use the new token check, connect to the database before looking up the user on a cold start, and refuse weak passwords or already-used links, with Vitest tests for each case.
+- Fixed a UI bug on `/forgot-password` and `/reset-password` where a success message still popped up right after an error toast on failed requests because of a missing `return`.
+
+Learned: storing a short fingerprint of the current password hash inside the signed reset token makes a reset link single-use without extra database state, since changing the password automatically makes the old fingerprint mismatch.
+
+Blockers: waiting for reviews from Harshad and Soham on open PRs #41 and #42.
+
+Next: `forgot-password` and `login` hardening, sign-in failure logging, manual tests TC-13 to TC-23, and opening the `feat/auth-hardening` PR.
