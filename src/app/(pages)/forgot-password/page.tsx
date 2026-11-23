@@ -24,6 +24,7 @@ export default function ForgotPassword() {
       const data = await res.json();
       if (!res.ok) {
         toast.error(data.error || "Something went wrong, please try again");
+        return;
       }
       toast.success(data.message);
     } catch {
