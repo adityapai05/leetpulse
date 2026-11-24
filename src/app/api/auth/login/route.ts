@@ -11,7 +11,7 @@ const GENERIC_ERROR = "Incorrect username or password.";
 let dummyHash: string | null = null;
 
 // Compared against when no real password exists, so unknown users and
-// Google-only accounts take about as long as a wrong password (FR-1.5, FR-1.8).
+// Google-only accounts take about as long as a wrong password.
 async function getDummyHash(): Promise<string> {
   if (!dummyHash) dummyHash = await bcrypt.hash("leetpulse-dummy-password", 10);
   return dummyHash;
