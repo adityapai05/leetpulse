@@ -85,3 +85,18 @@ Learned: storing a short fingerprint of the current password hash inside the sig
 Blockers: waiting for reviews from Harshad and Soham on open PRs #41 and #42.
 
 Next: `forgot-password` and `login` hardening, sign-in failure logging, manual tests TC-13 to TC-23, and opening the `feat/auth-hardening` PR.
+
+## Tue 24 Nov 2026
+
+Branches: `feat/auth-hardening`
+
+Done
+- EN-1: updated `forgot-password` (`src/app/api/auth/forgot-password/route.ts`) to issue the new reset tokens and return the same `200` answer whether or not an account exists or email delivery fails, with Vitest tests for each case.
+- EN-1: updated `login` (`src/app/api/auth/login/route.ts`) to reject non-string inputs before querying the database, compare against a dummy password hash when an account has no password or does not exist so timing stays even, return one generic message for unknown users, wrong passwords and Google-only accounts, and show the not-verified message only after the password matches, with unit tests.
+- EN-4: wrote the `README.md`  covering what the fork adds, local setup, environment variables, Google OAuth setup, and scripts.
+
+Learned: comparing against a dummy bcrypt hash when an account has no password keeps login response timing even, so password login does not give away whether an email belongs to a Google-only account.
+
+Blockers: waiting for reviews from Harshad and Soham on open PRs #41 and #42
+
+Next: build reset links from the request address when no base URL is set, run manual tests TC-13 to TC-23, and open the `feat/auth-hardening` PR.
