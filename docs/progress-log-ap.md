@@ -52,3 +52,51 @@ Learned: handling Google OAuth callbacks and redirects.
 Blockers: waiting for teammate reviews on the open PR and on the earlier merged PRs #1, #2 and #40.
 
 Next: deploy the fork to Vercel and test Google sign-in there (Checkpoint 1), finalise and open google sign in PR, then the reset-token and login hardening on `feat/auth-hardening` (Should Enhancements).
+
+
+## Sat 21 Nov 2026 (Checkpoint 1)
+
+Branches: `feat/google-signin`
+
+Done
+- Deployed the fork to Vercel (production from `main`, preview of `feat/google-signin`) with its own MongoDB Atlas database, and added the Vercel addresses to the Google OAuth client.
+- Online testing found three separate causes behind failed logins and a wrong redirect: `NODE_ENV` was set to `development`, `NEXT_PUBLIC_BASE_URL` still pointed at `localhost` so Google redirected back to my laptop, and MongoDB Atlas Network Access only allowed my own IP, so login and Google sign-in timed out on Vercel. After fixing all three, Google sign-in works on the preview deployment.
+- Ran manual tests TC-01 to TC-12 locally and on the preview. All passed.
+- Added Vitest tests for the callback route (refused consent, wrong or missing state, bad code, Google unreachable, unverified email, database failure, success).
+- Opened PR #42 for Google sign-in (EN-1 Must items) and asked Harshad and Soham to review.
+
+Learned: three unrelated settings (environment name, base URL and the database network list) all produced the same symptom, a slow failure, so I had to check and fix each one.
+
+Blockers: waiting for reviews from Harshad and Soham on the open PRs, and Harshad's and Soham's branches have no commits yet.
+
+Next: `feat/auth-hardening` (reset token, forgot-password, login), test cases TC-13 to TC-23.
+
+## Mon 23 Nov 2026
+
+Branches: `feat/auth-hardening`
+
+Done
+- EN-2: added the reset token helper (`src/lib/resetToken.ts`) with unit tests. Reset links expire after 20 minutes, are checked for the `password_reset` purpose, and carry a short fingerprint of the current password hash so each link stops working as soon as the password changes, without adding a database field. Also works for Google-only accounts setting a password for the first time.
+- Updated `reset-password` (`src/app/api/auth/reset-password/route.ts`) to use the new token check, connect to the database before looking up the user on a cold start, and refuse weak passwords or already-used links, with Vitest tests for each case.
+- Fixed a UI bug on `/forgot-password` and `/reset-password` where a success message still popped up right after an error toast on failed requests because of a missing `return`.
+
+Learned: storing a short fingerprint of the current password hash inside the signed reset token makes a reset link single-use without extra database state, since changing the password automatically makes the old fingerprint mismatch.
+
+Blockers: waiting for reviews from Harshad and Soham on open PRs #41 and #42.
+
+Next: `forgot-password` and `login` hardening, sign-in failure logging, manual tests TC-13 to TC-23, and opening the `feat/auth-hardening` PR.
+
+## Tue 24 Nov 2026
+
+Branches: `feat/auth-hardening`
+
+Done
+- EN-1: updated `forgot-password` (`src/app/api/auth/forgot-password/route.ts`) to issue the new reset tokens and return the same `200` answer whether or not an account exists or email delivery fails, with Vitest tests for each case.
+- EN-1: updated `login` (`src/app/api/auth/login/route.ts`) to reject non-string inputs before querying the database, compare against a dummy password hash when an account has no password or does not exist so timing stays even, return one generic message for unknown users, wrong passwords and Google-only accounts, and show the not-verified message only after the password matches, with unit tests.
+- EN-4: wrote the `README.md`  covering what the fork adds, local setup, environment variables, Google OAuth setup, and scripts.
+
+Learned: comparing against a dummy bcrypt hash when an account has no password keeps login response timing even, so password login does not give away whether an email belongs to a Google-only account.
+
+Blockers: waiting for reviews from Harshad and Soham on open PRs #41 and #42
+
+Next: build reset links from the request address when no base URL is set, run manual tests TC-13 to TC-23, and open the `feat/auth-hardening` PR.

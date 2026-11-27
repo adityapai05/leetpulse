@@ -2,48 +2,44 @@ import { NextRequest, NextResponse } from "next/server";
 import { sendEmail } from "@/lib/sendEmail";
 import connectDB from "@/lib/db";
 import getUserModel from "@/models/Users";
-import jwt from "jsonwebtoken";
+import { signResetToken } from "@/lib/resetToken";
 
-export async function POST(req: NextRequest) {
+const GENERIC_MESSAGE =
+  "If an account exists for that email or username, a reset link has been sent.";
+
+async function handle(req: NextRequest) {
   const body = await req.json();
-  let { emailOrUsername } = body;
-
-  if (typeof emailOrUsername !== "string") {
-    return NextResponse.json({ error: "Invalid data" }, { status: 400 });
-  }
-
-  emailOrUsername = emailOrUsername.trim();
+  const emailOrUsername =
+    typeof body?.emailOrUsername === "string" ? body.emailOrUsername.trim() : "";
 
   if (!emailOrUsername) {
     return NextResponse.json({ error: "Please fill data" }, { status: 400 });
-  }
-
-  await connectDB();
-
-  const lower = emailOrUsername.toLowerCase();
-
-  const User = getUserModel();
-  const user = await User.findOne({
-    $or: [{ username: emailOrUsername }, { email: lower }],
-    isVerified: true,
-  });
-
-  if (!user) {
-    return NextResponse.json({ error: "User not found" }, { status: 404 });
   }
 
   if (!process.env.JWT_SECRET) {
     throw new Error("JWT_SECRET not configured");
   }
 
-  const token = jwt.sign(
-    {
-      sub: user._id.toString(),
-      purpose: "password_reset",
-      iat: Math.floor(Date.now() / 1000),
-    },
-    process.env.JWT_SECRET,
-    { expiresIn: "20m" }
+  await connectDB();
+
+  const User = getUserModel();
+  const user = await User.findOne({
+    $or: [
+      { username: emailOrUsername },
+      { email: emailOrUsername.toLowerCase() },
+    ],
+    isVerified: true,
+  });
+
+  // Same answer whether or not the account exists (FR-1.8).
+  if (!user) {
+    return NextResponse.json({ message: GENERIC_MESSAGE }, { status: 200 });
+  }
+
+  const token = signResetToken(
+    user._id.toString(),
+    user.password,
+    process.env.JWT_SECRET
   );
 
   const resetPasswordUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/reset-password?token=${token}`;
@@ -86,10 +82,20 @@ export async function POST(req: NextRequest) {
     </div>
   </div>
   `
-  );
+  ).catch(() => {
+    console.error("[forgot-password] email could not be sent");
+  });
 
-  return NextResponse.json(
-    { message: "Reset password email sent" },
-    { status: 200 }
-  );
+  return NextResponse.json({ message: GENERIC_MESSAGE }, { status: 200 });
+}
+
+export async function POST(req: NextRequest) {
+  try {
+    return await handle(req);
+  } catch {
+    return NextResponse.json(
+      { error: "Something went wrong. Please try again." },
+      { status: 500 }
+    );
+  }
 }
