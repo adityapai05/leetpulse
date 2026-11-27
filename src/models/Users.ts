@@ -5,7 +5,8 @@ export interface IUser extends Document {
   username: string;
   firstName: string;
   email: string;
-  password: string;
+  password?: string;
+  googleId?: string;
   isVerified: boolean;
 
   // Meta
@@ -27,8 +28,9 @@ const UserSchema = new mongoose.Schema<IUser>({
   username: { type: String, required: true, unique: true, trim: true },
   firstName: { type: String, required: true },
   email: { type: String, required: true, unique: true, trim: true },
-  password: { type: String, required: true, trim: true },
+  password: { type: String, required: false, trim: true },
   isVerified: { type: Boolean, default: false },
+  googleId: { type: String, unique: true, sparse: true },
 
   // Meta
   createdAt: { type: Date, default: Date.now },

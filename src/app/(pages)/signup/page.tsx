@@ -2,6 +2,7 @@
 
 import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
+import GoogleButton from "@/components/ui/GoogleButton";
 import Link from "next/link";
 import toast from "react-hot-toast";
 import { ChangeEvent, FormEvent, useState } from "react";
@@ -193,6 +194,13 @@ export default function SignUp() {
             text={loading ? "Signing Up..." : "Sign Up"}
             loading={loading}
           />
+
+          <div className="flex items-center gap-3 text-xs text-text_muted">
+            <span className="h-px flex-1 bg-border" />
+            or
+            <span className="h-px flex-1 bg-border" />
+          </div>
+          <GoogleButton />
 
           <div className="flex text-sm text-text_muted self-center">
             Already have an account?&nbsp;
