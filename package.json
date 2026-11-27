@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "update-questions": "node scripts/fetchLeetcode.js",
+    "update-questions": "tsx scripts/updateQuestions.ts",
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
@@ -54,6 +54,7 @@
     "postcss": "^8.5.6",
     "tailwindcss": "^3.4.17",
     "ts-node": "^10.9.2",
+    "tsx": "^4.23.15",
     "typescript": "^5.9.3",
     "vitest": "^5.1.1"
   }
